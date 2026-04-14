@@ -60,6 +60,7 @@
     body {
       font-family: 'DM Sans', sans-serif;
       background: #FAFAF8;
+      font-weight: 400;
       color: #0E0C09;
       -webkit-font-smoothing: antialiased;
     }
@@ -70,7 +71,7 @@
       --ivoire: #F5F0E8;
       --black: #0E0C09;
       --gold: #B8922A;
-      --muted: rgba(14,12,9,0.45);
+      --muted: rgba(14,12,9,0.65);
       --border: rgba(14,12,9,0.08);
     }
 
@@ -97,8 +98,8 @@
     .nav-links { display: flex; gap: 28px; align-items: center; }
     .nav-links a {
       font-size: 12px; font-weight: 500; text-decoration: none;
-      color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
-      transition: color 0.3s;
+      color: rgba(14,12,9,0.75); letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.3s; font-weight: 500;
     }
     .nav-links a:hover { color: var(--black); }
     .nav-actions { display: flex; gap: 10px; align-items: center; }
@@ -370,7 +371,7 @@
     <div class="hero-line"></div>
     <p class="hero-subtitle">
       L'excellence de la coiffure afro<br>
-      maintenant accessible partout au Québec
+      <strong style="color:var(--black);font-weight:500;">réservée en 2 minutes, garantie, partout au Québec</strong>
     </p>
     <!-- 4 Parcours directement sous le sous-titre -->
     <div style="margin-top: 40px; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(14,12,9,0.06); animation: slideUp 1s ease 0.9s both;">
@@ -379,15 +380,15 @@
       <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--black); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">✂</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis client</div>
-        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Réservez une coiffeuse certifiée</div>
-        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 1px; margin-top: 2px;">Réserver</span>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Réservez en 2 min · Payez après la séance</div>
+        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 1px; margin-top: 2px;">Réserver ma place</span>
       </div>
 
       <!-- Je suis abonné -->
       <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">♛</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis abonné</div>
-        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Accédez à tout le réseau partout au Québec</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Rejoignez 312 abonnés actifs · Économies dès le 1er mois</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Mon espace</span>
       </div>
 
@@ -395,7 +396,7 @@
       <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">★</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Coiffeur(se) / Emploi</div>
-        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Rejoignez le réseau ou postulez au salon</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Gagnez jusqu'à 4 200$/mois avec nos clients fidèles</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Rejoindre</span>
       </div>
 
@@ -403,7 +404,7 @@
       <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">📦</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis fournisseur</div>
-        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Photos requises · Livraison partout au Québec · Commandes autonomes</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Vendez à 500+ clients actifs · Commandes automatisées</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Devenir fournisseur</span>
       </div>
     </div>
@@ -412,9 +413,9 @@
     <div class="hero-proof" style="margin-top: 28px;">
       <span>★ 4.4/5 Google</span>
       <span class="sep">|</span>
-      <span>500+ clients</span>
+      <span>500+ coiffures réalisées</span>
       <span class="sep">|</span>
-      <span>10+ coiffeurs certifiés</span>
+      <span>10+ partenaires certifiés</span>
     </div>
 
     <div class="hero-scroll"></div>
@@ -441,17 +442,17 @@
         <div class="eco-card">
           <p class="lieu">Longueuil</p>
           <h3>Salon Kadio</h3>
-          <p>Coiffure afro, locs, tresses, barbier, soins végétaux. L'expérience en personne.</p>
+          <p>L'expérience en personne depuis 2018. 500+ clients qui reviennent.</p>
         </div>
         <div class="eco-card">
           <p class="lieu">Grand Montréal</p>
           <h3>Kadio Network</h3>
-          <p>10+ coiffeurs certifiés. Même standards. Même application. Partout au Québec.</p>
+          <p>10+ coiffeurs certifiés près de chez vous. Qualité garantie, même app.</p>
         </div>
         <div class="eco-card">
           <p class="lieu">Soins naturels</p>
           <h3>Kadio Végétal</h3>
-          <p>Chébé, moringa, ghassoul, aloe vera. Préparés devant vous. Zéro chimie.</p>
+          <p>100% naturel, préparé devant vous. Zéro produit chimique sur votre cuir chevelu.</p>
         </div>
       </div>
     </div>
@@ -463,7 +464,7 @@
       <div style="text-align: center; margin-bottom: 56px;">
         <p class="section-label" style="color: var(--muted);">Au salon</p>
         <h2 class="section-title" style="color: var(--black);">Nos services</h2>
-        <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">Comparez les prix réguliers et les avantages abonnés</p>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">Nos abonnés économisent en moyenne <strong style="color:var(--gold);">847$/an</strong></p>
       </div>
 
       <!-- En-tête colonnes -->
@@ -547,6 +548,7 @@
       <div style="text-align: center; margin-bottom: 48px;">
         <p class="section-label" style="color: var(--gold);">Réseau</p>
         <h2 class="section-title" style="color: var(--black);">Nos partenaires certifiés</h2>
+        <p style="color: var(--muted); font-size: 15px; margin-top: 14px;">Trouvez un coiffeur certifié à moins de 15 minutes de chez vous</p>
       </div>
       <div style="position: relative;">
         <div id="map" style="height: 420px; width: 100%;"></div>
@@ -563,7 +565,7 @@
     <div style="max-width: 700px; margin: 0 auto; text-align: center; padding: 100px 24px;">
       <p class="section-label" style="color: var(--gold);">Tirage 2026</p>
       <h2 class="section-title" style="color: var(--black); font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin-bottom: 20px;">Gagnez une voiture</h2>
-      <p style="color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 36px;">1 ticket = 20$ · 3 tickets = 50$ · Chaque coiffure au salon = 1 ticket gratuit</p>
+      <p style="color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 36px;"><strong>1 ticket = 20$</strong> · 3 tickets = 50$ · <strong style="color:var(--gold);">Chaque coiffure au salon = 1 ticket gratuit</strong></p>
       <div style="display: flex; gap: 40px; justify-content: center; margin-bottom: 40px;">
         <div><div style="font-size: 36px; font-weight: 300; color: var(--black); font-family: 'Cormorant Garamond', serif;">247</div><div style="font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;">participants</div></div>
         <div><div style="font-size: 36px; font-weight: 300; color: var(--black); font-family: 'Cormorant Garamond', serif;">5 000</div><div style="font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;">objectif</div></div>
@@ -579,7 +581,7 @@
       <div style="text-align: center; margin-bottom: 20px;">
         <p class="section-label" style="color: var(--gold);">Abonnements</p>
         <h2 class="section-title" style="color: var(--black);">Choisissez votre forfait</h2>
-        <p style="color: var(--muted); font-size: 15px; margin-top: 16px;">Sans engagement · Annulez à tout moment · Économies dès le 1er mois</p>
+        <p style="color: var(--muted); font-size: 15px; margin-top: 16px;">Sans engagement · <strong style="color:var(--black);">30 jours satisfait ou remboursé</strong> · Économies dès le 1er mois</p>
       </div>
 
       <!-- Social proof -->
@@ -596,7 +598,7 @@
           <div>
             <p class="forfait-cat">Barbier</p>
             <div class="forfait-name">Barbier Essentiel</div>
-            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">2 coupes par mois, idéal pour garder votre style</p>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">Gardez votre style toutes les 2 semaines sans y penser</p>
           </div>
           <div>
             <div><span class="forfait-prix">29</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
@@ -609,16 +611,16 @@
             <li><span class="check">✓</span> Rappels SMS automatiques</li>
             <li><span class="check">✓</span> Annulation gratuite</li>
           </ul>
-          <button class="btn-outline" style="font-size: 12px; padding: 14px;">Commencer</button>
+          <button class="btn-outline" style="font-size: 12px; padding: 14px;">Commencer mon essai</button>
         </div>
 
         <!-- FORFAIT 2 : Knotless Signature — RECOMMANDÉ -->
         <div class="forfait-card recommended">
-          <div class="forfait-badge">★ Recommandé — Le plus populaire</div>
+          <div class="forfait-badge">★ Choisi par 214 clients ce mois — Le plus populaire</div>
           <div style="margin-top: 20px;">
             <p class="forfait-cat" style="color: var(--gold);">Tresses</p>
             <div class="forfait-name">Knotless Signature</div>
-            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">1 session knotless par mois + consultation style</p>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">1 session knotless signature + consultation style gratuite</p>
           </div>
           <div>
             <div><span class="forfait-prix">110</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
@@ -633,7 +635,7 @@
             <li><span class="check">✓</span> 15% de réduction sur les extras</li>
             <li><span class="check">✓</span> Partenaire dédié</li>
           </ul>
-          <button style="padding: 14px; background: var(--gold); color: var(--white); border: none; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase;">Choisir ce forfait</button>
+          <button style="padding: 14px; background: var(--gold); color: var(--white); border: none; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase;">Choisir Knotless Signature</button>
         </div>
 
         <!-- FORFAIT 3 : Tout Compris -->
@@ -641,7 +643,7 @@
           <div>
             <p class="forfait-cat">Tous services</p>
             <div class="forfait-name">Tout Compris</div>
-            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">Accès illimité à tous les services Kadio</p>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">Accès illimité à tous les services (valeur 350$+/mois)</p>
           </div>
           <div>
             <div><span class="forfait-prix">149</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
@@ -656,7 +658,7 @@
             <li><span class="check">✓</span> Rappels SMS automatiques</li>
             <li style="color: var(--muted); font-style: italic; font-size: 12px;"><span class="check" style="color: var(--muted);"></span> *fair use : 1 service/semaine max</li>
           </ul>
-          <button class="btn-solid" style="font-size: 12px; padding: 14px;">Commencer</button>
+          <button class="btn-solid" style="font-size: 12px; padding: 14px;">Commencer mon essai</button>
         </div>
       </div>
 
@@ -687,15 +689,15 @@
       </div>
       <div class="temoignages-grid">
         <div class="temoignage-card">
-          <p class="texte">"Meilleure expérience coiffure que j'ai jamais eue. L'application rend tout tellement simple."</p>
+          <p class="texte">"Meilleure expérience coiffure de ma vie. L'app me rappelle mes rendez-vous, je n'y pense même plus."</p>
           <div style="margin-top: auto;"><div class="nom">Mariam S.</div><div class="ville">Longueuil</div></div>
         </div>
         <div class="temoignage-card">
-          <p class="texte">"Ma coiffeuse est venue chez moi en 30 minutes. Résultat impeccable, comme en salon."</p>
+          <p class="texte">"J'économise 340$/mois grâce à mon abonnement Knotless. Et la qualité est impeccable."</p>
           <div style="margin-top: auto;"><div class="nom">Aminata K.</div><div class="ville">Montréal-Nord</div></div>
         </div>
         <div class="temoignage-card">
-          <p class="texte">"Les soins végétaux ont transformé mes cheveux. Je ne retournerai jamais aux produits chimiques."</p>
+          <p class="texte">"Les soins végétaux ont transformé mes cheveux en 3 mois. Je ne reviendrai jamais en arrière."</p>
           <div style="margin-top: auto;"><div class="nom">Sandra P.</div><div class="ville">Brossard</div></div>
         </div>
       </div>
@@ -718,17 +720,17 @@
 
     <div style="max-width: 600px; margin: 0 auto;">
       <p class="section-label" style="color: var(--gold);">Votre place vous attend</p>
-      <h2 class="section-title" style="color: var(--black); font-size: clamp(32px, 6vw, 56px); line-height: 1.1; margin-bottom: 16px;">Prêt à commencer ?</h2>
+      <h2 class="section-title" style="color: var(--black); font-size: clamp(32px, 6vw, 56px); line-height: 1.1; margin-bottom: 16px;">Votre coiffeur vous attend</h2>
       <p style="color: var(--muted); font-size: 16px; line-height: 1.6; max-width: 480px; margin: 0 auto 40px;">
-        Un réseau bâti sur l'excellence, la confiance et la fierté de nos cultures afro.
+        Rejoignez 500+ clients qui ont choisi Kadio. Sans engagement. Garantie 30 jours.
       </p>
       <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;">
-        <button class="btn-solid">Réserver maintenant</button>
+        <button class="btn-solid">Réserver ma place gratuitement</button>
         <button class="btn-outline">Devenir partenaire</button>
       </div>
       <div style="padding: 16px 24px; background: rgba(184,146,42,0.06); display: inline-block;">
         <span style="font-size: 13px; color: var(--black); letter-spacing: 0.02em;">
-          🔒 Places limitées par quartier — <strong>6 places restantes</strong> à Longueuil
+          🔒 <strong>⚡ Plus que 6 places ce mois-ci</strong> à Longueuil · <strong style="color:var(--gold);">-40% le 1er mois</strong>
         </span>
       </div>
     </div>
