@@ -358,8 +358,8 @@
         <a href="#">Blog</a>
       </nav>
       <div class="nav-actions">
-        <a href="#" class="btn-outline-sm">Mon espace</a>
-        <a href="#" class="btn-solid-sm">Devenir partenaire</a>
+        <a href="/app" class="btn-outline-sm">Mon espace</a>
+        <a href="/app" class="btn-solid-sm">Devenir partenaire</a>
       </div>
     </div>
   </header>
@@ -376,7 +376,7 @@
     <div style="margin-top: 40px; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(14,12,9,0.06); animation: slideUp 1s ease 0.9s both;">
 
       <!-- Je suis client -->
-      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--black); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">✂</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis client</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Réservez une coiffeuse certifiée</div>
@@ -384,7 +384,7 @@
       </div>
 
       <!-- Je suis abonné -->
-      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">♛</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis abonné</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Accédez à tout le réseau partout au Québec</div>
@@ -392,7 +392,7 @@
       </div>
 
       <!-- Coiffeur(se) / Emploi -->
-      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">★</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Coiffeur(se) / Emploi</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Rejoignez le réseau ou postulez au salon</div>
@@ -400,7 +400,7 @@
       </div>
 
       <!-- Je suis fournisseur -->
-      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">📦</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis fournisseur</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Photos requises · Livraison partout au Québec · Commandes autonomes</div>
@@ -763,6 +763,17 @@
     </div>
     <div class="footer-bottom">© 2026 Kadio Coiffure & Esthétique</div>
   </footer>
+
+  <script>
+    // Wire all action buttons and placeholder anchors to the React app
+    document.querySelectorAll('button').forEach(function (btn) {
+      btn.style.cursor = 'pointer';
+      btn.addEventListener('click', function () { window.location.href = '/app'; });
+    });
+    document.querySelectorAll('a[href="#"]').forEach(function (a) {
+      a.setAttribute('href', '/app');
+    });
+  </script>
 
 </body>
 </html>
