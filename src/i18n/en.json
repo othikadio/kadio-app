@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Home",
+    "tarifs": "Pricing",
+    "blog": "Blog",
+    "contact": "Contact",
+    "connexion": "Sign in",
+    "devenir_partenaire": "Become a partner"
+  },
+  "common": {
+    "confirmer": "Confirm",
+    "annuler": "Cancel",
+    "enregistrer": "Save",
+    "fermer": "Close",
+    "retour": "Back",
+    "chargement": "Loading…",
+    "erreur": "An error occurred",
+    "succes": "Success"
+  },
+  "auth": {
+    "telephone": "Phone",
+    "code_otp": "Verification code",
+    "connexion": "Sign in",
+    "inscription": "Create account",
+    "envoyer_code": "Send code",
+    "verifier": "Verify"
+  },
+  "hero": {
+    "titre": "Afro luxury at your fingertips",
+    "sous_titre": "Book at Kadio Coiffure & Esthétique",
+    "cta": "Book now"
+  },
+  "accueil": {
+    "titre_section": "Why Kadio?",
+    "avantage_1": "Certified artists",
+    "avantage_2": "Premium products",
+    "avantage_3": "Book in 60s",
+    "avantage_4": "Satisfaction guaranteed",
+    "stats_partenaires": "partners",
+    "stats_clients": "satisfied clients",
+    "stats_villes": "cities",
+    "rejoindre_titre": "Join the network",
+    "rejoindre_cta": "Become a partner"
+  },
+  "reserver": {
+    "titre": "Book",
+    "choisir_service": "Choose a service",
+    "choisir_lieu": "Choose a salon",
+    "choisir_date": "Choose a date",
+    "recap": "Summary",
+    "paiement": "Payment",
+    "confirmation": "Confirmed!",
+    "depot": "Deposit",
+    "confirmer_rdv": "Confirm booking",
+    "vers_paiement": "To payment"
+  },
+  "forfaits": {
+    "titre": "Plans & Subscriptions",
+    "mensuel": "Monthly",
+    "annuel": "Annual",
+    "economie": "savings",
+    "populaire": "Popular",
+    "choisir": "Choose this plan",
+    "inclus": "Included",
+    "sans_engagement": "No commitment"
+  },
+  "client": {
+    "mon_compte": "My account",
+    "mes_rdv": "My appointments",
+    "mes_abonnements": "My subscriptions",
+    "historique": "History",
+    "prochain_rdv": "Next appointment",
+    "annuler_rdv": "Cancel appointment",
+    "noter": "Leave a review",
+    "modifier": "Edit",
+    "points": "points",
+    "bienvenue": "Welcome"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Dashboard",
+    "mes_services": "My services",
+    "agenda": "Calendar",
+    "portefeuille": "Wallet",
+    "reservations": "Bookings",
+    "revenus": "Revenue",
+    "disponibilites": "Availability",
+    "clients": "Clients",
+    "avis": "Reviews",
+    "retrait": "Withdrawal"
+  },
+  "pwa": {
+    "installer": "Install app",
+    "installer_desc": "Quick access from your home screen",
+    "plus_tard": "Later",
+    "installer_btn": "Install",
+    "offline": "Offline mode",
+    "maj_disponible": "Update available"
+  },
+  "footer": {
+    "droits": "All rights reserved",
+    "politique": "Privacy policy",
+    "cgu": "Terms of use",
+    "contact": "Contact",
+    "langue": "Language"
+  },
+  "cartes": {
+    "numero": "Card number",
+    "expiry": "Expiry date",
+    "cvv": "CVV",
+    "nom": "Name on card",
+    "payer": "Pay"
+  },
+  "services": {
+    "coiffure": "Hairstyling",
+    "braids": "Braids",
+    "locs": "Locs",
+    "color": "Coloring",
+    "esthetique": "Aesthetics",
+    "soins": "Hair care",
+    "massage": "Massage",
+    "maquillage": "Makeup"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Akèy",
+    "tarifs": "Pri",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "connexion": "Konekte",
+    "devenir_partenaire": "Vin patnè"
+  },
+  "common": {
+    "confirmer": "Konfime",
+    "annuler": "Anile",
+    "enregistrer": "Anrejistre",
+    "fermer": "Fèmen",
+    "retour": "Retounen",
+    "chargement": "Chajman…",
+    "erreur": "Gen yon erè",
+    "succes": "Siksè"
+  },
+  "auth": {
+    "telephone": "Telefòn",
+    "code_otp": "Kòd verifikasyon",
+    "connexion": "Konekte",
+    "inscription": "Kreye kont",
+    "envoyer_code": "Voye kòd",
+    "verifier": "Verifye"
+  },
+  "hero": {
+    "titre": "Liks afwo nan men ou",
+    "sous_titre": "Rezève nan Kadio Coiffure & Esthétique",
+    "cta": "Rezève kounye a"
+  },
+  "accueil": {
+    "titre_section": "Poukisa Kadio ?",
+    "avantage_1": "Atis sètifye",
+    "avantage_2": "Pwodui premyòm",
+    "avantage_3": "Rezève an 60s",
+    "avantage_4": "Satisfaksyon garanti",
+    "stats_partenaires": "patnè",
+    "stats_clients": "kliyan satisfè",
+    "stats_villes": "vil",
+    "rejoindre_titre": "Rejwenn rezo a",
+    "rejoindre_cta": "Vin patnè"
+  },
+  "reserver": {
+    "titre": "Rezève",
+    "choisir_service": "Chwazi yon sèvis",
+    "choisir_lieu": "Chwazi yon salon",
+    "choisir_date": "Chwazi yon dat",
+    "recap": "Rezime",
+    "paiement": "Peman",
+    "confirmation": "Konfime !",
+    "depot": "Depo",
+    "confirmer_rdv": "Konfime randevou",
+    "vers_paiement": "Ale nan peman"
+  },
+  "forfaits": {
+    "titre": "Abònman & Pakè",
+    "mensuel": "Mansyèl",
+    "annuel": "Anyèl",
+    "economie": "ekonomi",
+    "populaire": "Popilè",
+    "choisir": "Chwazi pakè sa",
+    "inclus": "Enkli",
+    "sans_engagement": "San angajman"
+  },
+  "client": {
+    "mon_compte": "Kont mwen",
+    "mes_rdv": "Randevou mwen",
+    "mes_abonnements": "Abònman mwen",
+    "historique": "Istwa",
+    "prochain_rdv": "Pwochen randevou",
+    "annuler_rdv": "Anile randevou",
+    "noter": "Kite yon kòmantè",
+    "modifier": "Modifye",
+    "points": "pwen",
+    "bienvenue": "Byenveni"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tablo de bò",
+    "mes_services": "Sèvis mwen",
+    "agenda": "Ajanda",
+    "portefeuille": "Pòtfèy",
+    "reservations": "Rezèvasyon",
+    "revenus": "Revni",
+    "disponibilites": "Disponiblite",
+    "clients": "Kliyan",
+    "avis": "Opinyon",
+    "retrait": "Retrè"
+  },
+  "pwa": {
+    "installer": "Enstale app la",
+    "installer_desc": "Aksè rapid depi ekran dakèy ou",
+    "plus_tard": "Pita",
+    "installer_btn": "Enstale",
+    "offline": "Mod san entènèt",
+    "maj_disponible": "Mizajou disponib"
+  },
+  "footer": {
+    "droits": "Tout dwa rezève",
+    "politique": "Politik konfidansyalite",
+    "cgu": "Kondisyon itilizasyon",
+    "contact": "Kontakt",
+    "langue": "Lang"
+  },
+  "cartes": {
+    "numero": "Nimewo kat",
+    "expiry": "Dat ekspirasyon",
+    "cvv": "CVV",
+    "nom": "Non sou kat la",
+    "payer": "Peye"
+  },
+  "services": {
+    "coiffure": "Koafè",
+    "braids": "Tres",
+    "locs": "Lòks",
+    "color": "Koulè",
+    "esthetique": "Estetik",
+    "soins": "Swen cheve",
+    "massage": "Masaj",
+    "maquillage": "Makiyaj"
+  }
+}

@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Kër gi",
+    "tarifs": "Jëf yi",
+    "blog": "Blog",
+    "contact": "Tangoral",
+    "connexion": "Dugg",
+    "devenir_partenaire": "Dëkkal jàppale"
+  },
+  "common": {
+    "confirmer": "Seetlu",
+    "annuler": "Seeti",
+    "enregistrer": "Bind",
+    "fermer": "Tëj",
+    "retour": "Dellu",
+    "chargement": "Yëgël…",
+    "erreur": "Am na njëkk",
+    "succes": "Mën na"
+  },
+  "auth": {
+    "telephone": "Telefon",
+    "code_otp": "Kood bi",
+    "connexion": "Dugg",
+    "inscription": "Bind sa tuuru",
+    "envoyer_code": "Yónn kood",
+    "verifier": "Xool"
+  },
+  "hero": {
+    "titre": "Rafet bu Afrik ci sa loxo",
+    "sous_titre": "Tëral ci Kadio Coiffure & Esthétique",
+    "cta": "Tëral léegi"
+  },
+  "accueil": {
+    "titre_section": "Ndax Kadio ?",
+    "avantage_1": "Jaambur yi sertifye",
+    "avantage_2": "Lewet yi baax",
+    "avantage_3": "Tëral ci 60s",
+    "avantage_4": "Séy warranté",
+    "stats_partenaires": "jàppale yi",
+    "stats_clients": "kliyaan yi séy",
+    "stats_villes": "dëkk yi",
+    "rejoindre_titre": "Dugg ci résoo bi",
+    "rejoindre_cta": "Dëkkal jàppale"
+  },
+  "reserver": {
+    "titre": "Tëral",
+    "choisir_service": "Tann sërivis",
+    "choisir_lieu": "Tann salon",
+    "choisir_date": "Tann bés",
+    "recap": "Résimé",
+    "paiement": "Fey",
+    "confirmation": "Dafa dëkk !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Seetlu randevou",
+    "vers_paiement": "Dem ci fey"
+  },
+  "forfaits": {
+    "titre": "Forfè ak Abonnement",
+    "mensuel": "Bu weer",
+    "annuel": "Bu at",
+    "economie": "jaamu",
+    "populaire": "Bëgg na ñu ko",
+    "choisir": "Tann forfè bii",
+    "inclus": "Nëkk ci",
+    "sans_engagement": "Dafa xam-xam"
+  },
+  "client": {
+    "mon_compte": "Sa kont",
+    "mes_rdv": "Randevou yi",
+    "mes_abonnements": "Abonnement yi",
+    "historique": "Xam-xamam",
+    "prochain_rdv": "Randevou bu jëkk",
+    "annuler_rdv": "Seeti randevou",
+    "noter": "Seet sa xibaar",
+    "modifier": "Soppi",
+    "points": "pwen",
+    "bienvenue": "Dalal ak jàmm"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "Sërivis yi",
+    "agenda": "Ajanda",
+    "portefeuille": "Xaalis bi",
+    "reservations": "Tëral yi",
+    "revenus": "Lañ man",
+    "disponibilites": "Disponibilite",
+    "clients": "Kliyaan yi",
+    "avis": "Xibaar yi",
+    "retrait": "Jël xaalis"
+  },
+  "pwa": {
+    "installer": "Staal app bi",
+    "installer_desc": "Yëgël yég ci sa ekran",
+    "plus_tard": "Ëllëg",
+    "installer_btn": "Staal",
+    "offline": "Modu sax internèt",
+    "maj_disponible": "Yéegal am na"
+  },
+  "footer": {
+    "droits": "Droit yi dëkk nañu",
+    "politique": "Politiku confidentialité",
+    "cgu": "CGU",
+    "contact": "Tangoral",
+    "langue": "Làkk"
+  },
+  "cartes": {
+    "numero": "Nimeero kart",
+    "expiry": "Dates ekspirasyoon",
+    "cvv": "CVV",
+    "nom": "Tuuru kart bi",
+    "payer": "Fey"
+  },
+  "services": {
+    "coiffure": "Sëf xét",
+    "braids": "Tres",
+    "locs": "Locks",
+    "color": "Rëdd",
+    "esthetique": "Esthétique",
+    "soins": "Suñu xét",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}

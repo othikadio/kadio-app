@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Accueil",
+    "tarifs": "Tarifs",
+    "blog": "Blog",
+    "contact": "Contact",
+    "connexion": "Connexion",
+    "devenir_partenaire": "Devenir partenaire"
+  },
+  "common": {
+    "confirmer": "Confirmer",
+    "annuler": "Annuler",
+    "enregistrer": "Enregistrer",
+    "fermer": "Fermer",
+    "retour": "Retour",
+    "chargement": "Chargement…",
+    "erreur": "Une erreur est survenue",
+    "succes": "Succès"
+  },
+  "auth": {
+    "telephone": "Téléphone",
+    "code_otp": "Code de vérification",
+    "connexion": "Se connecter",
+    "inscription": "Créer un compte",
+    "envoyer_code": "Envoyer le code",
+    "verifier": "Vérifier"
+  },
+  "hero": {
+    "titre": "Le luxe afro à votre portée",
+    "sous_titre": "Réservez chez Kadio Coiffure & Esthétique",
+    "cta": "Réserver maintenant"
+  },
+  "accueil": {
+    "titre_section": "Pourquoi Kadio ?",
+    "avantage_1": "Artistes certifiés",
+    "avantage_2": "Produits premium",
+    "avantage_3": "Réservation en 60s",
+    "avantage_4": "Satisfaction garantie",
+    "stats_partenaires": "partenaires",
+    "stats_clients": "clients satisfaits",
+    "stats_villes": "villes",
+    "rejoindre_titre": "Rejoignez le réseau",
+    "rejoindre_cta": "Devenir partenaire"
+  },
+  "reserver": {
+    "titre": "Réserver",
+    "choisir_service": "Choisir un service",
+    "choisir_lieu": "Choisir un salon",
+    "choisir_date": "Choisir une date",
+    "recap": "Récapitulatif",
+    "paiement": "Paiement",
+    "confirmation": "Confirmé !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Confirmer le RDV",
+    "vers_paiement": "Vers le paiement"
+  },
+  "forfaits": {
+    "titre": "Forfaits & Abonnements",
+    "mensuel": "Mensuel",
+    "annuel": "Annuel",
+    "economie": "d'économie",
+    "populaire": "Populaire",
+    "choisir": "Choisir ce forfait",
+    "inclus": "Inclus",
+    "sans_engagement": "Sans engagement"
+  },
+  "client": {
+    "mon_compte": "Mon compte",
+    "mes_rdv": "Mes rendez-vous",
+    "mes_abonnements": "Mes abonnements",
+    "historique": "Historique",
+    "prochain_rdv": "Prochain RDV",
+    "annuler_rdv": "Annuler le RDV",
+    "noter": "Laisser un avis",
+    "modifier": "Modifier",
+    "points": "points",
+    "bienvenue": "Bienvenue"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "Mes services",
+    "agenda": "Agenda",
+    "portefeuille": "Portefeuille",
+    "reservations": "Réservations",
+    "revenus": "Revenus",
+    "disponibilites": "Disponibilités",
+    "clients": "Clients",
+    "avis": "Avis",
+    "retrait": "Retrait"
+  },
+  "pwa": {
+    "installer": "Installer l'app",
+    "installer_desc": "Accès rapide depuis votre écran d'accueil",
+    "plus_tard": "Plus tard",
+    "installer_btn": "Installer",
+    "offline": "Mode hors ligne",
+    "maj_disponible": "Mise à jour disponible"
+  },
+  "footer": {
+    "droits": "Tous droits réservés",
+    "politique": "Politique de confidentialité",
+    "cgu": "CGU",
+    "contact": "Contact",
+    "langue": "Langue"
+  },
+  "cartes": {
+    "numero": "Numéro de carte",
+    "expiry": "Date d'expiration",
+    "cvv": "CVV",
+    "nom": "Nom sur la carte",
+    "payer": "Payer"
+  },
+  "services": {
+    "coiffure": "Coiffure",
+    "braids": "Tresses",
+    "locs": "Locks",
+    "color": "Coloration",
+    "esthetique": "Esthétique",
+    "soins": "Soins capillaires",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}

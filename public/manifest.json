@@ -1,0 +1,43 @@
+{
+  "name": "Kadio Coiffure — Salon & Réseau Coiffure Afro",
+  "short_name": "Kadio Coiffure",
+  "description": "Salon de coiffure afro et réseau de partenaires. Réservation en ligne, abonnements, paiements. Longueuil, Québec.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#0a0705",
+  "theme_color": "#D4AF37",
+  "orientation": "portrait-primary",
+  "lang": "fr",
+  "categories": ["lifestyle", "shopping"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Réserver",
+      "short_name": "Réserver",
+      "description": "Réserver un service",
+      "url": "/client/reserver",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Mes RDV",
+      "short_name": "Mes RDV",
+      "description": "Voir mes rendez-vous",
+      "url": "/client/rdv",
+      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}

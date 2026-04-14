@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Galle",
+    "tarifs": "Njaru",
+    "blog": "Blog",
+    "contact": "Tawtaade",
+    "connexion": "Naatde",
+    "devenir_partenaire": "Waɗde hokkere"
+  },
+  "common": {
+    "confirmer": "Ɓetde",
+    "annuler": "Haɓɓude",
+    "enregistrer": "Winndude",
+    "fermer": "Uddude",
+    "retour": "Juɓɓinude",
+    "chargement": "Faɗɗude…",
+    "erreur": "Juumre waɗi",
+    "succes": "Jokkere"
+  },
+  "auth": {
+    "telephone": "Telefoone",
+    "code_otp": "Kooɗ ngenndiɗo",
+    "connexion": "Naatde",
+    "inscription": "Hollude ɗerol",
+    "envoyer_code": "Neldu kooɗ",
+    "verifier": "Ɓetde"
+  },
+  "hero": {
+    "titre": "Neɗɗaagu Afrik e juuɗe maa",
+    "sous_titre": "Jaɓɓinde e Kadio Coiffure & Esthétique",
+    "cta": "Jaɓɓin hannde"
+  },
+  "accueil": {
+    "titre_section": "Maa Kadio ?",
+    "avantage_1": "Artiste certifié",
+    "avantage_2": "Ɓiɗɗi premium",
+    "avantage_3": "Jaɓɓin 60s",
+    "avantage_4": "Laaɓal garantii",
+    "stats_partenaires": "hokkere",
+    "stats_clients": "jiyaaɓe laabi",
+    "stats_villes": "wuro",
+    "rejoindre_titre": "Naatde réseau",
+    "rejoindre_cta": "Waɗde hokkere"
+  },
+  "reserver": {
+    "titre": "Jaɓɓinde",
+    "choisir_service": "Suɓo service",
+    "choisir_lieu": "Suɓo salon",
+    "choisir_date": "Suɓo ñalnde",
+    "recap": "Résumé",
+    "paiement": "Jaaɓnde",
+    "confirmation": "Ɓetii !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Ɓet rendez-vous",
+    "vers_paiement": "Yahde jaaɓnde"
+  },
+  "forfaits": {
+    "titre": "Forfait e Abonnement",
+    "mensuel": "Lewru",
+    "annuel": "Hitaande",
+    "economie": "renndo",
+    "populaire": "Moƴƴi",
+    "choisir": "Suɓo forfait ngoo",
+    "inclus": "E nder",
+    "sans_engagement": "Engagement alaa"
+  },
+  "client": {
+    "mon_compte": "Compte am",
+    "mes_rdv": "Rendez-vous am",
+    "mes_abonnements": "Abonnement am",
+    "historique": "Ɗo waɗii",
+    "prochain_rdv": "Rendez-vous ɓenngo",
+    "annuler_rdv": "Haɓɓu rendez-vous",
+    "noter": "Winnd miijo",
+    "modifier": "Heltu",
+    "points": "points",
+    "bienvenue": "Semmbe"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "Service am",
+    "agenda": "Agenda",
+    "portefeuille": "Ceeɗu",
+    "reservations": "Réservation",
+    "revenus": "Njaru sooɗaaɗo",
+    "disponibilites": "Disponibilité",
+    "clients": "Jiyaaɓe",
+    "avis": "Miijo",
+    "retrait": "Waɗde ceeɗu"
+  },
+  "pwa": {
+    "installer": "Installer app",
+    "installer_desc": "Naatde ɓurɗo yoɓde ekraan maa",
+    "plus_tard": "Yeeso",
+    "installer_btn": "Installer",
+    "offline": "Mode internet alaa",
+    "maj_disponible": "Mise à jour woni"
+  },
+  "footer": {
+    "droits": "Hakke fof ɓe njooɗii",
+    "politique": "Politique confidentialité",
+    "cgu": "CGU",
+    "contact": "Tawtaade",
+    "langue": "Lamɗam"
+  },
+  "cartes": {
+    "numero": "Nambari carte",
+    "expiry": "Ñalnde lappol",
+    "cvv": "CVV",
+    "nom": "Innde e carte",
+    "payer": "Jaaɓ"
+  },
+  "services": {
+    "coiffure": "Tignde",
+    "braids": "Tresse",
+    "locs": "Locks",
+    "color": "Riiɗe",
+    "esthetique": "Esthétique",
+    "soins": "Teddinirde tignde",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}

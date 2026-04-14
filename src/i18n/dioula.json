@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "So",
+    "tarifs": "Sɔngɔ",
+    "blog": "Blog",
+    "contact": "Kunbɛn",
+    "connexion": "Sɔrɔ",
+    "devenir_partenaire": "Sigida kɛ"
+  },
+  "common": {
+    "confirmer": "Ɲɛsin",
+    "annuler": "Dabila",
+    "enregistrer": "Mara",
+    "fermer": "Datugu",
+    "retour": "Segin",
+    "chargement": "Sɔrɔ la…",
+    "erreur": "Fili dɔ kɛra",
+    "succes": "Sɔrɔ"
+  },
+  "auth": {
+    "telephone": "Telefɔni",
+    "code_otp": "Jatebɔ code",
+    "connexion": "Sɔrɔ",
+    "inscription": "Account kura",
+    "envoyer_code": "Ci code",
+    "verifier": "Jatebɔ"
+  },
+  "hero": {
+    "titre": "Afiriki ka ɲɛtaa i bolo",
+    "sous_titre": "Kadio Coiffure & Esthétique la rdv ta",
+    "cta": "Sisan rdv ta"
+  },
+  "accueil": {
+    "titre_section": "Mun na Kadio ?",
+    "avantage_1": "Jarabacɛ certifié",
+    "avantage_2": "Nɔgɔya kura",
+    "avantage_3": "Rdv 60s kɔnɔ",
+    "avantage_4": "Dɛsɛ kɛlen",
+    "stats_partenaires": "sigidabaw",
+    "stats_clients": "clientw ɲumanen",
+    "stats_villes": "duguw",
+    "rejoindre_titre": "Réseau kɔnɔ don",
+    "rejoindre_cta": "Sigida kɛ"
+  },
+  "reserver": {
+    "titre": "Rdv ta",
+    "choisir_service": "Baara sugandi",
+    "choisir_lieu": "Salon sugandi",
+    "choisir_date": "Don sugandi",
+    "recap": "Yiriwa",
+    "paiement": "Sara",
+    "confirmation": "Dɛsɛra !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Rdv ɲɛsin",
+    "vers_paiement": "Sara fɛ"
+  },
+  "forfaits": {
+    "titre": "Forfait ni Abonnement",
+    "mensuel": "Kalo ta",
+    "annuel": "San ta",
+    "economie": "yɛlɛma",
+    "populaire": "Cɛmanba",
+    "choisir": "Forfait in sugandi",
+    "inclus": "Bɛ kɔnɔ",
+    "sans_engagement": "Engagement tɛ"
+  },
+  "client": {
+    "mon_compte": "N ka compte",
+    "mes_rdv": "N ka rdv",
+    "mes_abonnements": "N ka abonnement",
+    "historique": "Kow tɛmɛnnen",
+    "prochain_rdv": "Rdv jɛ",
+    "annuler_rdv": "Rdv dabila",
+    "noter": "Kumakanw sɛbɛn",
+    "modifier": "Yɛlɛma",
+    "points": "points",
+    "bienvenue": "Aw ni baara"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "N ka baara",
+    "agenda": "Agenda",
+    "portefeuille": "Wari",
+    "reservations": "Réservation",
+    "revenus": "Nafolo",
+    "disponibilites": "Lɔgɔkow",
+    "clients": "Clientw",
+    "avis": "Miiriliw",
+    "retrait": "Wari sɔrɔ"
+  },
+  "pwa": {
+    "installer": "App sɔrɔ",
+    "installer_desc": "Ekran fɛ joona",
+    "plus_tard": "Tile wɛrɛ",
+    "installer_btn": "Sɔrɔ",
+    "offline": "Internet tɛ mode",
+    "maj_disponible": "Yɛlɛma kura bɛ"
+  },
+  "footer": {
+    "droits": "Hakɛw bɛɛ mara",
+    "politique": "Gundo politiki",
+    "cgu": "CGU",
+    "contact": "Kunbɛn",
+    "langue": "Kan"
+  },
+  "cartes": {
+    "numero": "Carte nɔmɔrɔ",
+    "expiry": "Laban tile",
+    "cvv": "CVV",
+    "nom": "Tɔgɔ carte la",
+    "payer": "Sara"
+  },
+  "services": {
+    "coiffure": "Kulɔ tɔgɔ",
+    "braids": "Tresse",
+    "locs": "Locks",
+    "color": "Kulɔ rɔbɔ",
+    "esthetique": "Esthétique",
+    "soins": "Kulɔ sara",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}

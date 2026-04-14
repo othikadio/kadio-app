@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kadio — Prévisualisation</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <script>
+    function initMap() {
+      const mapStyles = [
+        { elementType: 'geometry', stylers: [{ color: '#f5f0e8' }] },
+        { elementType: 'labels.text.stroke', stylers: [{ color: '#fafaf8' }] },
+        { elementType: 'labels.text.fill', stylers: [{ color: '#6b6560' }] },
+        { featureType: 'landscape.natural', elementType: 'geometry', stylers: [{ color: '#f0ebe3' }] },
+        { featureType: 'poi', elementType: 'geometry', stylers: [{ color: '#ede7dc' }] },
+        { featureType: 'poi.park', elementType: 'geometry.fill', stylers: [{ color: '#e5dfd5' }] },
+        { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#fafaf8' }] },
+        { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#ede7dc' }] },
+        { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#ddd6ca' }] },
+      ];
+
+      const map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: 45.5316, lng: -73.5180 },
+        zoom: 11,
+        styles: mapStyles,
+        disableDefaultUI: true,
+        zoomControl: true,
+      });
+
+      new google.maps.Marker({
+        position: { lat: 45.5197, lng: -73.4977 }, map, title: 'Salon Kadio',
+        icon: { path: google.maps.SymbolPath.CIRCLE, scale: 12, fillColor: '#B8922A', fillOpacity: 1, strokeColor: '#0E0C09', strokeWeight: 2 },
+      });
+
+      const partenaires = [
+        { lat: 45.5243, lng: -73.4934, nom: 'Diane Mbaye' },
+        { lat: 45.5005, lng: -73.4189, nom: 'Fatou Konaté' },
+        { lat: 45.5991, lng: -73.6199, nom: 'Sandra Pierre' },
+        { lat: 45.6066, lng: -73.7124, nom: 'Aminata Coulibaly' },
+        { lat: 45.4579, lng: -73.4584, nom: 'Rachel Ndoye' },
+        { lat: 45.5405, lng: -73.4960, nom: 'Marcus Durand' },
+      ];
+
+      const bounds = new google.maps.LatLngBounds();
+      bounds.extend({ lat: 45.5197, lng: -73.4977 });
+      partenaires.forEach(p => {
+        new google.maps.Marker({
+          position: { lat: p.lat, lng: p.lng }, map, title: p.nom,
+          icon: { path: google.maps.SymbolPath.CIRCLE, scale: 8, fillColor: '#FAFAF8', fillOpacity: 1, strokeColor: '#B8922A', strokeWeight: 2 },
+        });
+        bounds.extend({ lat: p.lat, lng: p.lng });
+      });
+      map.fitBounds(bounds, 40);
+    }
+  </script>
+  <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBbM4IoB_DydTAVHnviPw3HoGfq3WGEEmY&callback=initMap&libraries=maps,marker&v=beta"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAFAF8;
+      color: #0E0C09;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Variables ── */
+    :root {
+      --white: #FAFAF8;
+      --ivoire: #F5F0E8;
+      --black: #0E0C09;
+      --gold: #B8922A;
+      --muted: rgba(14,12,9,0.45);
+      --border: rgba(14,12,9,0.08);
+    }
+
+    /* ── Animations ── */
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    @keyframes scrollBand { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+
+    /* ── Navbar ── */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(250,250,248,0.92); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .navbar-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 24px;
+      height: 64px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      font-size: 22px; letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--black); text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 28px; align-items: center; }
+    .nav-links a {
+      font-size: 12px; font-weight: 500; text-decoration: none;
+      color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--black); }
+    .nav-actions { display: flex; gap: 10px; align-items: center; }
+    .btn-outline-sm {
+      font-size: 11px; color: var(--muted); text-decoration: none;
+      padding: 8px 16px; border: 1px solid rgba(14,12,9,0.15);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .btn-solid-sm {
+      background: var(--black); color: var(--white);
+      padding: 9px 18px; font-size: 11px; font-weight: 600;
+      text-decoration: none; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+
+    /* ── Hero ── */
+    .hero {
+      min-height: 100vh; background: var(--white);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center; padding: 0 24px; position: relative;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 400;
+      font-size: clamp(72px, 18vw, 200px);
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-indent: 0.14em; color: var(--black);
+      line-height: 0.9; animation: fadeIn 1.2s ease;
+    }
+    .hero-line {
+      width: 60px; height: 1px; background: var(--black);
+      margin: 32px auto; opacity: 0.2;
+    }
+    .hero-subtitle {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(16px, 2.8vw, 24px);
+      color: var(--black); max-width: 600; line-height: 1.5;
+      font-weight: 300; letter-spacing: 0.02em;
+      animation: slideUp 1s ease 0.3s both;
+    }
+    .hero-buttons {
+      margin-top: 48px; display: flex; gap: 16px; flex-wrap: wrap;
+      justify-content: center; animation: slideUp 1s ease 0.6s both;
+    }
+    .btn-solid {
+      padding: 14px 40px; background: var(--black); color: var(--white);
+      border: none; font-size: 13px; font-weight: 500; cursor: pointer;
+      letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .btn-outline {
+      padding: 14px 40px; background: transparent; color: var(--black);
+      border: 1px solid var(--black); font-size: 13px; font-weight: 500;
+      cursor: pointer; letter-spacing: 0.12em; text-transform: uppercase;
+    }
+    .hero-proof {
+      margin-top: 40px; display: flex; gap: 24px; flex-wrap: wrap;
+      justify-content: center; align-items: center;
+      animation: slideUp 1s ease 0.9s both;
+    }
+    .hero-proof span { font-size: 13px; color: var(--muted); letter-spacing: 0.02em; }
+    .hero-proof .sep { color: rgba(14,12,9,0.15); }
+    .hero-scroll {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      width: 1px; height: 48px; background: var(--black); opacity: 0.12;
+      animation: fadeIn 1.5s ease 1s both;
+    }
+
+    /* ── Bandeau villes ── */
+    .band {
+      overflow: hidden; border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border); background: var(--white); padding: 14px 0;
+    }
+    .band-scroll {
+      display: flex; width: max-content; animation: scrollBand 22s linear infinite;
+    }
+    .band-scroll span {
+      color: var(--black); font-size: 12px; font-weight: 400;
+      letter-spacing: 0.2em; white-space: nowrap; padding: 0 40px;
+      text-transform: uppercase; opacity: 0.35;
+    }
+
+    /* ── Section titres ── */
+    .section-label {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.25em;
+      text-transform: uppercase; margin: 0 0 16px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 300; letter-spacing: 0.02em; margin: 0;
+    }
+
+    /* ── Écosystème (ivoire) ── */
+    .eco { background: var(--ivoire); padding: 100px 24px; }
+    .eco-inner { max-width: 1100px; margin: 0 auto; }
+    .eco-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1px; background: rgba(14,12,9,0.06);
+    }
+    .eco-card {
+      padding: 48px 36px; background: var(--ivoire);
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .eco-card .lieu { color: var(--gold); font-size: 11px; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; }
+    .eco-card h3 { font-size: 24px; color: var(--black); font-weight: 400; font-family: 'Cormorant Garamond', serif; letter-spacing: 0.02em; }
+    .eco-card p { color: var(--muted); font-size: 14px; line-height: 1.7; }
+
+    /* ── Services (blanc) ── */
+    .services { background: var(--white); padding: 100px 24px; }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header {
+      display: grid; grid-template-columns: 1fr 120px 120px;
+      padding: 0 28px 16px; border-bottom: 1px solid var(--border);
+    }
+    .services-header span {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .services-header span:not(:first-child) { text-align: center; }
+    .service-row {
+      padding: 20px 28px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 120px 120px; align-items: center;
+    }
+    .service-row .name { color: var(--black); font-weight: 500; font-size: 15px; }
+    .service-row .cat { color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .service-row .price-reg { color: var(--muted); font-size: 14px; text-align: center; text-decoration: line-through; }
+    .service-row .price-abo { text-align: center; }
+    .badge-inclus {
+      display: inline-block; background: var(--black); color: var(--white);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 14px;
+    }
+    .badge-reduc {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      padding: 4px 14px;
+    }
+    .services-banner {
+      margin-top: 32px; padding: 20px 28px; background: var(--ivoire);
+      text-align: center; font-size: 14px; color: var(--black); letter-spacing: 0.02em;
+    }
+    .services-banner strong { font-weight: 600; }
+    @media (max-width: 640px) {
+      .services-header, .service-row { grid-template-columns: 1fr 90px 90px; padding: 16px 16px; }
+      .badge-inclus, .badge-reduc { font-size: 10px; padding: 3px 10px; }
+    }
+
+    /* ── Forfaits (blanc) — conversion psychology ── */
+    .forfaits { background: var(--white); padding: 100px 24px; }
+    .forfaits-inner { max-width: 1100px; margin: 0 auto; }
+    .forfaits-proof { text-align: center; margin-bottom: 48px; display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .forfaits-proof span { font-size: 13px; color: var(--muted); }
+    .forfaits-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 0;
+    }
+    .forfait-card {
+      padding: 44px 32px; border: 1px solid var(--border); background: var(--white);
+      display: flex; flex-direction: column; gap: 20px; position: relative;
+    }
+    .forfait-card.recommended {
+      border: 2px solid var(--gold); transform: scale(1.02); z-index: 2;
+      box-shadow: 0 8px 40px rgba(184,146,42,0.10);
+    }
+    .forfait-badge {
+      position: absolute; top: -1px; left: 0; right: 0;
+      background: var(--gold); color: var(--white); text-align: center;
+      font-size: 11px; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase;
+      padding: 6px 0;
+    }
+    .forfait-cat { color: var(--muted); font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; }
+    .forfait-name { color: var(--black); font-size: 22px; font-weight: 500; font-family: 'Cormorant Garamond', serif; }
+    .forfait-prix { font-size: 44px; font-weight: 300; color: var(--black); font-family: 'Cormorant Garamond', serif; }
+    .forfait-anchor { color: var(--muted); font-size: 12px; margin-top: 4px; }
+    .forfait-anchor s { text-decoration: line-through; }
+    .forfait-saving { color: var(--gold); font-size: 12px; font-weight: 600; margin-top: 4px; letter-spacing: 0.04em; }
+    .forfait-features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+    .forfait-features li { display: flex; align-items: center; gap: 10px; font-size: 13px; color: var(--black); }
+    .forfait-features li .check { color: var(--gold); font-size: 14px; flex-shrink: 0; }
+    .forfait-guarantee {
+      margin-top: 40px; padding: 28px 32px; background: var(--ivoire); text-align: center;
+    }
+    @media (max-width: 768px) {
+      .forfaits-grid { grid-template-columns: 1fr; }
+      .forfait-card.recommended { transform: none; }
+    }
+
+    /* ── Témoignages (ivoire) ── */
+    .temoignages { background: var(--ivoire); padding: 100px 24px; }
+    .temoignages-inner { max-width: 1100px; margin: 0 auto; }
+    .temoignages-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1px; background: rgba(14,12,9,0.06);
+    }
+    .temoignage-card {
+      padding: 36px 32px; background: var(--ivoire);
+      display: flex; flex-direction: column; gap: 16px;
+    }
+    .temoignage-card .texte { color: var(--black); font-size: 14px; line-height: 1.7; font-style: italic; opacity: 0.8; }
+    .temoignage-card .nom { color: var(--black); font-weight: 500; font-size: 14px; }
+    .temoignage-card .ville { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+    /* ── Stats (blanc) ── */
+    .stats {
+      background: var(--white); padding: 80px 24px; border-top: 1px solid var(--border);
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto; display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 40px; text-align: center;
+    }
+    .stat-val {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 8vw, 72px); color: var(--black);
+      line-height: 1; margin-bottom: 8px; font-weight: 300;
+    }
+    .stat-label { color: var(--muted); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; }
+
+    /* ── CTA Final (ivoire) ── */
+    .cta-final { background: var(--ivoire); padding: 120px 24px; text-align: center; }
+    .cta-final-inner { max-width: 600px; margin: 0 auto; }
+
+    /* ── Footer (ivoire) ── */
+    .footer { background: var(--ivoire); border-top: 1px solid var(--border); }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; padding: 64px 24px 48px;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+    }
+    .footer h4 {
+      color: var(--black); margin-bottom: 14px; font-size: 11px;
+      font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase;
+    }
+    .footer a, .footer p { font-size: 13px; color: var(--muted); text-decoration: none; line-height: 1.7; }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding: 20px 24px;
+      font-size: 11px; color: var(--muted); letter-spacing: 0.04em;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .nav-links, .nav-actions { display: none; }
+      .eco-grid, .forfaits-grid, .temoignages-grid { grid-template-columns: 1fr; }
+      .forfait-card + .forfait-card { border-left: none; border-top: 1px solid var(--border); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAVBAR ════════ -->
+  <header class="navbar">
+    <div class="navbar-inner">
+      <a href="#" class="nav-logo">KADIO</a>
+      <nav class="nav-links">
+        <a href="#">Accueil</a>
+        <a href="#">Comment ça marche</a>
+        <a href="#">Forfaits</a>
+        <a href="#">Service VIP</a>
+        <a href="#">Rejoindre</a>
+        <a href="#">Blog</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="#" class="btn-outline-sm">Mon espace</a>
+        <a href="#" class="btn-solid-sm">Devenir partenaire</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero" style="padding-top: 64px;">
+    <h1>KADIO</h1>
+    <div class="hero-line"></div>
+    <p class="hero-subtitle">
+      L'excellence de la coiffure afro<br>
+      maintenant accessible partout au Québec
+    </p>
+    <!-- 4 Parcours directement sous le sous-titre -->
+    <div style="margin-top: 40px; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(14,12,9,0.06); animation: slideUp 1s ease 0.9s both;">
+
+      <!-- Je suis client -->
+      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--black); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">✂</span></div>
+        <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis client</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Réservez une coiffeuse certifiée</div>
+        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 1px; margin-top: 2px;">Réserver</span>
+      </div>
+
+      <!-- Je suis abonné -->
+      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+        <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">♛</span></div>
+        <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis abonné</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Accédez à tout le réseau partout au Québec</div>
+        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Mon espace</span>
+      </div>
+
+      <!-- Coiffeur(se) / Emploi -->
+      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+        <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">★</span></div>
+        <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Coiffeur(se) / Emploi</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Rejoignez le réseau ou postulez au salon</div>
+        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Rejoindre</span>
+      </div>
+
+      <!-- Je suis fournisseur -->
+      <div style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+        <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">📦</span></div>
+        <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis fournisseur</div>
+        <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Photos requises · Livraison partout au Québec · Commandes autonomes</div>
+        <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Devenir fournisseur</span>
+      </div>
+    </div>
+
+    <!-- Preuve sociale sous les parcours -->
+    <div class="hero-proof" style="margin-top: 28px;">
+      <span>★ 4.4/5 Google</span>
+      <span class="sep">|</span>
+      <span>500+ clients</span>
+      <span class="sep">|</span>
+      <span>10+ coiffeurs certifiés</span>
+    </div>
+
+    <div class="hero-scroll"></div>
+  </section>
+
+  <!-- ════════ BANDEAU VILLES ════════ -->
+  <div class="band">
+    <div class="band-scroll">
+      <span>Longueuil · Montréal · Laval · Brossard · Québec · Gatineau · Sherbrooke ·</span>
+      <span>Longueuil · Montréal · Laval · Brossard · Québec · Gatineau · Sherbrooke ·</span>
+      <span>Longueuil · Montréal · Laval · Brossard · Québec · Gatineau · Sherbrooke ·</span>
+      <span>Longueuil · Montréal · Laval · Brossard · Québec · Gatineau · Sherbrooke ·</span>
+    </div>
+  </div>
+
+  <!-- ════════ ÉCOSYSTÈME ════════ -->
+  <section class="eco">
+    <div class="eco-inner">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <p class="section-label" style="color: var(--gold);">L'écosystème</p>
+        <h2 class="section-title" style="color: var(--black);">Trois piliers, une vision</h2>
+      </div>
+      <div class="eco-grid">
+        <div class="eco-card">
+          <p class="lieu">Longueuil</p>
+          <h3>Salon Kadio</h3>
+          <p>Coiffure afro, locs, tresses, barbier, soins végétaux. L'expérience en personne.</p>
+        </div>
+        <div class="eco-card">
+          <p class="lieu">Grand Montréal</p>
+          <h3>Kadio Network</h3>
+          <p>10+ coiffeurs certifiés. Même standards. Même application. Partout au Québec.</p>
+        </div>
+        <div class="eco-card">
+          <p class="lieu">Soins naturels</p>
+          <h3>Kadio Végétal</h3>
+          <p>Chébé, moringa, ghassoul, aloe vera. Préparés devant vous. Zéro chimie.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ SERVICES — Prix régulier vs Abonné ════════ -->
+  <section class="services">
+    <div class="services-inner">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <p class="section-label" style="color: var(--muted);">Au salon</p>
+        <h2 class="section-title" style="color: var(--black);">Nos services</h2>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">Comparez les prix réguliers et les avantages abonnés</p>
+      </div>
+
+      <!-- En-tête colonnes -->
+      <div class="services-header">
+        <span>Service</span>
+        <span>Prix régulier</span>
+        <span>Abonné</span>
+      </div>
+
+      <!-- Knotless braids -->
+      <div class="service-row">
+        <div><div class="name">Knotless braids</div><div class="cat">Tresses · Knotless Signature · 110$/mois</div></div>
+        <div class="price-reg">85 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Tresses classiques -->
+      <div class="service-row">
+        <div><div class="name">Tresses classiques</div><div class="cat">Tresses · Tresses Essentiel · 75$/mois</div></div>
+        <div class="price-reg">65 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Locs installation -->
+      <div class="service-row">
+        <div><div class="name">Locs installation</div><div class="cat">Locs · Locs Premium · 90$/mois</div></div>
+        <div class="price-reg">170 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Locs entretien -->
+      <div class="service-row">
+        <div><div class="name">Locs entretien</div><div class="cat">Locs · Locs Mensuel · 60$/mois</div></div>
+        <div class="price-reg">64 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Coupe homme fade -->
+      <div class="service-row">
+        <div><div class="name">Coupe homme fade</div><div class="cat">Barbier · Barbier Essentiel · 29$/mois</div></div>
+        <div class="price-reg">26 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Tissage simple -->
+      <div class="service-row">
+        <div><div class="name">Tissage simple</div><div class="cat">Tissage · Tout Compris · 149$/mois</div></div>
+        <div class="price-reg">102 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- Coupes enfant -->
+      <div class="service-row">
+        <div><div class="name">Coupes enfant (−12)</div><div class="cat">Enfants · Famille Enfants · 55$/mois</div></div>
+        <div class="price-reg">21 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- Soin cuir chevelu -->
+      <div class="service-row">
+        <div><div class="name">Soin cuir chevelu</div><div class="cat">Soins · Tout Compris · 149$/mois</div></div>
+        <div class="price-reg">45 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- Bannière économies -->
+      <div class="services-banner">
+        <strong>Économisez jusqu'à 100%</strong> sur vos services avec un abonnement Kadio
+      </div>
+
+      <div style="text-align: center; margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <button class="btn-solid" style="font-size: 12px;">Voir les forfaits</button>
+        <button class="btn-outline" style="font-size: 12px;">Tous les services</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CARTE RÉSEAU ════════ -->
+  <section class="eco">
+    <div class="eco-inner">
+      <div style="text-align: center; margin-bottom: 48px;">
+        <p class="section-label" style="color: var(--gold);">Réseau</p>
+        <h2 class="section-title" style="color: var(--black);">Nos partenaires certifiés</h2>
+      </div>
+      <div style="position: relative;">
+        <div id="map" style="height: 420px; width: 100%;"></div>
+        <div style="position: absolute; bottom: 16px; left: 12px; z-index: 10; background: rgba(250,250,248,0.95); padding: 8px 14px; display: flex; gap: 16px; font-size: 12px; color: #0E0C09; backdrop-filter: blur(8px); border: 1px solid rgba(14,12,9,0.06); pointer-events: none;">
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #B8922A; display: inline-block;"></span>Salon Kadio</span>
+          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FAFAF8; border: 2px solid #B8922A; display: inline-block;"></span>Partenaires certifiés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TIRAGE ════════ -->
+  <section class="services">
+    <div style="max-width: 700px; margin: 0 auto; text-align: center; padding: 100px 24px;">
+      <p class="section-label" style="color: var(--gold);">Tirage 2026</p>
+      <h2 class="section-title" style="color: var(--black); font-size: clamp(32px, 5vw, 48px); line-height: 1.15; margin-bottom: 20px;">Gagnez une voiture</h2>
+      <p style="color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 36px;">1 ticket = 20$ · 3 tickets = 50$ · Chaque coiffure au salon = 1 ticket gratuit</p>
+      <div style="display: flex; gap: 40px; justify-content: center; margin-bottom: 40px;">
+        <div><div style="font-size: 36px; font-weight: 300; color: var(--black); font-family: 'Cormorant Garamond', serif;">247</div><div style="font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;">participants</div></div>
+        <div><div style="font-size: 36px; font-weight: 300; color: var(--black); font-family: 'Cormorant Garamond', serif;">5 000</div><div style="font-size: 11px; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase;">objectif</div></div>
+      </div>
+      <div style="background: rgba(14,12,9,0.06); height: 2px; margin-bottom: 36px;"><div style="width: 4.94%; height: 100%; background: var(--gold);"></div></div>
+      <button class="btn-solid" style="font-size: 12px;">Participer</button>
+    </div>
+  </section>
+
+  <!-- ════════ FORFAITS — Psychologie de conversion ════════ -->
+  <section class="forfaits">
+    <div class="forfaits-inner">
+      <div style="text-align: center; margin-bottom: 20px;">
+        <p class="section-label" style="color: var(--gold);">Abonnements</p>
+        <h2 class="section-title" style="color: var(--black);">Choisissez votre forfait</h2>
+        <p style="color: var(--muted); font-size: 15px; margin-top: 16px;">Sans engagement · Annulez à tout moment · Économies dès le 1er mois</p>
+      </div>
+
+      <!-- Social proof -->
+      <div class="forfaits-proof">
+        <span>✓ 312 abonnés actifs</span>
+        <span>✓ 97% de satisfaction</span>
+        <span>✓ 0$ de frais d'annulation</span>
+      </div>
+
+      <div class="forfaits-grid">
+
+        <!-- FORFAIT 1 : Barbier Essentiel -->
+        <div class="forfait-card">
+          <div>
+            <p class="forfait-cat">Barbier</p>
+            <div class="forfait-name">Barbier Essentiel</div>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">2 coupes par mois, idéal pour garder votre style</p>
+          </div>
+          <div>
+            <div><span class="forfait-prix">29</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
+            <div class="forfait-anchor"><s>70 $/mois</s> sans abonnement</div>
+            <div class="forfait-saving">Vous économisez 41$/mois</div>
+          </div>
+          <ul class="forfait-features">
+            <li><span class="check">✓</span> 2 coupes fade ou dégradé</li>
+            <li><span class="check">✓</span> Booking prioritaire</li>
+            <li><span class="check">✓</span> Rappels SMS automatiques</li>
+            <li><span class="check">✓</span> Annulation gratuite</li>
+          </ul>
+          <button class="btn-outline" style="font-size: 12px; padding: 14px;">Commencer</button>
+        </div>
+
+        <!-- FORFAIT 2 : Knotless Signature — RECOMMANDÉ -->
+        <div class="forfait-card recommended">
+          <div class="forfait-badge">★ Recommandé — Le plus populaire</div>
+          <div style="margin-top: 20px;">
+            <p class="forfait-cat" style="color: var(--gold);">Tresses</p>
+            <div class="forfait-name">Knotless Signature</div>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">1 session knotless par mois + consultation style</p>
+          </div>
+          <div>
+            <div><span class="forfait-prix">110</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
+            <div class="forfait-anchor"><s>140 $/mois</s> sans abonnement</div>
+            <div class="forfait-saving">Vous économisez 30$/mois + consultation gratuite</div>
+          </div>
+          <ul class="forfait-features">
+            <li><span class="check">✓</span> 1 session knotless braids</li>
+            <li><span class="check">✓</span> Consultation style personnalisée</li>
+            <li><span class="check">✓</span> Priorité booking VIP</li>
+            <li><span class="check">✓</span> Rappels SMS automatiques</li>
+            <li><span class="check">✓</span> 15% de réduction sur les extras</li>
+            <li><span class="check">✓</span> Partenaire dédié</li>
+          </ul>
+          <button style="padding: 14px; background: var(--gold); color: var(--white); border: none; font-size: 12px; font-weight: 600; cursor: pointer; letter-spacing: 0.1em; text-transform: uppercase;">Choisir ce forfait</button>
+        </div>
+
+        <!-- FORFAIT 3 : Tout Compris -->
+        <div class="forfait-card">
+          <div>
+            <p class="forfait-cat">Tous services</p>
+            <div class="forfait-name">Tout Compris</div>
+            <p style="color: var(--muted); font-size: 13px; margin-top: 6px;">Accès illimité à tous les services Kadio</p>
+          </div>
+          <div>
+            <div><span class="forfait-prix">149</span><span style="color: var(--muted); font-size: 14px;"> $/mois</span></div>
+            <div class="forfait-anchor"><s>350+ $/mois</s> sans abonnement</div>
+            <div class="forfait-saving">Vous économisez 200+$/mois</div>
+          </div>
+          <ul class="forfait-features">
+            <li><span class="check">✓</span> Services au choix illimités*</li>
+            <li><span class="check">✓</span> Priorité absolue sur tous les créneaux</li>
+            <li><span class="check">✓</span> Partenaire dédié attitré</li>
+            <li><span class="check">✓</span> 25% de réduction sur les extras</li>
+            <li><span class="check">✓</span> Rappels SMS automatiques</li>
+            <li style="color: var(--muted); font-style: italic; font-size: 12px;"><span class="check" style="color: var(--muted);"></span> *fair use : 1 service/semaine max</li>
+          </ul>
+          <button class="btn-solid" style="font-size: 12px; padding: 14px;">Commencer</button>
+        </div>
+      </div>
+
+      <!-- Garantie satisfait ou remboursé -->
+      <div class="forfait-guarantee">
+        <div style="font-size: 15px; color: var(--black); font-weight: 500; margin-bottom: 6px;">Garantie satisfait ou remboursé 30 jours</div>
+        <div style="font-size: 13px; color: var(--muted); line-height: 1.6;">Pas satisfait ? On vous rembourse intégralement. Sans question. Sans délai.</div>
+      </div>
+
+      <!-- Urgence douce -->
+      <div style="text-align: center; margin-top: 24px;">
+        <p style="font-size: 13px; color: var(--muted); font-style: italic;">🔒 Places limitées par quartier pour garantir la qualité du service</p>
+      </div>
+
+      <!-- Lien tous les forfaits -->
+      <div style="text-align: center; margin-top: 32px;">
+        <button class="btn-outline" style="font-size: 12px;">Voir tous les 9 forfaits</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ TÉMOIGNAGES ════════ -->
+  <section class="temoignages">
+    <div class="temoignages-inner">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <p class="section-label" style="color: var(--gold);">Témoignages</p>
+        <h2 class="section-title" style="color: var(--black);">Ils nous font confiance</h2>
+      </div>
+      <div class="temoignages-grid">
+        <div class="temoignage-card">
+          <p class="texte">"Meilleure expérience coiffure que j'ai jamais eue. L'application rend tout tellement simple."</p>
+          <div style="margin-top: auto;"><div class="nom">Mariam S.</div><div class="ville">Longueuil</div></div>
+        </div>
+        <div class="temoignage-card">
+          <p class="texte">"Ma coiffeuse est venue chez moi en 30 minutes. Résultat impeccable, comme en salon."</p>
+          <div style="margin-top: auto;"><div class="nom">Aminata K.</div><div class="ville">Montréal-Nord</div></div>
+        </div>
+        <div class="temoignage-card">
+          <p class="texte">"Les soins végétaux ont transformé mes cheveux. Je ne retournerai jamais aux produits chimiques."</p>
+          <div style="margin-top: auto;"><div class="nom">Sandra P.</div><div class="ville">Brossard</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ STATS ════════ -->
+  <section class="stats">
+    <div class="stats-inner">
+      <div><div class="stat-val">500+</div><div class="stat-label">Clients satisfaits</div></div>
+      <div><div class="stat-val">10+</div><div class="stat-label">Coiffeurs certifiés</div></div>
+      <div><div class="stat-val">4.8</div><div class="stat-label">Note Google</div></div>
+      <div><div class="stat-val">8</div><div class="stat-label">Langues parlées</div></div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA FINAL — Luxe épuré ════════ -->
+  <section class="cta-final" style="position: relative; overflow: hidden;">
+    <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 60px; background: var(--gold); opacity: 0.25;"></div>
+
+    <div style="max-width: 600px; margin: 0 auto;">
+      <p class="section-label" style="color: var(--gold);">Votre place vous attend</p>
+      <h2 class="section-title" style="color: var(--black); font-size: clamp(32px, 6vw, 56px); line-height: 1.1; margin-bottom: 16px;">Prêt à commencer ?</h2>
+      <p style="color: var(--muted); font-size: 16px; line-height: 1.6; max-width: 480px; margin: 0 auto 40px;">
+        Un réseau bâti sur l'excellence, la confiance et la fierté de nos cultures afro.
+      </p>
+      <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px;">
+        <button class="btn-solid">Réserver maintenant</button>
+        <button class="btn-outline">Devenir partenaire</button>
+      </div>
+      <div style="padding: 16px 24px; background: rgba(184,146,42,0.06); display: inline-block;">
+        <span style="font-size: 13px; color: var(--black); letter-spacing: 0.02em;">
+          🔒 Places limitées par quartier — <strong>6 places restantes</strong> à Longueuil
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <a href="#" class="nav-logo" style="font-size: 16px; display: inline-block; margin-bottom: 16px;">KADIO</a>
+        <p>Coiffure & Esthétique<br>Longueuil, Québec</p>
+      </div>
+      <div>
+        <h4>Navigation</h4>
+        <a href="#" style="display: block; margin-bottom: 8px;">Accueil</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Forfaits</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Service VIP</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Blog</a>
+      </div>
+      <div>
+        <h4>Espaces</h4>
+        <a href="#" style="display: block; margin-bottom: 8px;">Espace client</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Portail partenaire</a>
+        <a href="#" style="display: block; margin-bottom: 8px;">Devenir partenaire</a>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <p>615, rue Antoinette-Robidoux<br>Local 100, Longueuil (QC)<br>J4J 2V8</p>
+        <a href="tel:5149195970" style="display: block; margin-top: 10px; color: var(--black);">514-919-5970</a>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Kadio Coiffure & Esthétique</div>
+  </footer>
+
+</body>
+</html>

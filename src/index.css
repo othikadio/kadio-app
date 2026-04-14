@@ -1,0 +1,62 @@
+/* Tailwind — utilisé uniquement pour les utilitaires md:flex / hidden md:block etc. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Reset Kadio ───────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #FAFAF8;
+  color: #0E0C09;
+  font-family: 'DM Sans', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100svh;
+  width: 100%;
+}
+
+/* ─── Variables CSS ──────────────────────────────────────────── */
+:root {
+  --noir:  #0E0C09;
+  --or:    #B8922A;
+  --creme: #FAFAF8;
+  --ivoire: #F5F0E8;
+  --sable: #EDE7DC;
+  --card:  #F5F0E8;
+  --card2: #EDE7DC;
+  --muted: rgba(14, 12, 9, 0.45);
+  --border: rgba(14, 12, 9, 0.08);
+  --border-or: rgba(184, 146, 42, 0.2);
+  --border-or-strong: rgba(184, 146, 42, 0.4);
+}
+
+/* ─── Scrollbar personnalisée ────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F5F0E8; }
+::-webkit-scrollbar-thumb { background: rgba(14,12,9,0.15); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(14,12,9,0.3); }
+
+/* ─── Animations globales ────────────────────────────────────── */
+@keyframes spin    { to { transform: rotate(360deg) } }
+@keyframes fadeIn  { from { opacity: 0; transform: translateY(8px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes slideUp { from { opacity: 0; transform: translateY(20px) } to { opacity: 1; transform: translateY(0) } }
+@keyframes pulse   { 0%,100% { opacity: 1 } 50% { opacity: 0.4 } }
+
+/* ─── Supprime le tap highlight iOS ─────────────────────────── */
+button, a { -webkit-tap-highlight-color: transparent; }
+
+/* ─── Input reset ────────────────────────────────────────────── */
+input, textarea, select {
+  outline: none;
+  font-family: inherit;
+}
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 100px #FAFAF8 inset;
+  -webkit-text-fill-color: #0E0C09;
+}

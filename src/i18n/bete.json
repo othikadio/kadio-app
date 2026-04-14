@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Kpↄ",
+    "tarifs": "Zuzu",
+    "blog": "Blog",
+    "contact": "Kↄ",
+    "connexion": "Bↄ",
+    "devenir_partenaire": "Nyↄ kpene"
+  },
+  "common": {
+    "confirmer": "Sé",
+    "annuler": "Gbↄ",
+    "enregistrer": "Tↄ",
+    "fermer": "Kpa",
+    "retour": "Sehin",
+    "chargement": "Wↄ la…",
+    "erreur": "Nyan dↄ ba",
+    "succes": "Yi lↄ"
+  },
+  "auth": {
+    "telephone": "Telifɔn",
+    "code_otp": "Kɔd nyuan",
+    "connexion": "Bↄ",
+    "inscription": "Kↄ kuan",
+    "envoyer_code": "Ci kɔd",
+    "verifier": "Nyuan"
+  },
+  "hero": {
+    "titre": "Afiriki ɲinya ↄ wɔ",
+    "sous_titre": "Rdv ta Kadio Coiffure & Esthétique",
+    "cta": "Rdv ta kpene"
+  },
+  "accueil": {
+    "titre_section": "Ndɛ Kadio ?",
+    "avantage_1": "Artiste certifié",
+    "avantage_2": "Nↄgↄ ɲinma",
+    "avantage_3": "Rdv 60s nun",
+    "avantage_4": "Dɛsɛ garanti",
+    "stats_partenaires": "kpene yi",
+    "stats_clients": "client yi fɛ",
+    "stats_villes": "dↄ yi",
+    "rejoindre_titre": "Réseau nun bↄ",
+    "rejoindre_cta": "Nyↄ kpene"
+  },
+  "reserver": {
+    "titre": "Rdv ta",
+    "choisir_service": "Service yi",
+    "choisir_lieu": "Salon yi",
+    "choisir_date": "Ɲↄ yi",
+    "recap": "Résumé",
+    "paiement": "Sara",
+    "confirmation": "Dɛ !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Rdv sé",
+    "vers_paiement": "Sara su"
+  },
+  "forfaits": {
+    "titre": "Forfait ni Abonnement",
+    "mensuel": "Ↄsↄ",
+    "annuel": "Pua",
+    "economie": "yɛlɛma",
+    "populaire": "Wↄ su",
+    "choisir": "Forfait in yi",
+    "inclus": "Nun",
+    "sans_engagement": "Engagement alↄ"
+  },
+  "client": {
+    "mon_compte": "N account",
+    "mes_rdv": "N rdv",
+    "mes_abonnements": "N abonnement",
+    "historique": "Kↄ tɛmɛn",
+    "prochain_rdv": "Rdv ↄ ba",
+    "annuler_rdv": "Rdv gbↄ",
+    "noter": "Kↄ sɛbɛ",
+    "modifier": "Yɛlɛma",
+    "points": "points",
+    "bienvenue": "Akwaba"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "N service",
+    "agenda": "Agenda",
+    "portefeuille": "Sika",
+    "reservations": "Réservation",
+    "revenus": "Lↄgↄ",
+    "disponibilites": "Disponibilité",
+    "clients": "Client yi",
+    "avis": "Kↄ",
+    "retrait": "Sika ta"
+  },
+  "pwa": {
+    "installer": "App ta",
+    "installer_desc": "Ekran fua nun bↄ",
+    "plus_tard": "Ↄ ba",
+    "installer_btn": "Ta",
+    "offline": "Internet alↄ mode",
+    "maj_disponible": "Mise à jour woni"
+  },
+  "footer": {
+    "droits": "Hakɛ bɛɛ tↄ",
+    "politique": "Politique confidentialité",
+    "cgu": "CGU",
+    "contact": "Kↄ",
+    "langue": "Kan"
+  },
+  "cartes": {
+    "numero": "Carte nↄmↄrↄ",
+    "expiry": "Ɲↄ laban",
+    "cvv": "CVV",
+    "nom": "Tↄgↄ carte",
+    "payer": "Sara"
+  },
+  "services": {
+    "coiffure": "Ti pua",
+    "braids": "Tresse",
+    "locs": "Locks",
+    "color": "Rↄbↄ",
+    "esthetique": "Esthétique",
+    "soins": "Ti sara",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}

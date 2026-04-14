@@ -1,0 +1,123 @@
+{
+  "nav": {
+    "accueil": "Ndako",
+    "tarifs": "Mitengo",
+    "blog": "Blog",
+    "contact": "Bokanani",
+    "connexion": "Kota",
+    "devenir_partenaire": "Kozala moninga"
+  },
+  "common": {
+    "confirmer": "Kolendisa",
+    "annuler": "Koboma",
+    "enregistrer": "Kobomba",
+    "fermer": "Kokanga",
+    "retour": "Kozonga",
+    "chargement": "Koleka…",
+    "erreur": "Likosá esalemi",
+    "succes": "Elonga"
+  },
+  "auth": {
+    "telephone": "Telefoni",
+    "code_otp": "Kode ya kolakisa",
+    "connexion": "Kota",
+    "inscription": "Bongisa compte",
+    "envoyer_code": "Tinda kode",
+    "verifier": "Kolakisa"
+  },
+  "hero": {
+    "titre": "Kitoko ya Afrique na loboko na yo",
+    "sous_titre": "Bongisa rdv na Kadio Coiffure & Esthétique",
+    "cta": "Bongisa sik'oyo"
+  },
+  "accueil": {
+    "titre_section": "Mpo na nini Kadio ?",
+    "avantage_1": "Baartiste bya certifié",
+    "avantage_2": "Biloko ya ntina",
+    "avantage_3": "Bongisa na 60s",
+    "avantage_4": "Satisfaction garanti",
+    "stats_partenaires": "bamoninga",
+    "stats_clients": "bakliyani basepeli",
+    "stats_villes": "bavile",
+    "rejoindre_titre": "Koya na réseau",
+    "rejoindre_cta": "Kozala moninga"
+  },
+  "reserver": {
+    "titre": "Bongisa",
+    "choisir_service": "Pona service",
+    "choisir_lieu": "Pona salon",
+    "choisir_date": "Pona mokolo",
+    "recap": "Résumé",
+    "paiement": "Lilembu",
+    "confirmation": "Elendisi !",
+    "depot": "Dépôt",
+    "confirmer_rdv": "Lendisa rendez-vous",
+    "vers_paiement": "Koya na lilembu"
+  },
+  "forfaits": {
+    "titre": "Forfait ná Abonnement",
+    "mensuel": "Ya sanza",
+    "annuel": "Ya mobu",
+    "economie": "kobomba",
+    "populaire": "Ya bato mingi",
+    "choisir": "Pona forfait oyo",
+    "inclus": "Ezali kati",
+    "sans_engagement": "Kozanga engagement"
+  },
+  "client": {
+    "mon_compte": "Compte na ngai",
+    "mes_rdv": "Rendez-vous na ngai",
+    "mes_abonnements": "Abonnement na ngai",
+    "historique": "Historique",
+    "prochain_rdv": "Rendez-vous oyo ekoya",
+    "annuler_rdv": "Boma rendez-vous",
+    "noter": "Tika commentaire",
+    "modifier": "Bobongisa",
+    "points": "points",
+    "bienvenue": "Boyei malamu"
+  },
+  "partenaire": {
+    "tableau_de_bord": "Tableau de bord",
+    "mes_services": "Service na ngai",
+    "agenda": "Agenda",
+    "portefeuille": "Portefeuille",
+    "reservations": "Réservation",
+    "revenus": "Mbongo oyo ezwami",
+    "disponibilites": "Disponibilité",
+    "clients": "Bakliyani",
+    "avis": "Mawazo",
+    "retrait": "Kozwa mbongo"
+  },
+  "pwa": {
+    "installer": "Installer app",
+    "installer_desc": "Pona ngonga nioso banda écran ya ndako",
+    "plus_tard": "Sima",
+    "installer_btn": "Installer",
+    "offline": "Mode kozanga internet",
+    "maj_disponible": "Mise à jour ezali"
+  },
+  "footer": {
+    "droits": "Makoki nyonso ebombami",
+    "politique": "Politique ya confidentialité",
+    "cgu": "CGU",
+    "contact": "Bokanani",
+    "langue": "Monoko"
+  },
+  "cartes": {
+    "numero": "Numéro ya carte",
+    "expiry": "Mokolo ya koleka",
+    "cvv": "CVV",
+    "nom": "Nkombo na carte",
+    "payer": "Lipa"
+  },
+  "services": {
+    "coiffure": "Kobomba suki",
+    "braids": "Tresses",
+    "locs": "Locks",
+    "color": "Couleur",
+    "esthetique": "Esthétique",
+    "soins": "Kobatela suki",
+    "massage": "Massage",
+    "maquillage": "Maquillage"
+  }
+}
