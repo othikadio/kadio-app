@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forfaits Tout Inclus — Kadio Coiffure</title>
+  <meta name="description" content="20+ forfaits mensuels tout inclus pour cheveux afro. Knotless, locs, barbier, tissage, tresses, enfants. Engagement minimum 2 mois. Économisez jusqu'à 50%." />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --white: #FAFAF8;
+      --ivoire: #F5F0E8;
+      --black: #0E0C09;
+      --gold: #B8922A;
+      --muted: rgba(14,12,9,0.65);
+      --border: rgba(14,12,9,0.08);
+    }
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--white); color: var(--black);
+      font-weight: 400; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .serif { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+    /* ── Nav ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.12em; color: var(--black); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); opacity: 0.75; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 10px 22px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── Hero ── */
+    .hero { padding: 80px 24px 48px; text-align: center; background: var(--ivoire); }
+    .hero .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 6vw, 64px); line-height: 1.05; margin-bottom: 16px; color: var(--black); }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p.sub { max-width: 620px; margin: 0 auto 32px; color: var(--muted); font-size: 16px; line-height: 1.65; }
+    .hero-proof { display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; font-size: 13px; color: var(--black); }
+    .hero-proof span { display: flex; align-items: center; gap: 6px; }
+    .hero-proof .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--gold); }
+
+    /* ── Filtres ── */
+    .filters { max-width: 1200px; margin: 0 auto; padding: 40px 24px 0; display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+    .filter-btn { padding: 10px 20px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 500; background: transparent; border: 1px solid var(--border); color: var(--black); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--gold); color: var(--gold); }
+    .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ── Catégorie ── */
+    .cat-block { max-width: 1200px; margin: 0 auto; padding: 56px 24px; }
+    .cat-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 28px; border-bottom: 1px solid var(--border); padding-bottom: 16px; }
+    .cat-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 400; color: var(--black); }
+    .cat-head span { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+
+    /* ── Carte forfait ── */
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1px; background: var(--border); }
+    .card { background: var(--white); padding: 28px; display: flex; flex-direction: column; gap: 18px; min-height: 440px; position: relative; transition: background 0.25s; }
+    .card:hover { background: var(--ivoire); }
+    .card.featured { background: linear-gradient(180deg, rgba(184,146,42,0.04) 0%, rgba(184,146,42,0.08) 100%); border: 1px solid rgba(184,146,42,0.3); }
+    .card .badge { position: absolute; top: -1px; right: -1px; background: var(--gold); color: var(--white); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 6px 12px; font-weight: 600; }
+    .card .cat-label { font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .card .name { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--black); line-height: 1.2; margin-bottom: 6px; }
+    .card .desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .card .price-row { padding: 14px 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .card .price { font-family: 'Cormorant Garamond', serif; font-size: 42px; font-weight: 300; color: var(--black); line-height: 1; }
+    .card .price-unit { font-size: 13px; color: var(--muted); margin-left: 4px; }
+    .card .anchor { font-size: 12px; color: var(--muted); margin-top: 8px; }
+    .card .anchor .val { font-weight: 600; color: var(--black); }
+    .card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; flex-grow: 1; }
+    .card ul li { font-size: 13px; color: var(--black); display: flex; gap: 10px; align-items: flex-start; line-height: 1.5; }
+    .card ul li .check { color: var(--gold); flex-shrink: 0; margin-top: 2px; }
+    .card button, .card a.btn { padding: 14px; background: transparent; border: 1px solid var(--black); color: var(--black); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; cursor: pointer; text-align: center; text-decoration: none; display: block; transition: all 0.2s; }
+    .card button:hover, .card a.btn:hover { background: var(--black); color: var(--white); }
+    .card.featured button, .card.featured a.btn { background: var(--gold); color: var(--white); border-color: var(--gold); }
+    .card.featured button:hover, .card.featured a.btn:hover { background: var(--black); border-color: var(--black); }
+
+    /* ── Famille ── */
+    .famille { background: var(--ivoire); padding: 80px 24px; text-align: center; }
+    .famille-inner { max-width: 800px; margin: 0 auto; }
+    .famille .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .famille h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 300; color: var(--black); margin-bottom: 20px; line-height: 1.1; }
+    .famille p { color: var(--muted); font-size: 16px; line-height: 1.7; margin-bottom: 28px; }
+    .famille .rules { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 640px; margin: 0 auto; }
+    @media (max-width: 600px) { .famille .rules { grid-template-columns: 1fr; } }
+    .famille .rule { background: var(--white); padding: 24px; text-align: left; border-left: 3px solid var(--gold); }
+    .famille .rule strong { display: block; font-size: 22px; color: var(--gold); font-family: 'Cormorant Garamond', serif; margin-bottom: 4px; }
+    .famille .rule span { font-size: 14px; color: var(--black); }
+
+    /* ── Paiement ── */
+    .paiement { padding: 100px 24px; background: var(--white); }
+    .paiement-inner { max-width: 1000px; margin: 0 auto; }
+    .paiement h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 300; color: var(--black); text-align: center; margin-bottom: 12px; }
+    .paiement .lead { text-align: center; color: var(--muted); font-size: 15px; margin-bottom: 56px; max-width: 640px; margin-left: auto; margin-right: auto; }
+    .paiement-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+    @media (max-width: 768px) { .paiement-grid { grid-template-columns: 1fr; } }
+    .paiement-col h3 { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 500; color: var(--black); margin-bottom: 16px; }
+    .paiement-col p { color: var(--muted); font-size: 14px; line-height: 1.7; margin-bottom: 12px; }
+    .paiement-col .months { display: flex; gap: 6px; flex-wrap: wrap; margin-top: 18px; }
+    .paiement-col .months span { background: var(--ivoire); padding: 8px 14px; font-size: 13px; font-weight: 500; color: var(--black); }
+
+    /* ── Règlements ── */
+    .regs { background: var(--ivoire); padding: 100px 24px; }
+    .regs-inner { max-width: 900px; margin: 0 auto; }
+    .regs h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 4vw, 40px); font-weight: 300; color: var(--black); text-align: center; margin-bottom: 48px; }
+    .reg-block { background: var(--white); padding: 28px 32px; margin-bottom: 2px; border-left: 3px solid var(--gold); }
+    .reg-block h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; color: var(--black); margin-bottom: 10px; }
+    .reg-block p { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 8px; }
+    .reg-block ul { margin-left: 18px; margin-top: 8px; }
+    .reg-block ul li { font-size: 14px; color: var(--muted); line-height: 1.7; list-style: disc; margin-bottom: 4px; }
+    .reg-block strong { color: var(--black); }
+
+    /* ── CTA ── */
+    .cta { padding: 100px 24px; text-align: center; background: var(--black); color: var(--white); }
+    .cta h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 300; line-height: 1.1; margin-bottom: 16px; }
+    .cta p { color: rgba(250,250,248,0.7); font-size: 16px; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+    .cta a.btn-gold { display: inline-block; padding: 18px 40px; background: var(--gold); color: var(--white); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+
+    /* ── Footer ── */
+    .footer { background: var(--black); color: rgba(250,250,248,0.6); padding: 40px 24px; text-align: center; font-size: 12px; border-top: 1px solid rgba(250,250,248,0.1); }
+    .footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">KADIO</a>
+      <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/forfaits" class="active">Forfaits</a>
+        <a href="/#services">Services</a>
+        <a href="/#temoignages">Avis</a>
+        <a href="/app/contact">Contact</a>
+      </div>
+      <a href="/app" class="nav-cta">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <p class="label">Forfaits Tout Inclus</p>
+    <h1>Un prix fixe. <em>Des services illimités.</em></h1>
+    <p class="sub">Plus besoin de calculer. Choisissez le forfait qui correspond à votre style et venez aussi souvent que vous le souhaitez. Engagement minimum 2 mois. Économies dès le premier rendez-vous.</p>
+    <div class="hero-proof">
+      <span><span class="dot"></span>312 abonnés actifs</span>
+      <span><span class="dot"></span>-10% pour les familles</span>
+      <span><span class="dot"></span>Pass prépayés disponibles</span>
+      <span><span class="dot"></span>Annulable à tout moment</span>
+    </div>
+  </section>
+
+  <!-- Filtres -->
+  <div class="filters">
+    <button class="filter-btn active" data-f="all">Tous</button>
+    <button class="filter-btn" data-f="barbier">Barbier</button>
+    <button class="filter-btn" data-f="tresses">Tresses & Knotless</button>
+    <button class="filter-btn" data-f="locs">Locs</button>
+    <button class="filter-btn" data-f="perruque">Perruques & Tissage</button>
+    <button class="filter-btn" data-f="enfant">Enfants</button>
+    <button class="filter-btn" data-f="autres">Autres</button>
+  </div>
+
+  <!-- ═══════════ BARBIER ═══════════ -->
+  <section class="cat-block" data-cat="barbier">
+    <div class="cat-head">
+      <h2>Barbier</h2>
+      <span>4 forfaits</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Barbier</p>
+          <div class="name">Coupe simple</div>
+          <p class="desc">Le classique hebdomadaire pour garder votre coupe fraîche.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">60</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">104 $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 coupe par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card featured">
+        <span class="badge">Populaire</span>
+        <div>
+          <p class="cat-label">Barbier</p>
+          <div class="name">Coupe + Barbe</div>
+          <p class="desc">Style impeccable du lundi au samedi, barbe parfaite chaque jour.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">65</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">140+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 coupe par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Rasage barbe illimité</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">Choisir ce forfait</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Barbier</p>
+          <div class="name">Barbe illimité</div>
+          <p class="desc">Uniquement l'entretien de la barbe, aussi souvent que nécessaire.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">36</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">80+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>Rasage barbe illimité</li>
+          <li><span class="check">✓</span>Finition et soin inclus</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Barbier · Enfant</p>
+          <div class="name">Enfant barbier</div>
+          <p class="desc">Pour les moins de 12 ans — coupe propre chaque semaine.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">50</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">84 $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 coupe par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ TRESSES & KNOTLESS ═══════════ -->
+  <section class="cat-block" data-cat="tresses">
+    <div class="cat-head">
+      <h2>Tresses &amp; Knotless</h2>
+      <span>5 forfaits</span>
+    </div>
+    <div class="grid">
+
+      <div class="card featured">
+        <span class="badge">★ Signature</span>
+        <div>
+          <p class="cat-label">Tresses</p>
+          <div class="name">Knotless Signature</div>
+          <p class="desc">Notre forfait le plus choisi. Pose complète, longueur de votre choix.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">140</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte (avec extensions)</span> · <span class="val">220+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose knotless par mois</li>
+          <li><span class="check">✓</span>Longueur au choix</li>
+          <li><span class="check">✓</span>Extensions / mèches incluses</li>
+          <li><span class="check">✓</span>Démêlage inclus</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">Choisir ce forfait</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Tresses</p>
+          <div class="name">Tresses / Twists Court</div>
+          <p class="desc">Une nouvelle pose par mois, entretien garanti.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">120</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">180+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose tresses ou twists par mois</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Combo</span>
+        <div>
+          <p class="cat-label">Combo</p>
+          <div class="name">Tresses / Twists + Barbier</div>
+          <p class="desc">Duo parfait pour couples ou style complet. Tous les avantages combinés.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">145</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Économie vs 2 forfaits séparés</span> · <span class="val">40 $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>Tous les avantages Tresses/Twists Court</li>
+          <li><span class="check">✓</span>Tous les avantages Coupe + Barbe</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Tresses</p>
+          <div class="name">Tresse rapide</div>
+          <p class="desc">Nattes collées, barrel twists et styles rapides. 2 poses par mois.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">80</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">160+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>2 poses par mois</li>
+          <li><span class="check">✓</span>Nattes collées, barrel twists</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Combo</span>
+        <div>
+          <p class="cat-label">Combo</p>
+          <div class="name">Tresse rapide + Barbier</div>
+          <p class="desc">Styles rapides pour elle, coupes impeccables pour lui.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">105</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Économie vs 2 forfaits séparés</span> · <span class="val">40 $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>Tous les avantages Tresse rapide</li>
+          <li><span class="check">✓</span>Tous les avantages Coupe + Barbe</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ LOCS ═══════════ -->
+  <section class="cat-block" data-cat="locs">
+    <div class="cat-head">
+      <h2>Locs</h2>
+      <span>2 forfaits</span>
+    </div>
+    <div class="grid">
+
+      <div class="card featured">
+        <span class="badge">★ Premium</span>
+        <div>
+          <p class="cat-label">Locs</p>
+          <div class="name">Locs Illimité</div>
+          <p class="desc">Entretien complet, suivi personnalisé, détox inclus.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">130</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">250+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>2 resserrages par mois</li>
+          <li><span class="check">✓</span>Suivi personnalisé + détox</li>
+          <li><span class="check">✓</span>−50% sur pose d'extensions</li>
+          <li><span class="check">✓</span>−50% pour défaire les locs</li>
+        </ul>
+        <a href="/app" class="btn">Choisir ce forfait</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Locs fines</p>
+          <div class="name">Microlocs / Sisterlocs</div>
+          <p class="desc">Entretien spécialisé pour locs fines. Réparations incluses.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">150</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">280+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>1 resserrage par mois</li>
+          <li><span class="check">✓</span>Réparations incluses</li>
+          <li><span class="check">✓</span>−40% sur pose d'extensions</li>
+          <li><span class="check">✓</span>−40% sur départ cheveux naturels</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ PERRUQUE & TISSAGE ═══════════ -->
+  <section class="cat-block" data-cat="perruque">
+    <div class="cat-head">
+      <h2>Perruques &amp; Tissage</h2>
+      <span>3 forfaits</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Perruque</p>
+          <div class="name">Pose perruque simple</div>
+          <p class="desc">Changez de look chaque semaine. Pose professionnelle, résultat naturel.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">130</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">240+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Finition pro</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card featured">
+        <span class="badge">Tout inclus</span>
+        <div>
+          <p class="cat-label">Perruque + Tresses</p>
+          <div class="name">Perruque + Nattes</div>
+          <p class="desc">La flexibilité maximale : pose perruque hebdo + nattes collées incluses.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">170</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">320+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose perruque par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>2 poses nattes collées / mois</li>
+          <li><span class="check">✓</span>Priorité booking VIP</li>
+        </ul>
+        <a href="/app" class="btn">Choisir ce forfait</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Tissage</p>
+          <div class="name">Tissage mensuel</div>
+          <p class="desc">Une pose complète par mois, entretien hebdomadaire inclus.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">100</span><span class="price-unit">$/mois + tx</span>
+          <div class="anchor"><span>Valeur à la carte</span> · <span class="val">160+ $/mois</span></div>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose par mois</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ ENFANTS ═══════════ -->
+  <section class="cat-block" data-cat="enfant">
+    <div class="cat-head">
+      <h2>Enfants (−12 ans)</h2>
+      <span>5 forfaits · jusqu'à −10% famille</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Enfant</p>
+          <div class="name">Tresses rapide enfant</div>
+          <p class="desc">2 poses par mois — nattes collées, barrel twists adaptés.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">60</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>2 poses par mois</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Enfant</p>
+          <div class="name">Knotless enfant</div>
+          <p class="desc">Tresses knotless adaptées aux cheveux des enfants.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">90</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 pose knotless par mois</li>
+          <li><span class="check">✓</span>Extensions / mèches incluses</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Enfant</p>
+          <div class="name">Locs enfant</div>
+          <p class="desc">Entretien complet pour les locs des plus jeunes.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">80</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>2 resserrages par mois</li>
+          <li><span class="check">✓</span>Suivi personnalisé</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Combo</span>
+        <div>
+          <p class="cat-label">Combo Enfant</p>
+          <div class="name">Locs + Barbier enfant</div>
+          <p class="desc">Pour les enfants avec locs + coupe régulière.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">100</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>Tous les avantages Locs enfant</li>
+          <li><span class="check">✓</span>Tous les avantages Enfant barbier</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <span class="badge">Combo</span>
+        <div>
+          <p class="cat-label">Combo Enfant</p>
+          <div class="name">Tresses rapide + Barbier</div>
+          <p class="desc">Tresses hebdomadaires + coupe régulière pour les enfants.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">85</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>Tous les avantages Tresses rapide enfant</li>
+          <li><span class="check">✓</span>Tous les avantages Enfant barbier</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ AUTRES ═══════════ -->
+  <section class="cat-block" data-cat="autres">
+    <div class="cat-head">
+      <h2>Autres services</h2>
+      <span>2 forfaits</span>
+    </div>
+    <div class="grid">
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Coiffure</p>
+          <div class="name">Mise en plis</div>
+          <p class="desc">Une mise en plis chaque semaine pour un look impeccable.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">60</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 mise en plis par semaine</li>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+      <div class="card">
+        <div>
+          <p class="cat-label">Soin</p>
+          <div class="name">Lavage mensuel</div>
+          <p class="desc">Un lavage professionnel chaque semaine — le minimum pour des cheveux sains.</p>
+        </div>
+        <div class="price-row">
+          <span class="price">35</span><span class="price-unit">$/mois + tx</span>
+        </div>
+        <ul>
+          <li><span class="check">✓</span>1 lavage par semaine</li>
+          <li><span class="check">✓</span>Priorité booking</li>
+        </ul>
+        <a href="/app" class="btn">S'abonner</a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══════════ FAMILLE ═══════════ -->
+  <section class="famille">
+    <div class="famille-inner">
+      <p class="label">Offre famille</p>
+      <h2>Économisez ensemble</h2>
+      <p>Plus vous êtes nombreux, plus vous économisez. Combinez vos forfaits ou souscrivez deux fois le même pour obtenir automatiquement une réduction.</p>
+      <div class="rules">
+        <div class="rule">
+          <strong>−10%</strong>
+          <span>sur le total lorsque vous combinez 2 forfaits différents et plus</span>
+        </div>
+        <div class="rule">
+          <strong>−10%</strong>
+          <span>sur le total lorsque vous prenez 1 forfait en double et plus</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ PAIEMENT ═══════════ -->
+  <section class="paiement">
+    <div class="paiement-inner">
+      <h2>Deux façons de payer</h2>
+      <p class="lead">Choisissez le mode de paiement qui vous convient. Mensuel flexible ou tout-en-une-fois avec réduction.</p>
+      <div class="paiement-grid">
+        <div class="paiement-col">
+          <h3>Paiement mensuel récurrent</h3>
+          <p>Prélèvement automatique le même jour chaque mois, via Square (sécurisé, PCI-DSS).</p>
+          <p><strong>Engagement minimum : 2 mois.</strong> Résiliable ensuite à tout moment depuis votre espace client, avec effet à la fin du mois en cours.</p>
+          <p>Cartes de crédit, débit, Apple Pay, Google Pay acceptés.</p>
+        </div>
+        <div class="paiement-col">
+          <h3>Pass prépayé (plusieurs mois)</h3>
+          <p>Réglez 2 à 12 mois d'un coup et profitez de votre forfait sans renouvellement à gérer. Paiement par carte, virement Interac ou comptant au salon.</p>
+          <p>Durées disponibles :</p>
+          <div class="months">
+            <span>2 mois</span><span>3 mois</span><span>4 mois</span><span>5 mois</span>
+            <span>6 mois</span><span>7 mois</span><span>8 mois</span><span>9 mois</span>
+            <span>10 mois</span><span>11 mois</span><span>12 mois</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ RÈGLEMENTS ═══════════ -->
+  <section class="regs">
+    <div class="regs-inner">
+      <h2>Règlements &amp; conditions</h2>
+
+      <div class="reg-block">
+        <h3>1. Conditions générales de service</h3>
+        <p>En prenant rendez-vous chez Kadio Coiffure et Esthétique, vous acceptez les présentes conditions générales.</p>
+        <p>Tous les services sont offerts sous réserve de disponibilité. Les prix affichés sont <strong>hors taxes</strong>. Les taxes applicables (TPS 5% + TVQ 9,975% = <strong>14,975%</strong>) s'ajoutent au moment du paiement.</p>
+        <p>Kadio Coiffure se réserve le droit de refuser ou de mettre fin à un service en cas de comportement inapproprié ou dangereux pour l'équipe ou la clientèle.</p>
+      </div>
+
+      <div class="reg-block">
+        <h3>2. Politique d'annulation et de modification</h3>
+        <ul>
+          <li><strong>Annulation ou modification :</strong> minimum 24 heures avant l'heure du rendez-vous.</li>
+          <li><strong>Annulation tardive (moins de 24h) :</strong> le dépôt de sécurité versé ne sera pas remboursé.</li>
+          <li><strong>Modification de dernière minute :</strong> sous réserve de disponibilité. Non garantie.</li>
+          <li>Pour annuler ou modifier : appelez le <strong>(514) 919-5970</strong> ou envoyez un SMS. Les annulations par WhatsApp ou réseaux sociaux ne sont pas acceptées.</li>
+        </ul>
+      </div>
+
+      <div class="reg-block">
+        <h3>3. Politique de non-présentation (No-Show)</h3>
+        <p>Tout rendez-vous non annulé pour lequel le client ne se présente pas entraîne :</p>
+        <ul>
+          <li>La perte totale du dépôt versé lors de la réservation.</li>
+          <li>Pour les abonnés : un avertissement inscrit au dossier.</li>
+          <li>Après <strong>2 no-shows</strong> : obligation de payer un dépôt de 50% pour toute future réservation, même pour les services exemptés.</li>
+        </ul>
+        <p>Nous comprenons les imprévus — merci de nous contacter dès que possible.</p>
+      </div>
+
+      <div class="reg-block">
+        <h3>4. Dépôts de sécurité et paiements</h3>
+        <p>Un dépôt de sécurité de <strong>20%</strong> est requis pour confirmer tout rendez-vous, sauf pour :</p>
+        <ul>
+          <li>Services Barbier / Coupe homme / Coupe enfant</li>
+          <li>Clients abonnés actifs</li>
+        </ul>
+        <p>Le dépôt est déduit du montant final lors du service. Paiements via Square (sécurisé, PCI-DSS). Cartes de crédit, débit et espèces acceptées. Tous les prix sont en dollars canadiens (CAD), hors taxes.</p>
+      </div>
+
+      <div class="reg-block">
+        <h3>5. Conditions d'abonnement</h3>
+        <ul>
+          <li><strong>Renouvellement :</strong> automatique chaque mois via Square, à la date anniversaire.</li>
+          <li><strong>Engagement minimum :</strong> 2 mois dès la souscription.</li>
+          <li><strong>Résiliation :</strong> possible à tout moment après l'engagement, depuis votre espace client. Effet à la fin du mois en cours.</li>
+          <li><strong>Remboursement :</strong> aucun remboursement partiel pour un mois entamé.</li>
+          <li><strong>Défaut de paiement :</strong> après 3 tentatives échouées (J0, J+3, J+7), l'abonnement est suspendu automatiquement.</li>
+          <li><strong>Cumul :</strong> avantages non cumulables avec d'autres promotions sauf indication contraire.</li>
+          <li><strong>Pass prépayés :</strong> non remboursables, valides à partir de la date d'achat pour la durée choisie.</li>
+        </ul>
+      </div>
+
+      <div class="reg-block">
+        <h3>6. Confidentialité et données personnelles</h3>
+        <p>Les informations collectées (nom, email, téléphone) sont utilisées uniquement pour la gestion des rendez-vous, les rappels SMS/email et la communication liée à nos services.</p>
+        <p>Vos données ne sont <strong>jamais vendues ni partagées</strong> avec des tiers, sauf obligations légales. Conformément à la Loi 25 du Québec, vous pouvez demander l'accès, la correction ou la suppression de vos données à <a href="mailto:kadioothniel@yahoo.fr" style="color: var(--gold);">kadioothniel@yahoo.fr</a>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════ CTA ═══════════ -->
+  <section class="cta">
+    <h2>Prêt à économiser sur vos coiffures ?</h2>
+    <p>Rejoignez les 312 abonnés actifs de Kadio et payez moins pour plus de services.</p>
+    <a href="/app" class="btn-gold">Souscrire maintenant</a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Kadio Coiffure et Esthétique · Longueuil, QC · <a href="tel:+15149195970">(514) 919-5970</a></p>
+  </footer>
+
+  <script>
+    // Filtres par catégorie
+    const buttons = document.querySelectorAll('.filter-btn');
+    const blocks = document.querySelectorAll('.cat-block');
+    buttons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        buttons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const f = btn.dataset.f;
+        blocks.forEach(bl => {
+          bl.style.display = (f === 'all' || bl.dataset.cat === f) ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
