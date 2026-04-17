@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { OR, CREME, CARD } from '@/lib/utils'
 import QRScanner from '@/components/ui/QRScanner'
 import { verifyQRCode, DEMO_CODES } from '@/utils/qr'
+import { renderTemplate } from '@/utils/sms-templates'
 
 const PROGRESSION = ['En attente', 'Client arrivé', 'En cours', 'Terminé']
 
@@ -12,7 +13,7 @@ export default function PartenaireScanner() {
   const [notFound, setNotFound]     = useState(false)
   const [progression, setProgression] = useState(0)
   const [scanKey, setScanKey]       = useState(0)
-  const [smsLog, setSmsLog]         = useState('')
+  const [smsLog, setSmsLog]         = useState([])
 
   function verifier(inputCode) {
     const res = verifyQRCode(inputCode)
@@ -31,6 +32,7 @@ export default function PartenaireScanner() {
     setNotFound(false)
     setCode('')
     setProgression(0)
+    setSmsLog([])
     setScanKey(k => k + 1)
     setActiveTab('scanner')
   }
@@ -212,7 +214,22 @@ export default function PartenaireScanner() {
             {progression === 2 && (
               <button onClick={() => {
                 setProgression(3)
-                setSmsLog(`3 SMS post-RDV programmés pour ${result.client.split(' ')[0]} ✓ · +${result.commission ?? 0} pts fidélité`)
+                // Déclencher les 3 SMS post-RDV automatiques
+                const vars = {
+                  prenom: result.client.split(' ')[0],
+                  service: result.service,
+                  date: result.date,
+                  heure: result.heure,
+                  montant: result.prix || '—',
+                  lien_notation: 'kadio.app/noter',
+                  coiffeur: 'Diane',
+                  lien_note: 'kadio.app/noter',
+                }
+                setSmsLog([
+                  { delay: 'Maintenant', template: 'client-service-termine', msg: renderTemplate('client-service-termine', vars) },
+                  { delay: '+ 10 min', template: 'client-rdv-comment-connu', msg: renderTemplate('client-rdv-comment-connu', vars) },
+                  { delay: '+ 30 min', template: 'client-rdv-avis-google', msg: renderTemplate('client-rdv-avis-google', vars) },
+                ])
               }}
                 style={{ background: '#22c55e', color: '#0E0C09', border: 'none', borderRadius: '10px', padding: '12px', fontSize: '14px', fontWeight: 700, cursor: 'pointer', fontFamily: `'DM Sans', sans-serif` }}>
                 Marquer terminé
@@ -223,9 +240,27 @@ export default function PartenaireScanner() {
                 <div style={{ textAlign: 'center', color: '#22c55e', fontWeight: 700, padding: '8px' }}>
                   ✅ Service terminé avec succès
                 </div>
-                {smsLog && (
-                  <div style={{ background: 'rgba(34,197,94,0.08)', border: '1px solid rgba(34,197,94,0.25)', borderRadius: '8px', padding: '10px 12px', fontSize: '12px', color: '#22c55e' }}>
-                    📱 {smsLog}
+                {smsLog && smsLog.length > 0 && (
+                  <div style={{ background: 'rgba(34,197,94,0.06)', border: '1px solid rgba(34,197,94,0.2)', borderRadius: '10px', padding: '12px' }}>
+                    <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.45)', fontWeight: 700, marginBottom: '8px', textTransform: 'uppercase' }}>
+                      3 SMS post-RDV déclenchés
+                    </div>
+                    {smsLog.map((sms, i) => (
+                      <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: i < smsLog.length - 1 ? '8px' : 0, padding: '8px 10px', background: 'rgba(34,197,94,0.06)', borderRadius: '8px' }}>
+                        <div style={{ fontSize: '16px', flexShrink: 0 }}>📱</div>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontSize: '11px', color: '#22c55e', fontWeight: 700, marginBottom: '2px' }}>
+                            {sms.delay} — SMS envoyé
+                          </div>
+                          <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.6)', lineHeight: 1.4 }}>
+                            {sms.msg.slice(0, 120)}{sms.msg.length > 120 ? '…' : ''}
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                    <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.35)', marginTop: '8px', textAlign: 'center' }}>
+                      + {result.commission ?? 0} pts fidélité crédités
+                    </div>
                   </div>
                 )}
               </div>
