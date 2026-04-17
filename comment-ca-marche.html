@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comment ça marche — Kadio Coiffure & Network</title>
+  <meta name="description" content="Découvrez comment fonctionne Kadio : réservation pour les clients, opportunités pour les coiffeurs et esthéticiennes, et marketplace pour les fournisseurs." />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --white: #FAFAF8; --ivoire: #F5F0E8; --black: #0E0C09;
+      --gold: #B8922A; --muted: rgba(14,12,9,0.65); --border: rgba(14,12,9,0.08);
+    }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--white); color: var(--black); font-weight: 400; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    .serif { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+    /* ── Nav ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); opacity: 0.75; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 10px 22px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── Hero ── */
+    .hero { padding: 100px 24px 80px; text-align: center; background: var(--ivoire); }
+    .hero .label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(38px, 6vw, 64px); line-height: 1.08; margin-bottom: 20px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p.sub { max-width: 620px; margin: 0 auto; color: var(--muted); font-size: 17px; line-height: 1.7; }
+
+    /* ── Piliers ── */
+    .pillars { padding: 80px 24px; background: var(--white); }
+    .pillars-inner { max-width: 1000px; margin: 0 auto; }
+    .pillars-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; margin-top: 48px; }
+    .pillar-card {
+      background: var(--ivoire); border-radius: 16px; padding: 40px 28px; text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .pillar-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,12,9,0.08); }
+    .pillar-icon { font-size: 42px; margin-bottom: 16px; }
+    .pillar-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 400; margin-bottom: 10px; }
+    .pillar-card p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+    .pillar-badge {
+      display: inline-block; padding: 6px 16px; background: var(--white);
+      border: 1px solid rgba(184,146,42,0.3); font-size: 12px; color: var(--gold);
+      font-weight: 600; letter-spacing: 0.06em; margin-top: 16px;
+    }
+
+    /* ── Section label + title ── */
+    .section-center { text-align: center; max-width: 700px; margin: 0 auto; }
+    .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin-bottom: 16px; color: var(--black); }
+    .section-sub { color: var(--muted); font-size: 16px; line-height: 1.7; }
+
+    /* ── Parcours ── */
+    .parcours { padding: 80px 24px; }
+    .parcours.bg-ivoire { background: var(--ivoire); }
+    .parcours.bg-white { background: var(--white); }
+    .parcours-inner { max-width: 1000px; margin: 0 auto; }
+    .parcours-header { display: flex; align-items: center; gap: 16px; margin-bottom: 36px; }
+    .parcours-header .icon { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 1.5px solid rgba(184,146,42,0.3); display: flex; align-items: center; justify-content: center; font-size: 26px; flex-shrink: 0; }
+    .parcours-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(26px, 3.5vw, 38px); }
+    .parcours-header h2 em { color: var(--gold); font-style: normal; }
+    .parcours-intro { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 700px; margin-bottom: 36px; }
+
+    .steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 24px; }
+    .step { position: relative; padding: 28px 20px; background: var(--white); border-radius: 14px; }
+    .parcours.bg-white .step { background: var(--ivoire); }
+    .step-num { width: 36px; height: 36px; border-radius: 50%; background: var(--gold); color: var(--white); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; margin-bottom: 14px; }
+    .step h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; color: var(--black); }
+    .step p { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    /* ── Avantages ── */
+    .avantages { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .avantage {
+      display: flex; align-items: center; gap: 8px; padding: 10px 18px;
+      background: var(--white); border: 1px solid rgba(184,146,42,0.2);
+      border-radius: 8px; font-size: 13px; color: var(--black);
+    }
+    .parcours.bg-white .avantage { background: var(--ivoire); }
+    .avantage span { color: var(--gold); }
+
+    /* ── CTA ── */
+    .cta-section { padding: 80px 24px; background: var(--ivoire); text-align: center; }
+    .cta-section h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin-bottom: 16px; }
+    .cta-section p { color: var(--muted); font-size: 16px; margin-bottom: 32px; }
+    .cta-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .cta-btn {
+      display: inline-block; padding: 16px 36px;
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+      transition: all 0.3s;
+    }
+    .cta-btn.primary { background: var(--black); color: var(--white); }
+    .cta-btn.primary:hover { background: var(--gold); }
+    .cta-btn.outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
+    .cta-btn.outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── Footer ── */
+    .footer { background: var(--black); color: rgba(250,250,248,0.55); padding: 48px 24px; text-align: center; font-size: 13px; }
+    .footer a { color: var(--gold); }
+    .footer-links { margin-bottom: 16px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { color: rgba(250,250,248,0.7); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .footer-links a:hover { color: var(--gold); }
+    .gold-line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAV ════════ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">KADIO</a>
+      <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/comment-ca-marche" class="active">Comment ça marche</a>
+        <a href="/forfaits">Forfaits</a>
+        <a href="/services">Services</a>
+        <a href="/service-vip">VIP</a>
+        <a href="/fournisseurs">Boutique</a>
+        <a href="/rejoindre">Rejoindre</a>
+        <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+      </div>
+      <a href="/app" class="nav-cta">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <p class="label">Kadio Network</p>
+    <h1 class="serif">Comment ça <em>marche</em></h1>
+    <p class="sub">Un écosystème complet pour la beauté des cultures afro. Que vous soyez client, professionnel ou fournisseur — Kadio vous donne les outils pour réussir.</p>
+  </section>
+
+  <!-- ════════ DEUX PILIERS ════════ -->
+  <section class="pillars">
+    <div class="pillars-inner">
+      <div class="section-center">
+        <p class="label">L'écosystème</p>
+        <h2 class="section-title">Deux piliers, une vision</h2>
+        <p class="section-sub">Kadio, c'est un salon physique et un réseau de professionnels indépendants. Ensemble, on bâtit la plus grande référence beauté afro au Québec.</p>
+      </div>
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">🏠</div>
+          <h3>Salon Kadio</h3>
+          <p>Notre salon à Longueuil : coiffure afro, locs, tresses, barbier, soins. L'expérience complète en personne avec service VIP inclus.</p>
+          <div class="pillar-badge">Longueuil, QC</div>
+        </div>
+        <div class="pillar-card">
+          <div class="pillar-icon">🌍</div>
+          <h3>Kadio Network</h3>
+          <p>Un réseau de coiffeurs, barbiers et esthéticiennes certifiés partout au Québec. Mêmes standards, même application, même qualité.</p>
+          <div class="pillar-badge">Partout au Québec</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PARCOURS CLIENT ════════ -->
+  <section class="parcours bg-ivoire">
+    <div class="parcours-inner">
+      <div class="parcours-header">
+        <div class="icon">👤</div>
+        <h2>Vous êtes <em>client(e)</em></h2>
+      </div>
+      <p class="parcours-intro">Réservez en quelques clics, payez en ligne, et profitez d'un service de qualité — au salon ou chez vous. Kadio s'occupe de tout.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Choisissez votre service</h4>
+          <p>Coiffure, barbier, tresses, locs, esthétique — parcourez nos services et forfaits.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Réservez en ligne</h4>
+          <p>Choisissez votre professionnel, la date et l'heure qui vous conviennent. Confirmation instantanée.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Profitez de l'expérience</h4>
+          <p>Rendez-vous au salon ou recevez un professionnel à domicile. Boissons offertes au salon.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Payez simplement</h4>
+          <p>Paiement en ligne sécurisé. Pas de surprise, prix transparent dès la réservation.</p>
+        </div>
+      </div>
+
+      <div class="avantages">
+        <div class="avantage"><span>✓</span> Réservation 24/7</div>
+        <div class="avantage"><span>✓</span> Service VIP au salon</div>
+        <div class="avantage"><span>✓</span> Forfaits économiques</div>
+        <div class="avantage"><span>✓</span> Professionnels certifiés</div>
+        <div class="avantage"><span>✓</span> Service à domicile disponible</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PARCOURS COIFFEUR / BARBIER ════════ -->
+  <section class="parcours bg-white">
+    <div class="parcours-inner">
+      <div class="parcours-header">
+        <div class="icon">✂️</div>
+        <h2>Vous êtes <em>coiffeur(se) ou barbier</em></h2>
+      </div>
+      <p class="parcours-intro">Rejoignez le réseau Kadio et développez votre clientèle sans les tracas de gestion. Vous coiffez, on s'occupe du reste. Vous gardez 75% de chaque service.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Inscrivez-vous</h4>
+          <p>Remplissez votre profil avec vos spécialités, disponibilités et zone de travail.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>On vous valide</h4>
+          <p>Notre équipe vérifie votre profil et vos compétences. Vous intégrez le réseau sous 48h.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Recevez des clients</h4>
+          <p>Les clients réservent directement via l'application. Vous recevez les rendez-vous automatiquement.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Soyez payé</h4>
+          <p>Paiement automatique après chaque service. 75% pour vous, 25% pour le réseau Kadio.</p>
+        </div>
+      </div>
+
+      <div class="avantages">
+        <div class="avantage"><span>✓</span> 75% de chaque service</div>
+        <div class="avantage"><span>✓</span> 0$ de frais d'entrée</div>
+        <div class="avantage"><span>✓</span> 100% flexible — vos horaires</div>
+        <div class="avantage"><span>✓</span> Clientèle garantie par Kadio</div>
+        <div class="avantage"><span>✓</span> Application de gestion incluse</div>
+        <div class="avantage"><span>✓</span> Travaillez où vous voulez</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PARCOURS ESTHÉTICIENNE ════════ -->
+  <section class="parcours bg-ivoire">
+    <div class="parcours-inner">
+      <div class="parcours-header">
+        <div class="icon">💅</div>
+        <h2>Vous êtes <em>esthéticien(ne)</em></h2>
+      </div>
+      <p class="parcours-intro">Pose d'ongles, cils, soins, maquillage — rejoignez le réseau et recevez des clients directement via l'application. Travaillez depuis votre studio, à domicile ou en mobile. Vous gardez 75%.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Décrivez vos services</h4>
+          <p>Listez exactement ce que vous faites : types de poses, techniques, soins offerts.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>Choisissez votre mode</h4>
+          <p>Votre propre studio, à domicile chez les clients, ou en mode mobile — vous décidez.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Les clients vous trouvent</h4>
+          <p>Votre profil apparaît dans l'application Kadio. Les clients réservent directement avec vous.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Recevez vos revenus</h4>
+          <p>75% de chaque prestation. Paiement automatique sur votre compte après chaque service.</p>
+        </div>
+      </div>
+
+      <div class="avantages">
+        <div class="avantage"><span>✓</span> 75% de chaque prestation</div>
+        <div class="avantage"><span>✓</span> Pas besoin d'un local au salon</div>
+        <div class="avantage"><span>✓</span> Studio, domicile ou mobile</div>
+        <div class="avantage"><span>✓</span> 0$ pour commencer</div>
+        <div class="avantage"><span>✓</span> Clientèle Kadio automatique</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ PARCOURS FOURNISSEUR ════════ -->
+  <section class="parcours bg-white">
+    <div class="parcours-inner">
+      <div class="parcours-header">
+        <div class="icon">📦</div>
+        <h2>Vous êtes <em>fournisseur</em></h2>
+      </div>
+      <p class="parcours-intro">Vendez vos produits capillaires, extensions, perruques, ongles ou cils sur la boutique Kadio. Accédez à notre réseau de clients et professionnels partout au Québec.</p>
+
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h4>Créez votre boutique</h4>
+          <p>Ajoutez vos produits avec photos, descriptions et prix. Inscription gratuite.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h4>On valide vos produits</h4>
+          <p>Notre équipe vérifie la qualité et active votre boutique sous 48h.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h4>Vendez en ligne</h4>
+          <p>Les clients commandent directement. Livraison partout au Québec.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <h4>Recevez vos paiements</h4>
+          <p>Transfert automatique après chaque vente sur votre compte ou carte Kadio.</p>
+        </div>
+      </div>
+
+      <div class="avantages">
+        <div class="avantage"><span>✓</span> Inscription gratuite</div>
+        <div class="avantage"><span>✓</span> Visibilité sur tout le réseau</div>
+        <div class="avantage"><span>✓</span> Paiement automatique</div>
+        <div class="avantage"><span>✓</span> Livraison partout au Québec</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA ════════ -->
+  <section class="cta-section">
+    <h2 class="serif">Prêt à rejoindre Kadio?</h2>
+    <p>Que vous cherchiez un service, un réseau ou une boutique — on a une place pour vous.</p>
+    <div class="cta-buttons">
+      <a href="/app" class="cta-btn primary">Réserver un service</a>
+      <a href="/rejoindre" class="cta-btn outline">Devenir partenaire</a>
+      <a href="/fournisseurs" class="cta-btn outline">Vendre mes produits</a>
+    </div>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="gold-line"></div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/comment-ca-marche">Comment ça marche</a>
+      <a href="/forfaits">Forfaits</a>
+      <a href="/services">Services</a>
+      <a href="/service-vip">VIP</a>
+      <a href="/fournisseurs">Boutique</a>
+      <a href="/rejoindre">Rejoindre</a>
+      <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+    </div>
+    <p>&copy; 2025 Kadio Coiffure. Tous droits réservés.</p>
+  </footer>
+
+</body>
+</html>

@@ -30,6 +30,10 @@
     {
       "source": "/fournisseurs",
       "destination": "/fournisseurs.html"
+    },
+    {
+      "source": "/comment-ca-marche",
+      "destination": "/comment-ca-marche.html"
     }
   ]
 }
