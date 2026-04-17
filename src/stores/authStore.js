@@ -48,6 +48,12 @@ const DEV_PERSONAS = {
     client: null, partenaire: null, employe: null,
     fournisseur: { id: 'four-jean', user_id: 'usr-four', nom_entreprise: `Beauté Afro Supply`, actif: true },
   },
+  '5147770001': {
+    user:       { id: 'usr-mariam', telephone: '514-777-0001', prenom: 'Mariam',  nom: 'Touré',    email: 'mariam@gmail.com', langue: 'fr' },
+    roles:      [{ role: 'candidat', statut: 'actif' }],
+    activeRole: 'candidat',
+    client: null, partenaire: null, employe: null, fournisseur: null,
+  },
 }
 
 const DEV_OTP = '123456'
