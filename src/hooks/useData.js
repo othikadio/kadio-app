@@ -41,9 +41,14 @@ export function useSupabaseData(serviceFn, mockData = null, deps = [], skip = fa
       }
     } catch (err) {
       console.warn('[useData] Supabase error, using mock:', err.message)
-      setError(err)
-      setData(mockData)
-      setSource('mock')
+      // Si on a un fallback mock, pas d'erreur visible — l'app reste fonctionnelle
+      if (mockData != null) {
+        setData(mockData)
+        setSource('mock')
+        setError(null)
+      } else {
+        setError(err)
+      }
     } finally {
       setLoading(false)
     }
