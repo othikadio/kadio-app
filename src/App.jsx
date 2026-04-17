@@ -65,6 +65,7 @@ const PartMateriel       = lazy(() => import('@/pages/partenaire/Materiel'))
 const PartCertificat     = lazy(() => import('@/pages/partenaire/Certificat'))
 const PartVacances       = lazy(() => import('@/pages/partenaire/Vacances'))
 const PartProfil         = lazy(() => import('@/pages/partenaire/Profil'))
+const PartFormation      = lazy(() => import('@/pages/partenaire/Formation'))
 
 // ── Employé pages ──
 const EmpAccueil        = lazy(() => import('@/pages/employe/Accueil'))
@@ -85,6 +86,7 @@ const CandQuiz          = lazy(() => import('@/pages/candidat/Quiz'))
 const FourCatalogue     = lazy(() => import('@/pages/fournisseur/Catalogue'))
 const FourCommandes     = lazy(() => import('@/pages/fournisseur/Commandes'))
 const FourPaiements     = lazy(() => import('@/pages/fournisseur/Paiements'))
+const FourFormation     = lazy(() => import('@/pages/fournisseur/Formation'))
 
 // ── Admin pages ──
 const AdminDashboard    = lazy(() => import('@/pages/admin/Dashboard'))
@@ -179,6 +181,7 @@ export default function App() {
                 <Route path="certificat"     element={<PartCertificat />} />
                 <Route path="vacances"       element={<PartVacances />} />
                 <Route path="profil"         element={<PartProfil />} />
+                <Route path="formation"      element={<PartFormation />} />
               </Route>
             </Route>
 
@@ -214,6 +217,7 @@ export default function App() {
                 <Route path="catalogue" element={<FourCatalogue />} />
                 <Route path="commandes" element={<FourCommandes />} />
                 <Route path="paiements" element={<FourPaiements />} />
+                <Route path="formation" element={<FourFormation />} />
               </Route>
             </Route>
 

@@ -8,6 +8,7 @@ const NAV = [
   { to: '/partenaire/scanner',       icon: '📷', label: 'Scanner' },
   { to: '/partenaire/portefeuille',  icon: '💰', label: 'Portefeuille' },
   { to: '/partenaire/stats',         icon: '📊', label: 'Stats' },
+  { to: '/partenaire/formation',    icon: '📚', label: 'Formation' },
 ]
 
 export default function PartenaireLayout() {

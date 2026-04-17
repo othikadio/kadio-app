@@ -6,6 +6,8 @@ import {
 } from '@/services'
 import { MOCK_CANDIDATURE_MARIAM, MOCK_MODULES } from '@/data/mockCandidat'
 import { MOCK_CANDIDATURES } from '@/data/mockAdmin'
+import { MOCK_MODULES_PARTENAIRE } from '@/data/mockFormationPartenaire'
+import { MOCK_MODULES_FOURNISSEUR } from '@/data/mockFormationFournisseur'
 
 /** Candidature d'un candidat par téléphone */
 export function useCandidature(telephone) {
@@ -50,4 +52,14 @@ export function useUpdateCandidatureStatut() {
 /** Compléter un module de formation */
 export function useCompleteModule() {
   return useSupabaseMutation((partenaireId, moduleId) => completeModule(partenaireId, moduleId))
+}
+
+/** Modules de formation — Partenaire */
+export function useFormationPartenaire() {
+  return useSupabaseData(() => getFormationModules(), MOCK_MODULES_PARTENAIRE)
+}
+
+/** Modules de formation — Fournisseur */
+export function useFormationFournisseur() {
+  return useSupabaseData(() => getFormationModules(), MOCK_MODULES_FOURNISSEUR)
 }

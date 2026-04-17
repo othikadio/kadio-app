@@ -6,6 +6,7 @@ const NAV = [
   { to: '/fournisseur/catalogue',  icon: '📦', label: 'Catalogue' },
   { to: '/fournisseur/commandes',  icon: '🛒', label: 'Commandes' },
   { to: '/fournisseur/paiements',  icon: '💳', label: 'Paiements' },
+  { to: '/fournisseur/formation', icon: '📚', label: 'Formation' },
 ]
 
 export default function FournisseurLayout() {
