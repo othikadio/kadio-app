@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { OR, CREME, NOIR, CARD, MUTED, BORDER_OR, formatMontant, formatDate, statutColor } from '@/lib/utils'
 import { useAllProduits, useCommandesFournisseur } from '@/hooks'
-import { MOCK_FOURNISSEUR_JEAN, STATUTS_COMMANDE } from '@/data/mockFournisseur'
+import { MOCK_FOURNISSEUR_JEAN, MOCK_PRODUITS_JEAN, STATUTS_COMMANDE } from '@/data/mockFournisseur'
 
 export default function AdminFournisseurs() {
   const { data: produits = [] } = useAllProduits()
