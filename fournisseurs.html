@@ -519,7 +519,41 @@
       <p class="detail-price" id="detail-price"></p>
       <p class="detail-desc" id="detail-desc"></p>
       <div class="detail-meta" id="detail-meta"></div>
-      <button class="btn-order" onclick="orderProduct()">Commander — Livraison partout au Québec</button>
+      <div id="order-form-container">
+        <p style="font-size: 13px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold);">Commander ce produit</p>
+        <form onsubmit="orderProduct(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Votre nom <span class="req">*</span></label>
+              <input type="text" name="client_nom" required placeholder="Prénom et nom" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="client_tel" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="client_email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Adresse de livraison <span class="req">*</span></label>
+              <input type="text" name="client_adresse" required placeholder="Adresse complète" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Quantité</label>
+            <input type="number" name="quantite" value="1" min="1" style="max-width: 100px;" />
+          </div>
+          <button type="submit" class="btn-order">Confirmer la commande</button>
+        </form>
+      </div>
+      <div id="order-success" style="display:none; text-align:center; padding: 20px 0;">
+        <div style="font-size: 40px; margin-bottom: 12px;">✓</div>
+        <h4 style="margin-bottom: 8px;">Commande envoyée !</h4>
+        <p style="color: var(--muted); font-size: 14px;">Nous vous contacterons pour confirmer la livraison.</p>
+      </div>
     </div>
   </div>
 
@@ -584,7 +618,7 @@
               '<span class="product-price">' + p.price.toFixed(2) + ' $</span>' +
               '<span class="product-tag">' + p.cat + '</span>' +
             '</div>' +
-            '<button class="btn-add" onclick="event.stopPropagation(); orderProduct(' + p.id + ')">Commander</button>' +
+            '<button class="btn-add" onclick="event.stopPropagation(); showDetail(' + p.id + ')">Commander</button>' +
           '</div></div>';
       }).join('');
     }
@@ -608,23 +642,49 @@
         '<span>🚚 <em>' + p.delivery + '</em></span>' +
         '<span>🌍 <em>' + p.origin + '</em></span>' +
         '<span>📦 <em>' + p.cat + '</em></span>';
+      // Reset order form state
+      document.getElementById('order-form-container').style.display = 'block';
+      document.getElementById('order-success').style.display = 'none';
+      var orderForm = document.querySelector('#order-form-container form');
+      if (orderForm) orderForm.reset();
+      var orderBtn = document.querySelector('#order-form-container button[type="submit"]');
+      if (orderBtn) { orderBtn.textContent = 'Confirmer la commande'; orderBtn.disabled = false; }
       openModal('detail');
     }
 
-    function orderProduct(id) {
-      var p = id ? products.find(function(x) { return x.id === id; }) : currentDetail;
+    function orderProduct(e) {
+      if (e && e.preventDefault) e.preventDefault();
+      var p = currentDetail;
       if (!p) return;
-      var subject = 'Commande — ' + p.name;
-      var body = 'Bonjour,\n\nJe souhaite commander :\n\n' +
-        'Produit : ' + p.name + '\n' +
-        'Prix : ' + p.price.toFixed(2) + ' $\n' +
-        'Fournisseur : ' + p.supplier + '\n\n' +
-        'Merci de me confirmer la disponibilité et les détails de livraison.\n\n' +
-        'Cordialement';
-      var a = document.createElement('a');
-      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      a.target = '_blank';
-      a.click();
+      var form = e.target;
+      var btn = form.querySelector('button[type="submit"]');
+      var btnText = btn.textContent;
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+
+      var data = new FormData(form);
+      data.append('Produit', p.name);
+      data.append('Prix', p.price.toFixed(2) + ' $');
+      data.append('Fournisseur', p.supplier);
+      data.append('Catégorie', p.category);
+      data.append('_subject', 'COMMANDE — ' + p.name + ' — ' + data.get('client_nom'));
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
+
+      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
+        method: 'POST',
+        body: data
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(result) {
+        document.getElementById('order-form-container').style.display = 'none';
+        document.getElementById('order-success').style.display = 'block';
+      })
+      .catch(function(err) {
+        alert('Erreur lors de l\'envoi. Veuillez réessayer.');
+        btn.textContent = btnText;
+        btn.disabled = false;
+      });
     }
 
     /* ══════ MODALS ══════ */
@@ -707,21 +767,14 @@
     function submitSupplier(e) {
       e.preventDefault();
       var form = e.target;
+      var btn = form.querySelector('button[type="submit"]');
+      var btnText = btn.textContent;
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
+
       var data = new FormData(form);
-      var entries = {};
-      var checkboxGroups = {};
 
-      data.forEach(function(val, key) {
-        if (key === 'categories') {
-          if (!checkboxGroups[key]) checkboxGroups[key] = [];
-          checkboxGroups[key].push(val);
-        } else if (!key.startsWith('prod_')) {
-          entries[key] = val;
-        }
-      });
-      Object.keys(checkboxGroups).forEach(function(k) { entries[k] = checkboxGroups[k].join(', '); });
-
-      // Collect products
+      // Collect products into readable text
       var prods = [];
       document.querySelectorAll('.product-add-card').forEach(function(card) {
         var idx = card.getAttribute('data-index');
@@ -730,44 +783,28 @@
         var cat = form.querySelector('[name="prod_cat_' + idx + '"]');
         var desc = form.querySelector('[name="prod_desc_' + idx + '"]');
         if (nom && nom.value) {
-          prods.push({
-            nom: nom.value,
-            prix: prix ? prix.value + ' $' : '',
-            categorie: cat ? cat.value : '',
-            description: desc ? desc.value : ''
-          });
+          prods.push(nom.value + ' — ' + (prix ? prix.value + '$' : '') + ' — ' + (cat ? cat.value : '') + (desc && desc.value ? ' — ' + desc.value : ''));
         }
       });
+      data.append('Produits soumis', prods.join('\n'));
+      data.append('_subject', 'INSCRIPTION FOURNISSEUR — ' + (data.get('entreprise') || ''));
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
 
-      var subject = 'INSCRIPTION FOURNISSEUR — ' + entries.entreprise;
-      var body = 'INSCRIPTION FOURNISSEUR KADIO\n' + '═'.repeat(40) + '\n\n';
-      body += 'Entreprise: ' + entries.entreprise + '\n';
-      body += 'Contact: ' + entries.nom_contact + '\n';
-      body += 'Courriel: ' + entries.email + '\n';
-      body += 'Téléphone: ' + entries.telephone + '\n';
-      if (entries.site) body += 'Site web: ' + entries.site + '\n';
-      body += 'Livraison: ' + entries.livraison + '\n';
-      if (entries.delai) body += 'Délai: ' + entries.delai + '\n';
-      body += 'Catégories: ' + entries.categories + '\n';
-      body += '\n── PRODUITS SOUMIS ──\n\n';
-      prods.forEach(function(p, i) {
-        body += 'Produit ' + (i + 1) + ':\n';
-        body += '  Nom: ' + p.nom + '\n';
-        body += '  Prix: ' + p.prix + '\n';
-        body += '  Catégorie: ' + p.categorie + '\n';
-        if (p.description) body += '  Description: ' + p.description + '\n';
-        body += '\n';
+      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
+        method: 'POST',
+        body: data
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(result) {
+        document.getElementById('form-supplier').style.display = 'none';
+        document.getElementById('success-supplier').style.display = 'block';
+      })
+      .catch(function(err) {
+        alert('Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter à kadioothniel@yahoo.fr');
+        btn.textContent = btnText;
+        btn.disabled = false;
       });
-      body += '(Photos jointes séparément si applicable)\n';
-      body += '\n— Envoyé depuis kadio-app.vercel.app/fournisseurs';
-
-      var a = document.createElement('a');
-      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      a.target = '_blank';
-      a.click();
-
-      document.getElementById('form-supplier').style.display = 'none';
-      document.getElementById('success-supplier').style.display = 'block';
     }
 
     // Init

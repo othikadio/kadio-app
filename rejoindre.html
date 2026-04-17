@@ -1083,29 +1083,16 @@
       }
     });
 
-    /* ── Form submission ── */
+    /* ── Form submission via FormSubmit ── */
     function submitForm(e, type) {
       e.preventDefault();
       var form = e.target;
       var data = new FormData(form);
+      var btn = form.querySelector('button[type="submit"]');
+      var btnText = btn.textContent;
+      btn.textContent = 'Envoi en cours...';
+      btn.disabled = true;
 
-      // Collect all values including checkboxes
-      var entries = {};
-      var checkboxGroups = {};
-      data.forEach(function(val, key) {
-        if (form.querySelector('input[name="' + key + '"][type="checkbox"]')) {
-          if (!checkboxGroups[key]) checkboxGroups[key] = [];
-          checkboxGroups[key].push(val);
-        } else {
-          entries[key] = val;
-        }
-      });
-      // Merge checkbox groups
-      Object.keys(checkboxGroups).forEach(function(key) {
-        entries[key] = checkboxGroups[key].join(', ');
-      });
-
-      // Build structured email
       var titles = {
         coiffeur: 'CANDIDATURE COIFFEUR(SE) PARTENAIRE',
         barbier: 'CANDIDATURE BARBIER PARTENAIRE',
@@ -1114,42 +1101,26 @@
         stage: 'DEMANDE DE STAGE',
         fournisseur: 'DEMANDE FOURNISSEUR'
       };
-      var subject = titles[type] + ' — ' + (entries.prenom ? entries.prenom + ' ' + entries.nom : entries.nom_contact || entries.entreprise);
-      var body = titles[type] + '\n' + '═'.repeat(40) + '\n\n';
 
-      var labels = {
-        prenom: 'Prénom', nom: 'Nom', email: 'Courriel', telephone: 'Téléphone',
-        ville: 'Ville', langues: 'Langues', experience: 'Expérience', formation: 'Formation',
-        specialites: 'Spécialités', services: 'Services offerts', lieu_travail: 'Lieu de travail',
-        disponibilite: 'Disponibilités', disponibilites: 'Disponibilités détaillées',
-        debut: 'Début souhaité', materiel: 'Matériel personnel', instagram: 'Instagram',
-        tiktok: 'TikTok', portfolio: 'Portfolio', motivation: 'Motivation',
-        commentaires: 'Commentaires', entreprise: 'Entreprise', nom_contact: 'Contact',
-        poste: 'Poste', contrat: 'Type de contrat', adresse: 'Adresse',
-        salaire: 'Salaire souhaité', produits: 'Produits', livraison: 'Zone livraison',
-        delai: 'Délai livraison', site: 'Site web', description: 'Description',
-        photos: 'Photos disponibles', programme: 'Programme', interet: 'Domaines intérêt',
-        duree: 'Durée stage'
-      };
+      data.append('_subject', titles[type] || 'Nouvelle candidature Kadio');
+      data.append('_template', 'table');
+      data.append('_captcha', 'false');
+      data.append('Type de candidature', titles[type] || type);
 
-      Object.keys(entries).forEach(function(key) {
-        if (entries[key]) {
-          body += (labels[key] || key) + ': ' + entries[key] + '\n';
-        }
+      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
+        method: 'POST',
+        body: data
+      })
+      .then(function(res) { return res.json(); })
+      .then(function(result) {
+        document.getElementById('form-' + type).style.display = 'none';
+        document.getElementById('success-' + type).style.display = 'block';
+      })
+      .catch(function(err) {
+        alert('Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter à kadioothniel@yahoo.fr');
+        btn.textContent = btnText;
+        btn.disabled = false;
       });
-
-      body += '\n— Envoyé depuis kadio-app.vercel.app/rejoindre';
-
-      var mailtoLink = 'mailto:kadioothniel@yahoo.fr?subject=' +
-        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-      var a = document.createElement('a');
-      a.href = mailtoLink;
-      a.target = '_blank';
-      a.click();
-
-      // Show success
-      document.getElementById('form-' + type).style.display = 'none';
-      document.getElementById('success-' + type).style.display = 'block';
     }
   </script>
 
