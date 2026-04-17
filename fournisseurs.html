@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Boutique Kadio — Produits capillaires et beauté afro</title>
+  <meta name="description" content="Commandez des produits capillaires et beauté afro livrés partout au Québec. Huiles, crèmes, extensions, perruques, produits ongles et cils." />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --white: #FAFAF8; --ivoire: #F5F0E8; --black: #0E0C09;
+      --gold: #B8922A; --muted: rgba(14,12,9,0.65); --border: rgba(14,12,9,0.08);
+    }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--white); color: var(--black); font-weight: 400; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ── Nav ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.12em; }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); opacity: 0.75; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 10px 22px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── Hero ── */
+    .hero { padding: 80px 24px 60px; text-align: center; background: var(--ivoire); }
+    .hero .label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 6vw, 60px); line-height: 1.05; margin-bottom: 16px; }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p.sub { max-width: 560px; margin: 0 auto 28px; color: var(--muted); font-size: 16px; line-height: 1.7; }
+    .hero-badges { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+    .hero-badge { display: flex; align-items: center; gap: 8px; padding: 10px 18px; background: var(--white); border: 1px solid rgba(184,146,42,0.25); font-size: 13px; color: var(--black); }
+    .hero-badge span { color: var(--gold); font-size: 16px; }
+
+    /* ── Filters ── */
+    .shop { padding: 48px 24px 80px; background: var(--white); }
+    .shop-inner { max-width: 1200px; margin: 0 auto; }
+    .shop-header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; margin-bottom: 32px; }
+    .shop-count { font-size: 14px; color: var(--muted); }
+    .shop-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+    .filter-btn {
+      padding: 8px 18px; border: 1px solid var(--border); background: var(--white);
+      font-family: inherit; font-size: 12px; color: var(--muted); cursor: pointer;
+      transition: all 0.2s; letter-spacing: 0.04em;
+    }
+    .filter-btn:hover { border-color: var(--gold); color: var(--black); }
+    .filter-btn.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ── Product grid ── */
+    .products-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px;
+    }
+    .product-card {
+      background: var(--white); border: 1px solid var(--border); border-radius: 12px;
+      overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,12,9,0.08); }
+    .product-img {
+      width: 100%; aspect-ratio: 1; background: var(--ivoire);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 48px; color: rgba(184,146,42,0.3); overflow: hidden;
+    }
+    .product-img img { width: 100%; height: 100%; object-fit: cover; }
+    .product-info { padding: 20px; }
+    .product-supplier { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--gold); margin-bottom: 6px; }
+    .product-name { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; margin-bottom: 6px; color: var(--black); }
+    .product-desc { font-size: 13px; color: var(--muted); line-height: 1.5; margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+    .product-footer { display: flex; justify-content: space-between; align-items: center; }
+    .product-price { font-size: 18px; font-weight: 600; color: var(--black); }
+    .product-tag { font-size: 10px; padding: 4px 10px; background: var(--ivoire); color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+    .btn-add {
+      padding: 10px 20px; background: var(--black); color: var(--white);
+      border: none; font-family: inherit; font-size: 11px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.3s; margin-top: 12px; width: 100%;
+    }
+    .btn-add:hover { background: var(--gold); }
+
+    /* ── Devenir fournisseur banner ── */
+    .supplier-cta { padding: 80px 24px; background: var(--ivoire); text-align: center; }
+    .supplier-cta-inner { max-width: 800px; margin: 0 auto; }
+    .supplier-cta .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .supplier-cta h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; color: var(--black); }
+    .supplier-cta > p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 560px; margin: 0 auto 32px; }
+    .supplier-steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 24px; margin-bottom: 36px; text-align: center; }
+    .supplier-step .num { width: 40px; height: 40px; border-radius: 50%; background: var(--white); border: 1px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 12px; font-size: 16px; font-weight: 600; color: var(--gold); }
+    .supplier-step h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--black); }
+    .supplier-step p { font-size: 12px; color: var(--muted); line-height: 1.5; }
+    .supplier-commission { display: inline-block; padding: 14px 28px; background: var(--white); border: 1.5px solid var(--gold); margin-bottom: 24px; }
+    .supplier-commission span { font-size: 15px; color: var(--gold); font-weight: 600; letter-spacing: 0.04em; }
+    .btn-supplier {
+      display: inline-block; padding: 14px 36px; background: var(--black); color: var(--white);
+      font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
+      border: none; cursor: pointer; font-family: inherit; transition: background 0.3s;
+    }
+    .btn-supplier:hover { background: var(--gold); }
+
+    /* ── Modal fournisseur ── */
+    .modal-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(14,12,9,0.5); backdrop-filter: blur(4px);
+      align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto;
+    }
+    .modal-overlay.active { display: flex; }
+    .modal {
+      background: var(--white); border-radius: 16px; padding: 40px 32px;
+      max-width: 640px; width: 100%; position: relative;
+      box-shadow: 0 24px 64px rgba(14,12,9,0.15); margin: 40px auto;
+    }
+    .modal-close { position: absolute; top: 16px; right: 20px; background: none; border: none; font-size: 24px; color: var(--muted); cursor: pointer; }
+    .modal-close:hover { color: var(--black); }
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 26px; margin-bottom: 6px; }
+    .modal .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 24px; line-height: 1.5; }
+    .form-section-title { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 24px 0 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .form-section-title:first-of-type { margin-top: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 14px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--black); margin-bottom: 5px; }
+    .form-group label .req { color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 10px 14px; border: 1px solid rgba(14,12,9,0.15); border-radius: 8px;
+      font-family: inherit; font-size: 14px; color: var(--black); background: var(--white); outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 70px; }
+    .form-group small { display: block; font-size: 11px; color: var(--muted); margin-top: 3px; }
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 6px; }
+    .checkbox-group label { display: flex; align-items: center; gap: 5px; padding: 7px 12px; border: 1px solid var(--border); border-radius: 6px; font-size: 12px; cursor: pointer; transition: all 0.2s; font-weight: 400; letter-spacing: 0; }
+    .checkbox-group label:hover { border-color: var(--gold); }
+    .checkbox-group input { accent-color: var(--gold); }
+
+    /* Product add section in modal */
+    .product-add-card {
+      background: var(--ivoire); border-radius: 10px; padding: 20px; margin-bottom: 14px;
+      position: relative;
+    }
+    .product-add-card .remove-product {
+      position: absolute; top: 10px; right: 12px; background: none; border: none;
+      font-size: 18px; color: var(--muted); cursor: pointer;
+    }
+    .product-add-card .remove-product:hover { color: #c00; }
+    .product-add-card h4 { font-size: 13px; font-weight: 600; color: var(--gold); margin-bottom: 12px; letter-spacing: 0.06em; }
+    .img-upload-zone {
+      width: 100%; aspect-ratio: 16/9; border: 2px dashed rgba(184,146,42,0.3);
+      border-radius: 8px; display: flex; flex-direction: column; align-items: center;
+      justify-content: center; cursor: pointer; transition: border-color 0.2s;
+      background: var(--white); margin-bottom: 12px; overflow: hidden; position: relative;
+    }
+    .img-upload-zone:hover { border-color: var(--gold); }
+    .img-upload-zone .placeholder { text-align: center; color: var(--muted); }
+    .img-upload-zone .placeholder span { font-size: 28px; display: block; margin-bottom: 6px; color: rgba(184,146,42,0.4); }
+    .img-upload-zone .placeholder p { font-size: 12px; }
+    .img-upload-zone img { width: 100%; height: 100%; object-fit: cover; position: absolute; inset: 0; }
+    .img-upload-zone input { display: none; }
+    .btn-add-product {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      width: 100%; padding: 12px; border: 1.5px dashed var(--gold); background: transparent;
+      color: var(--gold); font-family: inherit; font-size: 13px; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-bottom: 20px;
+    }
+    .btn-add-product:hover { background: rgba(184,146,42,0.06); }
+    .form-submit {
+      width: 100%; padding: 14px; background: var(--black); color: var(--white);
+      border: none; font-family: inherit; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
+      transition: background 0.3s; border-radius: 8px;
+    }
+    .form-submit:hover { background: var(--gold); }
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success .check { width: 64px; height: 64px; border-radius: 50%; background: var(--ivoire); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+    .form-success h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 8px; }
+    .form-success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
+
+    /* ── Product detail modal ── */
+    .detail-modal .modal { max-width: 500px; }
+    .detail-img { width: 100%; aspect-ratio: 1; background: var(--ivoire); border-radius: 10px; overflow: hidden; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; font-size: 64px; color: rgba(184,146,42,0.25); }
+    .detail-img img { width: 100%; height: 100%; object-fit: cover; }
+    .detail-supplier { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--gold); margin-bottom: 4px; }
+    .detail-name { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+    .detail-price { font-size: 22px; font-weight: 600; color: var(--black); margin-bottom: 16px; }
+    .detail-desc { font-size: 14px; color: var(--muted); line-height: 1.7; margin-bottom: 20px; }
+    .detail-meta { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .detail-meta span { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+    .detail-meta span em { font-style: normal; color: var(--black); font-weight: 500; }
+    .btn-order {
+      width: 100%; padding: 14px; background: var(--black); color: var(--white);
+      border: none; font-family: inherit; font-size: 12px; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.3s;
+    }
+    .btn-order:hover { background: var(--gold); }
+
+    /* ── Footer ── */
+    .footer { background: var(--black); color: rgba(250,250,248,0.55); padding: 48px 24px; text-align: center; font-size: 13px; }
+    .footer a { color: var(--gold); }
+    .footer-links { margin-bottom: 16px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { color: rgba(250,250,248,0.7); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .footer-links a:hover { color: var(--gold); }
+    .gold-line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAV ════════ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">KADIO</a>
+      <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/forfaits">Forfaits</a>
+        <a href="/services">Services</a>
+        <a href="/fournisseurs" class="active">Boutique</a>
+        <a href="/rejoindre">Rejoindre</a>
+        <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+      </div>
+      <a href="/app" class="nav-cta">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <p class="label">Boutique Kadio</p>
+    <h1>Produits <em>beauté afro</em></h1>
+    <p class="sub">Produits capillaires, soins, extensions, accessoires ongles et cils — sélectionnés par nos professionnels, livrés partout au Québec.</p>
+    <div class="hero-badges">
+      <div class="hero-badge"><span>🚚</span> Livraison partout au Québec</div>
+      <div class="hero-badge"><span>✅</span> Fournisseurs vérifiés</div>
+      <div class="hero-badge"><span>⭐</span> Sélection professionnelle</div>
+    </div>
+  </section>
+
+  <!-- ════════ BOUTIQUE ════════ -->
+  <section class="shop">
+    <div class="shop-inner">
+      <div class="shop-header">
+        <span class="shop-count" id="product-count">24 produits</span>
+        <div class="shop-filters">
+          <button class="filter-btn active" onclick="filterProducts('all', this)">Tout</button>
+          <button class="filter-btn" onclick="filterProducts('capillaire', this)">Capillaire</button>
+          <button class="filter-btn" onclick="filterProducts('extensions', this)">Extensions</button>
+          <button class="filter-btn" onclick="filterProducts('perruques', this)">Perruques</button>
+          <button class="filter-btn" onclick="filterProducts('ongles', this)">Ongles</button>
+          <button class="filter-btn" onclick="filterProducts('cils', this)">Cils</button>
+          <button class="filter-btn" onclick="filterProducts('outils', this)">Outils</button>
+        </div>
+      </div>
+
+      <div class="products-grid" id="products-grid">
+        <!-- Products injected by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ DEVENIR FOURNISSEUR ════════ -->
+  <section class="supplier-cta">
+    <div class="supplier-cta-inner">
+      <p class="label">Vendez sur Kadio</p>
+      <h2>Devenez fournisseur</h2>
+      <p>Proposez vos produits à notre réseau de professionnels et clients partout au Québec. Inscription gratuite, commission transparente.</p>
+
+      <div class="supplier-commission">
+        <span>💰 Commission : seulement 10% par vente</span>
+      </div>
+
+      <div class="supplier-steps">
+        <div class="supplier-step">
+          <div class="num">1</div>
+          <h4>Inscrivez-vous</h4>
+          <p>Créez votre profil fournisseur et ajoutez vos produits avec photos</p>
+        </div>
+        <div class="supplier-step">
+          <div class="num">2</div>
+          <h4>Validation</h4>
+          <p>Notre équipe vérifie vos produits et active votre boutique sous 48h</p>
+        </div>
+        <div class="supplier-step">
+          <div class="num">3</div>
+          <h4>Vendez</h4>
+          <p>Les clients commandent, vous livrez. Vous gardez 90% de chaque vente</p>
+        </div>
+        <div class="supplier-step">
+          <div class="num">4</div>
+          <h4>Paiement</h4>
+          <p>Transfert automatique sur votre compte à chaque vente complétée</p>
+        </div>
+      </div>
+
+      <button class="btn-supplier" onclick="openModal('supplier')">Inscrire ma boutique</button>
+    </div>
+  </section>
+
+  <!-- ════════ MODAL: Inscription fournisseur + produits ════════ -->
+  <div class="modal-overlay" id="modal-supplier">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('supplier')">&times;</button>
+      <div id="form-supplier">
+        <h3>Inscription fournisseur</h3>
+        <p class="modal-sub">Créez votre profil et ajoutez vos premiers produits. Commission : 10% par vente.</p>
+
+        <form onsubmit="submitSupplier(event)" id="supplier-form">
+
+          <p class="form-section-title">Votre entreprise</p>
+          <div class="form-group">
+            <label>Nom de la boutique / entreprise <span class="req">*</span></label>
+            <input type="text" name="entreprise" required placeholder="Ex: Afro Beauty QC" />
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Personne contact <span class="req">*</span></label>
+              <input type="text" name="nom_contact" required placeholder="Prénom et nom" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Site web</label>
+              <input type="url" name="site" placeholder="https://..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Zone de livraison <span class="req">*</span></label>
+              <select name="livraison" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Grand Montréal</option>
+                <option>Tout le Québec</option>
+                <option>Canada complet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Délai de livraison</label>
+              <select name="delai">
+                <option value="" disabled selected>Choisir</option>
+                <option>1-2 jours ouvrables</option>
+                <option>3-5 jours ouvrables</option>
+                <option>1-2 semaines</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Catégories <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="categories" value="Capillaire" /><span>Capillaire</span></label>
+              <label><input type="checkbox" name="categories" value="Extensions / Mèches" /><span>Extensions</span></label>
+              <label><input type="checkbox" name="categories" value="Perruques" /><span>Perruques</span></label>
+              <label><input type="checkbox" name="categories" value="Ongles" /><span>Ongles</span></label>
+              <label><input type="checkbox" name="categories" value="Cils" /><span>Cils</span></label>
+              <label><input type="checkbox" name="categories" value="Outils pro" /><span>Outils pro</span></label>
+              <label><input type="checkbox" name="categories" value="Accessoires" /><span>Accessoires</span></label>
+            </div>
+          </div>
+
+          <p class="form-section-title">Vos produits</p>
+          <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">Ajoutez au moins 1 produit avec photo. Vous pourrez en ajouter d'autres après validation.</p>
+
+          <div id="products-container">
+            <div class="product-add-card" data-index="1">
+              <h4>Produit #1</h4>
+              <div class="img-upload-zone" onclick="this.querySelector('input').click()">
+                <input type="file" accept="image/*" onchange="previewImage(this)" />
+                <div class="placeholder">
+                  <span>📷</span>
+                  <p>Cliquez pour ajouter une photo</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Nom du produit <span class="req">*</span></label>
+                <input type="text" name="prod_nom_1" required placeholder="Ex: Huile de ricin bio 250ml" />
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label>Prix ($) <span class="req">*</span></label>
+                  <input type="number" name="prod_prix_1" required placeholder="0.00" step="0.01" min="0" />
+                </div>
+                <div class="form-group">
+                  <label>Catégorie <span class="req">*</span></label>
+                  <select name="prod_cat_1" required>
+                    <option value="" disabled selected>Choisir</option>
+                    <option>Capillaire</option><option>Extensions</option><option>Perruques</option>
+                    <option>Ongles</option><option>Cils</option><option>Outils</option><option>Accessoires</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Description</label>
+                <textarea name="prod_desc_1" placeholder="Décrivez votre produit (ingrédients, taille, usage...)"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="btn-add-product" onclick="addProduct()">
+            <span style="font-size: 18px;">+</span> Ajouter un autre produit
+          </button>
+
+          <button type="submit" class="form-submit">Soumettre mon inscription</button>
+        </form>
+      </div>
+      <div class="form-success" id="success-supplier">
+        <div class="check">✓</div>
+        <h4>Inscription soumise !</h4>
+        <p>Merci ! Notre équipe validera votre profil et vos produits sous 48h. Vous recevrez un courriel de confirmation avec les prochaines étapes.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ════════ MODAL: Détail produit ════════ -->
+  <div class="modal-overlay detail-modal" id="modal-detail">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('detail')">&times;</button>
+      <div class="detail-img" id="detail-img">📦</div>
+      <p class="detail-supplier" id="detail-supplier"></p>
+      <h3 class="detail-name" id="detail-name"></h3>
+      <p class="detail-price" id="detail-price"></p>
+      <p class="detail-desc" id="detail-desc"></p>
+      <div class="detail-meta" id="detail-meta"></div>
+      <button class="btn-order" onclick="orderProduct()">Commander — Livraison partout au Québec</button>
+    </div>
+  </div>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="gold-line"></div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/forfaits">Forfaits</a>
+      <a href="/services">Services</a>
+      <a href="/fournisseurs">Boutique</a>
+      <a href="/rejoindre">Rejoindre</a>
+      <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+    </div>
+    <p>&copy; 2025 Kadio Coiffure & Esthétique. Tous droits réservés.</p>
+  </footer>
+
+  <script>
+    /* ══════ DEMO PRODUCTS ══════ */
+    var products = [
+      { id: 1, name: "Huile de ricin noire jamaïcaine", supplier: "Afro Naturals QC", price: 24.99, cat: "capillaire", desc: "Huile de ricin noire pressée à froid. Stimule la pousse des cheveux, nourrit le cuir chevelu. Format 250ml. 100% naturel, sans additifs.", delivery: "3-5 jours", origin: "Jamaïque" },
+      { id: 2, name: "Beurre de karité brut", supplier: "Karité du Sahel", price: 18.99, cat: "capillaire", desc: "Beurre de karité non raffiné du Burkina Faso. Hydratation intense pour cheveux secs et cuir chevelu sensible. Pot de 200g.", delivery: "3-5 jours", origin: "Burkina Faso" },
+      { id: 3, name: "Crème coiffante définition boucles", supplier: "Afro Naturals QC", price: 22.50, cat: "capillaire", desc: "Crème légère pour définir et hydrater les boucles. Sans sulfates, sans parabènes. Tenue moyenne, brillance naturelle. 300ml.", delivery: "3-5 jours", origin: "Canada" },
+      { id: 4, name: "Knotless braids — Mèches Xpression", supplier: "Beauty Supply MTL", price: 8.99, cat: "extensions", desc: "Mèches synthétiques pré-étirées pour knotless braids. Texture douce et naturelle. Résistantes à la chaleur. Couleur #1B.", delivery: "1-2 jours", origin: "Import" },
+      { id: 5, name: "Mèches à tresser — lot de 5", supplier: "Beauty Supply MTL", price: 34.99, cat: "extensions", desc: "Lot de 5 paquets de mèches synthétiques pour tresses. Couleurs variées disponibles. Texture lisse et douce.", delivery: "1-2 jours", origin: "Import" },
+      { id: 6, name: "Lace front wig — Body wave 22\"", supplier: "Crown Wigs Montréal", price: 189.99, cat: "perruques", desc: "Perruque lace front en cheveux humains. Body wave, 22 pouces. Lace HD transparente, pré-plumée. Densité 180%.", delivery: "3-5 jours", origin: "Brésil" },
+      { id: 7, name: "Perruque courte pixie cut", supplier: "Crown Wigs Montréal", price: 89.99, cat: "perruques", desc: "Perruque courte style pixie en cheveux synthétiques haute qualité. Résistante à la chaleur jusqu'à 180°C. Facile à coiffer.", delivery: "3-5 jours", origin: "Import" },
+      { id: 8, name: "Kit gel ongles UV — 12 couleurs", supplier: "Nails Pro Laval", price: 54.99, cat: "ongles", desc: "Kit professionnel de 12 gels UV couleur. Formule longue tenue (3+ semaines). Compatible lampe UV et LED. Pots de 5ml.", delivery: "3-5 jours", origin: "Canada" },
+      { id: 9, name: "Tips ongles — coffret 500 pièces", supplier: "Nails Pro Laval", price: 19.99, cat: "ongles", desc: "Coffret de 500 tips transparents en 10 tailles. Forme naturelle ou stiletto. Compatibles gel et acrylique.", delivery: "1-2 jours", origin: "Import" },
+      { id: 10, name: "Lampe UV/LED professionnelle 120W", supplier: "Nails Pro Laval", price: 79.99, cat: "ongles", desc: "Lampe de polymérisation professionnelle 120W. Séchage en 30 secondes. Minuterie 10/30/60/99s. Compatible tous gels.", delivery: "3-5 jours", origin: "Import" },
+      { id: 11, name: "Extensions cils volume russe — 0.07mm", supplier: "LashBar QC", price: 29.99, cat: "cils", desc: "Extensions de cils en soie synthétique. Épaisseur 0.07mm pour volume russe. Courbes C et D disponibles. 12 lignes par plateau.", delivery: "1-2 jours", origin: "Corée" },
+      { id: 12, name: "Colle cils professionnelle — 10ml", supplier: "LashBar QC", price: 34.99, cat: "cils", desc: "Adhésif professionnel à séchage rapide (1-2 sec). Tenue 6-8 semaines. Hypoallergénique, sans formaldéhyde. Flacon 10ml.", delivery: "1-2 jours", origin: "Corée" },
+      { id: 13, name: "Shampooing hydratant sans sulfate", supplier: "Afro Naturals QC", price: 16.99, cat: "capillaire", desc: "Shampooing doux sans sulfate pour cheveux texturés. À l'huile de coco et aloe vera. Nettoie sans assécher. 400ml.", delivery: "3-5 jours", origin: "Canada" },
+      { id: 14, name: "Gel edge control extra fort", supplier: "Afro Naturals QC", price: 12.99, cat: "capillaire", desc: "Gel edge control pour baby hairs et finitions. Tenue extra forte sans résidus blancs. Enrichi en huile d'argan. 100ml.", delivery: "3-5 jours", origin: "Canada" },
+      { id: 15, name: "Tondeuse professionnelle sans fil", supplier: "BarberTools QC", price: 129.99, cat: "outils", desc: "Tondeuse professionnelle rechargeable. Lame en acier carbone DLC. Autonomie 4h. Moteur 7200 RPM. Livré avec 8 guides de coupe.", delivery: "3-5 jours", origin: "Import" },
+      { id: 16, name: "Ciseaux de coiffure japonais 6\"", supplier: "BarberTools QC", price: 64.99, cat: "outils", desc: "Ciseaux professionnels en acier japonais VG10. Coupe précise et fluide. 6 pouces. Vis de tension réglable. Étui inclus.", delivery: "3-5 jours", origin: "Japon" },
+      { id: 17, name: "Poudre acrylique rose — 120g", supplier: "Nails Pro Laval", price: 24.99, cat: "ongles", desc: "Poudre acrylique professionnelle couleur rose naturel. Polymérisation moyenne pour un travail confortable. Compatible tous liquides monomère.", delivery: "3-5 jours", origin: "USA" },
+      { id: 18, name: "Closure lace 4x4 — Straight", supplier: "Crown Wigs Montréal", price: 69.99, cat: "perruques", desc: "Closure en cheveux humains vierges. Lace 4x4, texture straight. Peut être colorée et coiffée. Densité naturelle.", delivery: "3-5 jours", origin: "Brésil" },
+      { id: 19, name: "Masque capillaire protéiné", supplier: "Karité du Sahel", price: 21.99, cat: "capillaire", desc: "Masque réparateur à la kératine et au beurre de karité. Renforce les cheveux cassants et sur-traités. Soin profond 15 min. 250ml.", delivery: "3-5 jours", origin: "Canada" },
+      { id: 20, name: "Kit rehaussement de cils", supplier: "LashBar QC", price: 44.99, cat: "cils", desc: "Kit professionnel complet pour rehaussement de cils. Inclut lotion de lift, fixateur, nourrissant et micro-brosses. 15-20 applications.", delivery: "1-2 jours", origin: "Corée" },
+      { id: 21, name: "Nail drill — perceuse électrique", supplier: "Nails Pro Laval", price: 59.99, cat: "ongles", desc: "Perceuse à ongles professionnelle 30 000 RPM. Vitesse variable. Rotation avant/arrière. 6 embouts diamantés inclus.", delivery: "3-5 jours", origin: "Import" },
+      { id: 22, name: "Huile de baobab vierge 100ml", supplier: "Karité du Sahel", price: 27.99, cat: "capillaire", desc: "Huile de baobab pressée à froid du Sénégal. Riche en vitamines A, D, E, F. Nourrit cheveux et cuir chevelu. Non grasse.", delivery: "3-5 jours", origin: "Sénégal" },
+      { id: 23, name: "Mèches à locs — 100% cheveux humains", supplier: "Beauty Supply MTL", price: 44.99, cat: "extensions", desc: "Mèches en cheveux humains 100% pour création de locs. Texture afro naturelle. Longueur 8\". Lot de 20 mèches.", delivery: "1-2 jours", origin: "Import" },
+      { id: 24, name: "Cape de coupe professionnelle", supplier: "BarberTools QC", price: 29.99, cat: "outils", desc: "Cape de coupe imperméable en nylon premium. Fermeture magnétique. Taille universelle. Design noir avec logo optionnel.", delivery: "1-2 jours", origin: "Canada" }
+    ];
+
+    var currentDetail = null;
+
+    function renderProducts(filter) {
+      var grid = document.getElementById('products-grid');
+      var filtered = filter === 'all' ? products : products.filter(function(p) { return p.cat === filter; });
+      document.getElementById('product-count').textContent = filtered.length + ' produit' + (filtered.length > 1 ? 's' : '');
+
+      grid.innerHTML = filtered.map(function(p) {
+        return '<div class="product-card" onclick="showDetail(' + p.id + ')">' +
+          '<div class="product-img"><span>📦</span></div>' +
+          '<div class="product-info">' +
+            '<p class="product-supplier">' + p.supplier + '</p>' +
+            '<h3 class="product-name">' + p.name + '</h3>' +
+            '<p class="product-desc">' + p.desc + '</p>' +
+            '<div class="product-footer">' +
+              '<span class="product-price">' + p.price.toFixed(2) + ' $</span>' +
+              '<span class="product-tag">' + p.cat + '</span>' +
+            '</div>' +
+            '<button class="btn-add" onclick="event.stopPropagation(); orderProduct(' + p.id + ')">Commander</button>' +
+          '</div></div>';
+      }).join('');
+    }
+
+    function filterProducts(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      renderProducts(cat);
+    }
+
+    function showDetail(id) {
+      var p = products.find(function(x) { return x.id === id; });
+      if (!p) return;
+      currentDetail = p;
+      document.getElementById('detail-img').innerHTML = '<span style="font-size:64px;color:rgba(184,146,42,0.25)">📦</span>';
+      document.getElementById('detail-supplier').textContent = p.supplier;
+      document.getElementById('detail-name').textContent = p.name;
+      document.getElementById('detail-price').textContent = p.price.toFixed(2) + ' $';
+      document.getElementById('detail-desc').textContent = p.desc;
+      document.getElementById('detail-meta').innerHTML =
+        '<span>🚚 <em>' + p.delivery + '</em></span>' +
+        '<span>🌍 <em>' + p.origin + '</em></span>' +
+        '<span>📦 <em>' + p.cat + '</em></span>';
+      openModal('detail');
+    }
+
+    function orderProduct(id) {
+      var p = id ? products.find(function(x) { return x.id === id; }) : currentDetail;
+      if (!p) return;
+      var subject = 'Commande — ' + p.name;
+      var body = 'Bonjour,\n\nJe souhaite commander :\n\n' +
+        'Produit : ' + p.name + '\n' +
+        'Prix : ' + p.price.toFixed(2) + ' $\n' +
+        'Fournisseur : ' + p.supplier + '\n\n' +
+        'Merci de me confirmer la disponibilité et les détails de livraison.\n\n' +
+        'Cordialement';
+      var a = document.createElement('a');
+      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      a.target = '_blank';
+      a.click();
+    }
+
+    /* ══════ MODALS ══════ */
+    function openModal(type) {
+      document.getElementById('modal-' + type).classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(type) {
+      document.getElementById('modal-' + type).classList.remove('active');
+      document.body.style.overflow = '';
+    }
+    document.querySelectorAll('.modal-overlay').forEach(function(o) {
+      o.addEventListener('click', function(e) {
+        if (e.target === o) { o.classList.remove('active'); document.body.style.overflow = ''; }
+      });
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        document.querySelectorAll('.modal-overlay.active').forEach(function(m) { m.classList.remove('active'); });
+        document.body.style.overflow = '';
+      }
+    });
+
+    /* ══════ SUPPLIER FORM ══════ */
+    var productCount = 1;
+
+    function addProduct() {
+      productCount++;
+      var container = document.getElementById('products-container');
+      var card = document.createElement('div');
+      card.className = 'product-add-card';
+      card.setAttribute('data-index', productCount);
+      card.innerHTML =
+        '<button class="remove-product" onclick="this.parentElement.remove()" type="button">&times;</button>' +
+        '<h4>Produit #' + productCount + '</h4>' +
+        '<div class="img-upload-zone" onclick="this.querySelector(\'input\').click()">' +
+          '<input type="file" accept="image/*" onchange="previewImage(this)" />' +
+          '<div class="placeholder"><span>📷</span><p>Cliquez pour ajouter une photo</p></div>' +
+        '</div>' +
+        '<div class="form-group"><label>Nom du produit <span class="req">*</span></label>' +
+          '<input type="text" name="prod_nom_' + productCount + '" required placeholder="Nom du produit" /></div>' +
+        '<div class="form-row">' +
+          '<div class="form-group"><label>Prix ($) <span class="req">*</span></label>' +
+            '<input type="number" name="prod_prix_' + productCount + '" required placeholder="0.00" step="0.01" min="0" /></div>' +
+          '<div class="form-group"><label>Catégorie <span class="req">*</span></label>' +
+            '<select name="prod_cat_' + productCount + '" required>' +
+              '<option value="" disabled selected>Choisir</option>' +
+              '<option>Capillaire</option><option>Extensions</option><option>Perruques</option>' +
+              '<option>Ongles</option><option>Cils</option><option>Outils</option><option>Accessoires</option>' +
+            '</select></div>' +
+        '</div>' +
+        '<div class="form-group"><label>Description</label>' +
+          '<textarea name="prod_desc_' + productCount + '" placeholder="Décrivez votre produit..."></textarea></div>';
+      container.appendChild(card);
+    }
+
+    function previewImage(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var zone = input.closest('.img-upload-zone');
+        reader.onload = function(e) {
+          var placeholder = zone.querySelector('.placeholder');
+          if (placeholder) placeholder.style.display = 'none';
+          var existing = zone.querySelector('img');
+          if (existing) existing.remove();
+          var img = document.createElement('img');
+          img.src = e.target.result;
+          zone.appendChild(img);
+        };
+        reader.readAsDataURL(input.files[0]);
+      }
+    }
+
+    function submitSupplier(e) {
+      e.preventDefault();
+      var form = e.target;
+      var data = new FormData(form);
+      var entries = {};
+      var checkboxGroups = {};
+
+      data.forEach(function(val, key) {
+        if (key === 'categories') {
+          if (!checkboxGroups[key]) checkboxGroups[key] = [];
+          checkboxGroups[key].push(val);
+        } else if (!key.startsWith('prod_')) {
+          entries[key] = val;
+        }
+      });
+      Object.keys(checkboxGroups).forEach(function(k) { entries[k] = checkboxGroups[k].join(', '); });
+
+      // Collect products
+      var prods = [];
+      document.querySelectorAll('.product-add-card').forEach(function(card) {
+        var idx = card.getAttribute('data-index');
+        var nom = form.querySelector('[name="prod_nom_' + idx + '"]');
+        var prix = form.querySelector('[name="prod_prix_' + idx + '"]');
+        var cat = form.querySelector('[name="prod_cat_' + idx + '"]');
+        var desc = form.querySelector('[name="prod_desc_' + idx + '"]');
+        if (nom && nom.value) {
+          prods.push({
+            nom: nom.value,
+            prix: prix ? prix.value + ' $' : '',
+            categorie: cat ? cat.value : '',
+            description: desc ? desc.value : ''
+          });
+        }
+      });
+
+      var subject = 'INSCRIPTION FOURNISSEUR — ' + entries.entreprise;
+      var body = 'INSCRIPTION FOURNISSEUR KADIO\n' + '═'.repeat(40) + '\n\n';
+      body += 'Entreprise: ' + entries.entreprise + '\n';
+      body += 'Contact: ' + entries.nom_contact + '\n';
+      body += 'Courriel: ' + entries.email + '\n';
+      body += 'Téléphone: ' + entries.telephone + '\n';
+      if (entries.site) body += 'Site web: ' + entries.site + '\n';
+      body += 'Livraison: ' + entries.livraison + '\n';
+      if (entries.delai) body += 'Délai: ' + entries.delai + '\n';
+      body += 'Catégories: ' + entries.categories + '\n';
+      body += '\n── PRODUITS SOUMIS ──\n\n';
+      prods.forEach(function(p, i) {
+        body += 'Produit ' + (i + 1) + ':\n';
+        body += '  Nom: ' + p.nom + '\n';
+        body += '  Prix: ' + p.prix + '\n';
+        body += '  Catégorie: ' + p.categorie + '\n';
+        if (p.description) body += '  Description: ' + p.description + '\n';
+        body += '\n';
+      });
+      body += '(Photos jointes séparément si applicable)\n';
+      body += '\n— Envoyé depuis kadio-app.vercel.app/fournisseurs';
+
+      var a = document.createElement('a');
+      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      a.target = '_blank';
+      a.click();
+
+      document.getElementById('form-supplier').style.display = 'none';
+      document.getElementById('success-supplier').style.display = 'block';
+    }
+
+    // Init
+    renderProducts('all');
+  </script>
+
+</body>
+</html>
