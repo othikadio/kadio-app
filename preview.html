@@ -193,6 +193,20 @@
     .vip-btn { display: inline-block; padding: 14px 36px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; transition: all 0.3s; }
     .vip-btn:hover { background: var(--gold); }
 
+    /* ── Boutique Banner ── */
+    .boutique-banner { background: var(--white); padding: 80px 24px; text-align: center; }
+    .boutique-inner { max-width: 1000px; margin: 0 auto; }
+    .boutique-banner .label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .boutique-banner h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 48px); line-height: 1.1; margin-bottom: 16px; color: var(--black); }
+    .boutique-banner > p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 540px; margin: 0 auto 32px; }
+    .boutique-cats { display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-bottom: 32px; }
+    .boutique-cat { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 20px 18px; background: var(--ivoire); border-radius: 12px; min-width: 110px; transition: transform 0.3s, box-shadow 0.3s; }
+    .boutique-cat:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(14,12,9,0.06); }
+    .boutique-cat span { font-size: 28px; }
+    .boutique-cat p { font-size: 12px; font-weight: 500; color: var(--black); letter-spacing: 0.04em; }
+    .boutique-link { display: inline-block; padding: 14px 36px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 600; transition: background 0.3s; }
+    .boutique-link:hover { background: var(--gold); }
+
     /* ── Écosystème (ivoire) ── */
     .eco { background: var(--ivoire); padding: 100px 24px; }
     .eco-inner { max-width: 1100px; margin: 0 auto; }
@@ -452,6 +466,24 @@
         <div class="vip-drink"><span>🍫</span> Chocolat chaud</div>
       </div>
       <a href="/service-vip" class="vip-btn">Découvrir le service VIP</a>
+    </div>
+  </section>
+
+  <!-- ════════ BOUTIQUE ════════ -->
+  <section class="boutique-banner">
+    <div class="boutique-inner">
+      <p class="label">Boutique Kadio</p>
+      <h2 class="section-title">Produits beauté afro</h2>
+      <p>Produits capillaires, extensions, perruques, ongles, cils et outils — sélectionnés par nos professionnels, livrés partout au Québec.</p>
+      <div class="boutique-cats">
+        <a href="/fournisseurs" class="boutique-cat"><span>🧴</span><p>Capillaire</p></a>
+        <a href="/fournisseurs" class="boutique-cat"><span>💇</span><p>Extensions</p></a>
+        <a href="/fournisseurs" class="boutique-cat"><span>👩</span><p>Perruques</p></a>
+        <a href="/fournisseurs" class="boutique-cat"><span>💅</span><p>Ongles</p></a>
+        <a href="/fournisseurs" class="boutique-cat"><span>👁️</span><p>Cils</p></a>
+        <a href="/fournisseurs" class="boutique-cat"><span>✂️</span><p>Outils</p></a>
+      </div>
+      <a href="/fournisseurs" class="boutique-link">Voir la boutique</a>
     </div>
   </section>
 
