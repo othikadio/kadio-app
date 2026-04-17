@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Rejoindre Kadio — Devenir partenaire ou postuler</title>
-  <meta name="description" content="Rejoignez le réseau Kadio Coiffure. Devenez coiffeur(se) partenaire, postulez pour un emploi au salon ou proposez vos produits comme fournisseur." />
+  <title>Rejoindre Kadio Network — Coiffeurs, Esthéticiens, Fournisseurs</title>
+  <meta name="description" content="Rejoignez le réseau Kadio Network. Coiffeurs, barbiers, esthéticiennes, techniciens en pose d'ongles et cils — devenez partenaire certifié ou postulez au salon." />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -17,12 +17,7 @@
       --muted: rgba(14,12,9,0.65);
       --border: rgba(14,12,9,0.08);
     }
-    body {
-      font-family: 'DM Sans', -apple-system, sans-serif;
-      background: var(--white); color: var(--black);
-      font-weight: 400; line-height: 1.55;
-      -webkit-font-smoothing: antialiased;
-    }
+    body { font-family: 'DM Sans', -apple-system, sans-serif; background: var(--white); color: var(--black); font-weight: 400; line-height: 1.55; -webkit-font-smoothing: antialiased; }
     a { color: inherit; text-decoration: none; }
 
     /* ── Nav ── */
@@ -40,25 +35,44 @@
     .hero .label { font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
     .hero h1 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(36px, 6vw, 64px); line-height: 1.05; margin-bottom: 20px; color: var(--black); }
     .hero h1 em { color: var(--gold); font-style: normal; }
-    .hero p.sub { max-width: 580px; margin: 0 auto; color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .hero p.sub { max-width: 620px; margin: 0 auto 32px; color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .hero-stats { display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; }
+    .hero-stat { text-align: center; }
+    .hero-stat .val { font-family: 'Cormorant Garamond', serif; font-size: 32px; color: var(--gold); font-weight: 400; }
+    .hero-stat .lbl { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 4px; }
 
-    /* ── Opportunités ── */
-    .opportunities { padding: 80px 24px; background: var(--white); }
-    .opp-inner { max-width: 1000px; margin: 0 auto; }
-    .opp-header { text-align: center; margin-bottom: 56px; }
-    .opp-header .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .opp-header h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; color: var(--black); }
-    .opp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 28px; }
-    .opp-card { background: var(--ivoire); border-radius: 16px; padding: 40px 28px; text-align: center; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    /* ── Section generics ── */
+    .section-label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; color: var(--black); }
+
+    /* ── Catégories (tabs) ── */
+    .categories { padding: 80px 24px; background: var(--white); }
+    .cat-inner { max-width: 1100px; margin: 0 auto; }
+    .cat-header { text-align: center; margin-bottom: 48px; }
+    .cat-tabs { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 48px; }
+    .cat-tab {
+      padding: 12px 24px; border: 1px solid var(--border); background: var(--white);
+      font-family: inherit; font-size: 13px; font-weight: 500; color: var(--muted);
+      cursor: pointer; transition: all 0.3s; letter-spacing: 0.04em;
+    }
+    .cat-tab:hover { border-color: var(--gold); color: var(--black); }
+    .cat-tab.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
+    /* ── Cards ── */
+    .cat-content { display: none; }
+    .cat-content.active { display: block; }
+    .opp-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 28px; }
+    .opp-card { background: var(--ivoire); border-radius: 16px; padding: 40px 28px; transition: transform 0.3s ease, box-shadow 0.3s ease; }
     .opp-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(14,12,9,0.08); }
-    .opp-icon { width: 60px; height: 60px; border-radius: 50%; background: var(--white); border: 1.5px solid rgba(184,146,42,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 24px; }
-    .opp-card h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 24px; margin-bottom: 12px; color: var(--black); }
-    .opp-card > p { color: var(--muted); font-size: 14px; line-height: 1.65; margin-bottom: 20px; }
-    .opp-card ul { list-style: none; text-align: left; margin-bottom: 24px; }
-    .opp-card ul li { font-size: 13px; color: var(--black); padding: 8px 0; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; }
-    .opp-card ul li::before { content: '\2713'; color: var(--gold); font-weight: 600; font-size: 14px; }
+    .opp-icon { width: 56px; height: 56px; border-radius: 50%; background: var(--white); border: 1.5px solid rgba(184,146,42,0.3); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 22px; }
+    .opp-card h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 24px; margin-bottom: 8px; color: var(--black); }
+    .opp-card .card-desc { color: var(--muted); font-size: 14px; line-height: 1.65; margin-bottom: 16px; }
+    .opp-card ul { list-style: none; margin-bottom: 24px; }
+    .opp-card ul li { font-size: 13px; color: var(--black); padding: 7px 0; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; gap: 10px; }
+    .opp-card ul li::before { content: '\2713'; color: var(--gold); font-weight: 600; font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+    .opp-card .commission { display: inline-block; padding: 8px 16px; background: var(--white); border: 1px solid rgba(184,146,42,0.3); font-size: 13px; color: var(--gold); font-weight: 600; margin-bottom: 20px; letter-spacing: 0.04em; }
     .opp-btn {
-      display: inline-block; padding: 12px 28px; background: var(--black); color: var(--white);
+      display: inline-block; padding: 14px 32px; background: var(--black); color: var(--white);
       font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600;
       transition: background 0.3s; border: none; cursor: pointer; font-family: inherit;
     }
@@ -68,14 +82,14 @@
     .modal-overlay {
       display: none; position: fixed; inset: 0; z-index: 1000;
       background: rgba(14,12,9,0.5); backdrop-filter: blur(4px);
-      align-items: center; justify-content: center; padding: 24px;
+      align-items: flex-start; justify-content: center; padding: 24px; overflow-y: auto;
     }
     .modal-overlay.active { display: flex; }
     .modal {
       background: var(--white); border-radius: 16px; padding: 48px 36px;
-      max-width: 520px; width: 100%; position: relative;
+      max-width: 600px; width: 100%; position: relative;
       box-shadow: 0 24px 64px rgba(14,12,9,0.15);
-      max-height: 90vh; overflow-y: auto;
+      margin: 40px auto;
     }
     .modal-close {
       position: absolute; top: 16px; right: 20px;
@@ -83,67 +97,57 @@
       color: var(--muted); cursor: pointer; padding: 4px;
     }
     .modal-close:hover { color: var(--black); }
-    .modal h3 {
-      font-family: 'Cormorant Garamond', serif; font-weight: 400;
-      font-size: 28px; margin-bottom: 8px; color: var(--black);
+    .modal h3 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 28px; margin-bottom: 8px; color: var(--black); }
+    .modal .modal-sub { font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.5; }
+    .form-section-title { font-size: 11px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin: 28px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .form-section-title:first-of-type { margin-top: 0; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 520px) { .form-row { grid-template-columns: 1fr; } }
+    .form-group { margin-bottom: 16px; }
+    .form-group label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; color: var(--black); margin-bottom: 6px; }
+    .form-group label .req { color: var(--gold); }
+    .form-group input, .form-group select, .form-group textarea {
+      width: 100%; padding: 11px 14px; border: 1px solid rgba(14,12,9,0.15); border-radius: 8px;
+      font-family: inherit; font-size: 14px; color: var(--black); background: var(--white);
+      transition: border-color 0.2s; outline: none;
     }
-    .modal .modal-sub {
-      font-size: 14px; color: var(--muted); margin-bottom: 28px; line-height: 1.5;
+    .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group small { display: block; font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .checkbox-group { display: flex; flex-wrap: wrap; gap: 8px; }
+    .checkbox-group label {
+      display: flex; align-items: center; gap: 6px; padding: 8px 14px;
+      border: 1px solid var(--border); border-radius: 6px; font-size: 13px;
+      cursor: pointer; transition: all 0.2s; font-weight: 400; letter-spacing: 0;
     }
-    .form-group { margin-bottom: 20px; }
-    .form-group label {
-      display: block; font-size: 12px; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      color: var(--black); margin-bottom: 8px;
-    }
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      width: 100%; padding: 12px 16px;
-      border: 1px solid rgba(14,12,9,0.15); border-radius: 8px;
-      font-family: inherit; font-size: 14px; color: var(--black);
-      background: var(--white); transition: border-color 0.2s;
-      outline: none;
-    }
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus { border-color: var(--gold); }
-    .form-group textarea { resize: vertical; min-height: 100px; }
+    .checkbox-group label:hover { border-color: var(--gold); }
+    .checkbox-group input:checked + span { color: var(--gold); font-weight: 500; }
+    .checkbox-group input { accent-color: var(--gold); }
     .form-submit {
       width: 100%; padding: 14px; background: var(--black); color: var(--white);
       border: none; font-family: inherit; font-size: 12px; font-weight: 600;
       letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer;
-      transition: background 0.3s; border-radius: 8px; margin-top: 8px;
+      transition: background 0.3s; border-radius: 8px; margin-top: 16px;
     }
     .form-submit:hover { background: var(--gold); }
-    .form-success {
-      display: none; text-align: center; padding: 40px 20px;
-    }
-    .form-success .check {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--ivoire); border: 2px solid var(--gold);
-      display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px; font-size: 28px;
-    }
-    .form-success h4 {
-      font-family: 'Cormorant Garamond', serif; font-size: 24px;
-      margin-bottom: 8px; color: var(--black);
-    }
+    .form-success { display: none; text-align: center; padding: 40px 20px; }
+    .form-success .check { width: 64px; height: 64px; border-radius: 50%; background: var(--ivoire); border: 2px solid var(--gold); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-size: 28px; }
+    .form-success h4 { font-family: 'Cormorant Garamond', serif; font-size: 24px; margin-bottom: 8px; color: var(--black); }
     .form-success p { font-size: 14px; color: var(--muted); line-height: 1.6; }
 
-    /* ── Pourquoi Kadio ── */
-    .why { padding: 80px 24px; background: var(--ivoire); text-align: center; }
-    .why-inner { max-width: 900px; margin: 0 auto; }
-    .why .label { font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 12px; }
-    .why h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin-bottom: 48px; color: var(--black); }
-    .why-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 32px; text-align: center; }
-    .why-item .icon { width: 52px; height: 52px; border-radius: 50%; background: var(--white); border: 1px solid rgba(184,146,42,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 22px; }
-    .why-item h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 20px; margin-bottom: 8px; color: var(--black); }
-    .why-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    /* ── Pourquoi / Modèle ── */
+    .model { padding: 80px 24px; background: var(--ivoire); }
+    .model-inner { max-width: 900px; margin: 0 auto; text-align: center; }
+    .model h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; color: var(--black); }
+    .model > p { color: var(--muted); font-size: 16px; line-height: 1.7; max-width: 600px; margin: 0 auto 48px; }
+    .model-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 28px; text-align: center; }
+    .model-item .icon { width: 52px; height: 52px; border-radius: 50%; background: var(--white); border: 1px solid rgba(184,146,42,0.3); display: flex; align-items: center; justify-content: center; margin: 0 auto 14px; font-size: 22px; }
+    .model-item h4 { font-family: 'Cormorant Garamond', serif; font-weight: 400; font-size: 20px; margin-bottom: 6px; color: var(--black); }
+    .model-item p { font-size: 13px; color: var(--muted); line-height: 1.6; }
 
-    /* ── CTA final ── */
+    /* ── CTA ── */
     .cta-final { padding: 80px 24px; background: var(--white); text-align: center; }
-    .cta-final h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); line-height: 1.15; margin-bottom: 16px; color: var(--black); }
+    .cta-final h2 { font-family: 'Cormorant Garamond', serif; font-weight: 300; font-size: clamp(28px, 4vw, 44px); margin-bottom: 16px; color: var(--black); }
     .cta-final p { color: var(--muted); font-size: 16px; margin-bottom: 28px; }
     .cta-final-badge { display: inline-block; padding: 16px 32px; background: var(--gold); color: var(--white); font-size: 14px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; }
 
@@ -176,181 +180,671 @@
 
   <!-- ════════ HERO ════════ -->
   <section class="hero">
-    <p class="label">Rejoignez le mouvement</p>
-    <h1>Faites partie de <em>Kadio</em></h1>
-    <p class="sub">Que vous soyez coiffeur(se), à la recherche d'un emploi ou fournisseur — il y a une place pour vous dans notre réseau.</p>
-  </section>
-
-  <!-- ════════ OPPORTUNITÉS ════════ -->
-  <section class="opportunities">
-    <div class="opp-inner">
-      <div class="opp-header">
-        <p class="label">Opportunités</p>
-        <h2>Trois façons de nous rejoindre</h2>
-      </div>
-
-      <div class="opp-grid">
-
-        <!-- Coiffeur(se) partenaire -->
-        <div class="opp-card">
-          <div class="opp-icon">★</div>
-          <h3>Coiffeur(se) partenaire</h3>
-          <p>Rejoignez le réseau Kadio et accédez à une clientèle fidèle partout au Québec.</p>
-          <ul>
-            <li>Clientèle garantie via notre plateforme</li>
-            <li>Visibilité sur tout le réseau</li>
-            <li>Flexibilité totale de votre horaire</li>
-            <li>Support marketing et outils inclus</li>
-          </ul>
-          <button class="opp-btn" onclick="openModal('partenaire')">Postuler</button>
-        </div>
-
-        <!-- Emploi au salon -->
-        <div class="opp-card">
-          <div class="opp-icon">✂️</div>
-          <h3>Emploi au salon</h3>
-          <p>Travaillez directement au Salon Kadio à Longueuil dans un environnement premium.</p>
-          <ul>
-            <li>Salaire compétitif + pourboires</li>
-            <li>Ambiance VIP et professionnelle</li>
-            <li>Formation continue offerte</li>
-            <li>Boissons offertes chaque jour</li>
-          </ul>
-          <button class="opp-btn" onclick="openModal('emploi')">Postuler</button>
-        </div>
-
-        <!-- Fournisseur -->
-        <div class="opp-card">
-          <div class="opp-icon">📦</div>
-          <h3>Fournisseur</h3>
-          <p>Proposez vos produits capillaires au réseau Kadio et touchez des salons partout au Québec.</p>
-          <ul>
-            <li>Photos des produits requises</li>
-            <li>Livraison partout au Québec</li>
-            <li>Commandes autonomes via la plateforme</li>
-            <li>Visibilité auprès de 10+ coiffeurs</li>
-          </ul>
-          <button class="opp-btn" onclick="openModal('fournisseur')">Proposer mes produits</button>
-        </div>
-
-      </div>
+    <p class="label">Kadio Network</p>
+    <h1>Rejoignez le <em>réseau</em></h1>
+    <p class="sub">Coiffeurs, barbiers, esthéticiennes, techniciens en pose d'ongles et cils — bâtissons ensemble le plus grand réseau beauté afro au Québec.</p>
+    <div class="hero-stats">
+      <div class="hero-stat"><div class="val">75%</div><div class="lbl">Pour vous</div></div>
+      <div class="hero-stat"><div class="val">7+</div><div class="lbl">Villes</div></div>
+      <div class="hero-stat"><div class="val">0$</div><div class="lbl">Frais d'entrée</div></div>
+      <div class="hero-stat"><div class="val">100%</div><div class="lbl">Flexible</div></div>
     </div>
   </section>
 
-  <!-- ════════ MODALS ════════ -->
+  <!-- ════════ CATÉGORIES ════════ -->
+  <section class="categories">
+    <div class="cat-inner">
+      <div class="cat-header">
+        <p class="section-label">Opportunités</p>
+        <h2 class="section-title">Choisissez votre profil</h2>
+      </div>
 
-  <!-- Modal: Coiffeur(se) partenaire -->
-  <div class="modal-overlay" id="modal-partenaire">
+      <div class="cat-tabs">
+        <button class="cat-tab active" onclick="switchTab('pro')">Professionnel(le) partenaire</button>
+        <button class="cat-tab" onclick="switchTab('emploi')">Emploi au salon</button>
+        <button class="cat-tab" onclick="switchTab('fournisseur')">Fournisseur</button>
+      </div>
+
+      <!-- ═══ TAB: Professionnel(le) partenaire ═══ -->
+      <div class="cat-content active" id="tab-pro">
+        <div class="opp-grid">
+
+          <div class="opp-card">
+            <div class="opp-icon">✂️</div>
+            <h3>Coiffeur(se)</h3>
+            <p class="card-desc">Spécialiste en coiffure afro — tresses, knotless, locs, tissage, perruques, colorations.</p>
+            <div class="commission">75% de vos revenus — 25% réseau</div>
+            <ul>
+              <li>Clientèle fournie via la plateforme Kadio</li>
+              <li>Travaillez dans la ville de votre choix</li>
+              <li>Horaire 100% flexible, vous êtes votre boss</li>
+              <li>Certification Kadio Network incluse</li>
+              <li>Visibilité marketing et profil en ligne</li>
+              <li>Accès aux outils de gestion (réservation, paiement)</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('coiffeur')">Postuler comme coiffeur(se)</button>
+          </div>
+
+          <div class="opp-card">
+            <div class="opp-icon">💈</div>
+            <h3>Barbier</h3>
+            <p class="card-desc">Coupes hommes, dégradés, rasages, tailles de barbe — pour une clientèle masculine exigeante.</p>
+            <div class="commission">75% de vos revenus — 25% réseau</div>
+            <ul>
+              <li>Clientèle masculine ciblée et régulière</li>
+              <li>Chaise réservée ou mobile selon votre préférence</li>
+              <li>Horaire flexible, aucun minimum imposé</li>
+              <li>Certification Kadio Network incluse</li>
+              <li>Formation continue et événements réseau</li>
+              <li>Matériel et espace de travail fournis au salon</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('barbier')">Postuler comme barbier</button>
+          </div>
+
+          <div class="opp-card">
+            <div class="opp-icon">💅</div>
+            <h3>Esthéticien(ne)</h3>
+            <p class="card-desc">Pose d'ongles, extensions de cils, soins du visage, maquillage, épilation — tous les services beauté.</p>
+            <div class="commission">75% de vos revenus — 25% réseau</div>
+            <ul>
+              <li>Élargissez votre clientèle grâce au réseau</li>
+              <li>Espace dédié esthétique au salon ou mobile</li>
+              <li>Horaire flexible, travaillez quand vous voulez</li>
+              <li>Certification Kadio Network incluse</li>
+              <li>Profil en ligne + portfolio sur la plateforme</li>
+              <li>Paiement sécurisé et suivi automatique</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('estheticien')">Postuler comme esthéticien(ne)</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══ TAB: Emploi au salon ═══ -->
+      <div class="cat-content" id="tab-emploi">
+        <div class="opp-grid" style="max-width: 700px; margin: 0 auto;">
+
+          <div class="opp-card">
+            <div class="opp-icon">🏠</div>
+            <h3>Emploi au Salon Kadio</h3>
+            <p class="card-desc">Travaillez directement au Salon Kadio à Longueuil — poste salarié dans un environnement VIP.</p>
+            <ul>
+              <li>Salaire compétitif + pourboires</li>
+              <li>Ambiance VIP — boissons offertes chaque jour</li>
+              <li>Formation continue et perfectionnement</li>
+              <li>Postes disponibles : coiffeur(se), barbier, esthéticien(ne), réceptionniste</li>
+              <li>Possibilité d'évoluer vers partenaire réseau</li>
+              <li>Adresse : 615 Antoinette-Robidoux, Longueuil</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('emploi')">Postuler pour un emploi</button>
+          </div>
+
+          <div class="opp-card">
+            <div class="opp-icon">📋</div>
+            <h3>Stage / Apprentissage</h3>
+            <p class="card-desc">Vous débutez dans le domaine ? Apprenez aux côtés de professionnels certifiés.</p>
+            <ul>
+              <li>Encadrement par des professionnels expérimentés</li>
+              <li>Apprentissage pratique sur clientèle réelle</li>
+              <li>Possibilité d'embauche après le stage</li>
+              <li>Environnement bienveillant et professionnel</li>
+              <li>Horaire flexible selon votre programme d'études</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('stage')">Postuler pour un stage</button>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ═══ TAB: Fournisseur ═══ -->
+      <div class="cat-content" id="tab-fournisseur">
+        <div class="opp-grid" style="max-width: 700px; margin: 0 auto;">
+
+          <div class="opp-card">
+            <div class="opp-icon">📦</div>
+            <h3>Fournisseur de produits</h3>
+            <p class="card-desc">Proposez vos produits capillaires et beauté au réseau Kadio — touchez des professionnels partout au Québec.</p>
+            <ul>
+              <li>Visibilité auprès de tout le réseau de professionnels</li>
+              <li>Commandes autonomes via la plateforme</li>
+              <li>Photos des produits requises pour le catalogue</li>
+              <li>Livraison partout au Québec exigée</li>
+              <li>Facturation et paiement gérés par Kadio</li>
+              <li>Programme de fournisseur préféré disponible</li>
+            </ul>
+            <button class="opp-btn" onclick="openModal('fournisseur')">Proposer mes produits</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════════ -->
+  <!-- ════════ MODALS — FORMULAIRES COMPLETS ════════════════ -->
+  <!-- ════════════════════════════════════════════════════════ -->
+
+  <!-- ═══ MODAL: Coiffeur(se) partenaire ═══ -->
+  <div class="modal-overlay" id="modal-coiffeur">
     <div class="modal">
-      <button class="modal-close" onclick="closeModal('partenaire')">&times;</button>
-      <div id="form-partenaire">
-        <h3>Devenir partenaire</h3>
-        <p class="modal-sub">Remplissez ce formulaire et notre équipe vous contactera sous 48h.</p>
-        <form onsubmit="submitForm(event, 'partenaire')">
-          <div class="form-group">
-            <label>Nom complet</label>
-            <input type="text" name="nom" required placeholder="Votre nom et prénom" />
+      <button class="modal-close" onclick="closeModal('coiffeur')">&times;</button>
+      <div id="form-coiffeur">
+        <h3>Devenir coiffeur(se) partenaire</h3>
+        <p class="modal-sub">Remplissez votre profil complet. Notre équipe vous contacte sous 48h.</p>
+        <form onsubmit="submitForm(event, 'coiffeur')">
+
+          <p class="form-section-title">Informations personnelles</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" name="prenom" required placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" name="nom" required placeholder="Votre nom de famille" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ville de résidence <span class="req">*</span></label>
+              <select name="ville" required>
+                <option value="" disabled selected>Votre ville</option>
+                <option>Longueuil</option><option>Montréal</option><option>Laval</option>
+                <option>Brossard</option><option>Québec</option><option>Gatineau</option>
+                <option>Sherbrooke</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Langue(s) parlée(s) <span class="req">*</span></label>
+              <input type="text" name="langues" required placeholder="Français, anglais, créole..." />
+            </div>
+          </div>
+
+          <p class="form-section-title">Expérience professionnelle</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Années d'expérience <span class="req">*</span></label>
+              <select name="experience" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Moins de 1 an</option><option>1 à 3 ans</option>
+                <option>3 à 5 ans</option><option>5 à 10 ans</option><option>10 ans et plus</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Formation / Diplôme</label>
+              <input type="text" name="formation" placeholder="DEP coiffure, école privée, autodidacte..." />
+            </div>
           </div>
           <div class="form-group">
-            <label>Courriel</label>
-            <input type="email" name="email" required placeholder="votre@email.com" />
+            <label>Spécialités <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="specialites" value="Tresses" /><span>Tresses</span></label>
+              <label><input type="checkbox" name="specialites" value="Knotless" /><span>Knotless</span></label>
+              <label><input type="checkbox" name="specialites" value="Locs" /><span>Locs</span></label>
+              <label><input type="checkbox" name="specialites" value="Tissage" /><span>Tissage</span></label>
+              <label><input type="checkbox" name="specialites" value="Perruques" /><span>Perruques</span></label>
+              <label><input type="checkbox" name="specialites" value="Coloration" /><span>Coloration</span></label>
+              <label><input type="checkbox" name="specialites" value="Coupe femme" /><span>Coupe femme</span></label>
+              <label><input type="checkbox" name="specialites" value="Coupe enfant" /><span>Coupe enfant</span></label>
+              <label><input type="checkbox" name="specialites" value="Soins capillaires" /><span>Soins capillaires</span></label>
+              <label><input type="checkbox" name="specialites" value="Défrisage" /><span>Défrisage</span></label>
+            </div>
+          </div>
+
+          <p class="form-section-title">Préférences de travail</p>
+          <div class="form-group">
+            <label>Où souhaitez-vous travailler ? <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="lieu_travail" value="Au salon Kadio (Longueuil)" /><span>Au salon Kadio (Longueuil)</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Chez moi / mon propre espace" /><span>Chez moi / mon espace</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="À domicile chez le client" /><span>À domicile (chez le client)</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Mobile / flexible" /><span>Mobile / flexible</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Disponibilités <span class="req">*</span></label>
+              <select name="disponibilite" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Temps plein (5+ jours)</option>
+                <option>Temps partiel (2-4 jours)</option>
+                <option>Weekends seulement</option>
+                <option>Soirs et weekends</option>
+                <option>Sur rendez-vous uniquement</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Date de début souhaitée</label>
+              <select name="debut">
+                <option value="" disabled selected>Choisir</option>
+                <option>Immédiatement</option>
+                <option>Dans 2 semaines</option>
+                <option>Dans 1 mois</option>
+                <option>Dans 2-3 mois</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label>Téléphone</label>
-            <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
-          </div>
-          <div class="form-group">
-            <label>Ville</label>
-            <select name="ville" required>
-              <option value="" disabled selected>Choisir votre ville</option>
-              <option>Longueuil</option>
-              <option>Montréal</option>
-              <option>Laval</option>
-              <option>Brossard</option>
-              <option>Québec</option>
-              <option>Gatineau</option>
-              <option>Sherbrooke</option>
-              <option>Autre</option>
+            <label>Avez-vous votre propre matériel ?</label>
+            <select name="materiel">
+              <option value="" disabled selected>Choisir</option>
+              <option>Oui, j'ai tout mon matériel</option>
+              <option>Partiellement, j'ai besoin de certaines choses</option>
+              <option>Non, j'ai besoin de tout</option>
             </select>
           </div>
-          <div class="form-group">
-            <label>Années d'expérience</label>
-            <select name="experience" required>
-              <option value="" disabled selected>Votre expérience</option>
-              <option>Moins de 2 ans</option>
-              <option>2 à 5 ans</option>
-              <option>5 à 10 ans</option>
-              <option>10 ans et plus</option>
-            </select>
+
+          <p class="form-section-title">Portfolio et présence en ligne</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" name="instagram" placeholder="@votrecompte" />
+            </div>
+            <div class="form-group">
+              <label>TikTok</label>
+              <input type="text" name="tiktok" placeholder="@votrecompte" />
+            </div>
           </div>
           <div class="form-group">
-            <label>Spécialités</label>
-            <input type="text" name="specialites" placeholder="Ex: Knotless, locs, barbier, tissage..." />
+            <label>Lien vers portfolio ou photos de travaux</label>
+            <input type="url" name="portfolio" placeholder="https://..." />
+            <small>Google Drive, Dropbox, site web... tout lien vers vos réalisations</small>
+          </div>
+
+          <p class="form-section-title">Informations additionnelles</p>
+          <div class="form-group">
+            <label>Pourquoi Kadio Network ?</label>
+            <textarea name="motivation" placeholder="Dites-nous ce qui vous motive à rejoindre le réseau..."></textarea>
           </div>
           <div class="form-group">
-            <label>Message (optionnel)</label>
-            <textarea name="message" placeholder="Parlez-nous de vous et de votre parcours..."></textarea>
+            <label>Questions ou commentaires</label>
+            <textarea name="commentaires" placeholder="Avez-vous des questions sur le fonctionnement du réseau ?"></textarea>
           </div>
+
           <button type="submit" class="form-submit">Envoyer ma candidature</button>
         </form>
       </div>
-      <div class="form-success" id="success-partenaire">
+      <div class="form-success" id="success-coiffeur">
         <div class="check">✓</div>
         <h4>Candidature envoyée !</h4>
-        <p>Merci pour votre intérêt. Notre équipe examinera votre profil et vous contactera sous 48h.</p>
+        <p>Merci pour votre intérêt pour Kadio Network. Notre équipe examinera votre profil et vous contactera sous 48h pour les prochaines étapes.</p>
       </div>
     </div>
   </div>
 
-  <!-- Modal: Emploi au salon -->
+  <!-- ═══ MODAL: Barbier partenaire ═══ -->
+  <div class="modal-overlay" id="modal-barbier">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('barbier')">&times;</button>
+      <div id="form-barbier">
+        <h3>Devenir barbier partenaire</h3>
+        <p class="modal-sub">Remplissez votre profil complet. Notre équipe vous contacte sous 48h.</p>
+        <form onsubmit="submitForm(event, 'barbier')">
+
+          <p class="form-section-title">Informations personnelles</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" name="prenom" required placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" name="nom" required placeholder="Votre nom de famille" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ville <span class="req">*</span></label>
+              <select name="ville" required>
+                <option value="" disabled selected>Votre ville</option>
+                <option>Longueuil</option><option>Montréal</option><option>Laval</option>
+                <option>Brossard</option><option>Québec</option><option>Gatineau</option>
+                <option>Sherbrooke</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Langue(s) parlée(s) <span class="req">*</span></label>
+              <input type="text" name="langues" required placeholder="Français, anglais..." />
+            </div>
+          </div>
+
+          <p class="form-section-title">Expérience</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Années d'expérience <span class="req">*</span></label>
+              <select name="experience" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Moins de 1 an</option><option>1 à 3 ans</option>
+                <option>3 à 5 ans</option><option>5 à 10 ans</option><option>10 ans et plus</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Formation</label>
+              <input type="text" name="formation" placeholder="École de barbier, autodidacte..." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Spécialités <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="specialites" value="Dégradé" /><span>Dégradé</span></label>
+              <label><input type="checkbox" name="specialites" value="Fade" /><span>Fade</span></label>
+              <label><input type="checkbox" name="specialites" value="Taper" /><span>Taper</span></label>
+              <label><input type="checkbox" name="specialites" value="Rasage" /><span>Rasage</span></label>
+              <label><input type="checkbox" name="specialites" value="Taille barbe" /><span>Taille barbe</span></label>
+              <label><input type="checkbox" name="specialites" value="Design / Tracés" /><span>Design / Tracés</span></label>
+              <label><input type="checkbox" name="specialites" value="Coloration homme" /><span>Coloration</span></label>
+              <label><input type="checkbox" name="specialites" value="Coupe enfant" /><span>Coupe enfant</span></label>
+            </div>
+          </div>
+
+          <p class="form-section-title">Préférences de travail</p>
+          <div class="form-group">
+            <label>Lieu de travail souhaité <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="lieu_travail" value="Au salon Kadio (Longueuil)" /><span>Au salon Kadio</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Mon propre espace" /><span>Mon propre espace</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="À domicile chez le client" /><span>À domicile</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Mobile / flexible" /><span>Mobile</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Disponibilités <span class="req">*</span></label>
+              <select name="disponibilite" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Temps plein</option><option>Temps partiel</option>
+                <option>Weekends</option><option>Soirs et weekends</option><option>Sur rendez-vous</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Matériel personnel ?</label>
+              <select name="materiel">
+                <option value="" disabled selected>Choisir</option>
+                <option>Oui, tout mon matériel</option><option>Partiellement</option><option>Non</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="form-section-title">Portfolio</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" name="instagram" placeholder="@votrecompte" />
+            </div>
+            <div class="form-group">
+              <label>Portfolio / photos</label>
+              <input type="url" name="portfolio" placeholder="https://..." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Motivation / commentaires</label>
+            <textarea name="motivation" placeholder="Pourquoi rejoindre Kadio Network ?"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Envoyer ma candidature</button>
+        </form>
+      </div>
+      <div class="form-success" id="success-barbier">
+        <div class="check">✓</div>
+        <h4>Candidature envoyée !</h4>
+        <p>Merci ! Notre équipe examinera votre profil et vous contactera sous 48h.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL: Esthéticien(ne) partenaire ═══ -->
+  <div class="modal-overlay" id="modal-estheticien">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('estheticien')">&times;</button>
+      <div id="form-estheticien">
+        <h3>Devenir esthéticien(ne) partenaire</h3>
+        <p class="modal-sub">Pose d'ongles, cils, soins, maquillage — rejoignez le réseau beauté Kadio.</p>
+        <form onsubmit="submitForm(event, 'estheticien')">
+
+          <p class="form-section-title">Informations personnelles</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" name="prenom" required placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" name="nom" required placeholder="Votre nom de famille" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Ville <span class="req">*</span></label>
+              <select name="ville" required>
+                <option value="" disabled selected>Votre ville</option>
+                <option>Longueuil</option><option>Montréal</option><option>Laval</option>
+                <option>Brossard</option><option>Québec</option><option>Gatineau</option>
+                <option>Sherbrooke</option><option>Autre</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Langue(s) <span class="req">*</span></label>
+              <input type="text" name="langues" required placeholder="Français, anglais..." />
+            </div>
+          </div>
+
+          <p class="form-section-title">Expérience et spécialités</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Années d'expérience <span class="req">*</span></label>
+              <select name="experience" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Moins de 1 an</option><option>1 à 3 ans</option>
+                <option>3 à 5 ans</option><option>5 à 10 ans</option><option>10 ans et plus</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Formation / Diplôme</label>
+              <input type="text" name="formation" placeholder="DEP esthétique, cours privés..." />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Services offerts <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="services" value="Pose d'ongles (gel)" /><span>Ongles gel</span></label>
+              <label><input type="checkbox" name="services" value="Pose d'ongles (acrylique)" /><span>Ongles acrylique</span></label>
+              <label><input type="checkbox" name="services" value="Manucure" /><span>Manucure</span></label>
+              <label><input type="checkbox" name="services" value="Pédicure" /><span>Pédicure</span></label>
+              <label><input type="checkbox" name="services" value="Nail art" /><span>Nail art</span></label>
+              <label><input type="checkbox" name="services" value="Extensions de cils" /><span>Extensions cils</span></label>
+              <label><input type="checkbox" name="services" value="Cils classiques" /><span>Cils classiques</span></label>
+              <label><input type="checkbox" name="services" value="Cils volume russe" /><span>Volume russe</span></label>
+              <label><input type="checkbox" name="services" value="Rehaussement de cils" /><span>Rehaussement cils</span></label>
+              <label><input type="checkbox" name="services" value="Soin du visage" /><span>Soin visage</span></label>
+              <label><input type="checkbox" name="services" value="Maquillage" /><span>Maquillage</span></label>
+              <label><input type="checkbox" name="services" value="Épilation (cire)" /><span>Épilation cire</span></label>
+              <label><input type="checkbox" name="services" value="Épilation (fil)" /><span>Épilation fil</span></label>
+              <label><input type="checkbox" name="services" value="Microblading" /><span>Microblading</span></label>
+              <label><input type="checkbox" name="services" value="Teinture sourcils/cils" /><span>Teinture sourcils</span></label>
+            </div>
+          </div>
+
+          <p class="form-section-title">Préférences de travail</p>
+          <div class="form-group">
+            <label>Lieu de travail <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="lieu_travail" value="Au salon Kadio (Longueuil)" /><span>Au salon Kadio</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Mon propre espace/studio" /><span>Mon propre studio</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="À domicile chez le client" /><span>À domicile</span></label>
+              <label><input type="checkbox" name="lieu_travail" value="Mobile / flexible" /><span>Mobile</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Disponibilités <span class="req">*</span></label>
+              <select name="disponibilite" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Temps plein</option><option>Temps partiel</option>
+                <option>Weekends</option><option>Soirs et weekends</option><option>Sur rendez-vous</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Matériel / produits personnels ?</label>
+              <select name="materiel">
+                <option value="" disabled selected>Choisir</option>
+                <option>Oui, j'ai tout</option><option>Partiellement</option><option>Non</option>
+              </select>
+            </div>
+          </div>
+
+          <p class="form-section-title">Portfolio</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" name="instagram" placeholder="@votrecompte" />
+            </div>
+            <div class="form-group">
+              <label>TikTok</label>
+              <input type="text" name="tiktok" placeholder="@votrecompte" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Portfolio / photos de réalisations</label>
+            <input type="url" name="portfolio" placeholder="https://..." />
+            <small>Lien vers vos photos de travail (Google Drive, site, etc.)</small>
+          </div>
+          <div class="form-group">
+            <label>Motivation</label>
+            <textarea name="motivation" placeholder="Pourquoi rejoindre Kadio Network ?"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Envoyer ma candidature</button>
+        </form>
+      </div>
+      <div class="form-success" id="success-estheticien">
+        <div class="check">✓</div>
+        <h4>Candidature envoyée !</h4>
+        <p>Merci ! Notre équipe examinera votre profil et vous contactera sous 48h.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL: Emploi au salon ═══ -->
   <div class="modal-overlay" id="modal-emploi">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('emploi')">&times;</button>
       <div id="form-emploi">
-        <h3>Postuler au salon</h3>
-        <p class="modal-sub">Envoyez votre candidature pour rejoindre l'équipe du Salon Kadio à Longueuil.</p>
+        <h3>Postuler au Salon Kadio</h3>
+        <p class="modal-sub">Poste salarié au 615 Antoinette-Robidoux, Longueuil.</p>
         <form onsubmit="submitForm(event, 'emploi')">
-          <div class="form-group">
-            <label>Nom complet</label>
-            <input type="text" name="nom" required placeholder="Votre nom et prénom" />
+
+          <p class="form-section-title">Informations personnelles</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" name="prenom" required placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" name="nom" required placeholder="Votre nom" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
           </div>
           <div class="form-group">
-            <label>Courriel</label>
-            <input type="email" name="email" required placeholder="votre@email.com" />
+            <label>Adresse (quartier / ville) <span class="req">*</span></label>
+            <input type="text" name="adresse" required placeholder="Ex: Vieux-Longueuil, Brossard..." />
+          </div>
+
+          <p class="form-section-title">Poste et expérience</p>
+          <div class="form-group">
+            <label>Poste(s) recherché(s) <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="poste" value="Coiffeur(se)" /><span>Coiffeur(se)</span></label>
+              <label><input type="checkbox" name="poste" value="Barbier" /><span>Barbier</span></label>
+              <label><input type="checkbox" name="poste" value="Esthéticien(ne)" /><span>Esthéticien(ne)</span></label>
+              <label><input type="checkbox" name="poste" value="Technicien(ne) ongles" /><span>Tech. ongles</span></label>
+              <label><input type="checkbox" name="poste" value="Technicien(ne) cils" /><span>Tech. cils</span></label>
+              <label><input type="checkbox" name="poste" value="Réceptionniste" /><span>Réceptionniste</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Expérience <span class="req">*</span></label>
+              <select name="experience" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Débutant(e)</option><option>1 à 3 ans</option>
+                <option>3 à 5 ans</option><option>5 ans et plus</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Type de contrat <span class="req">*</span></label>
+              <select name="contrat" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Temps plein</option><option>Temps partiel</option>
+                <option>Weekends seulement</option><option>Sur appel</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label>Téléphone</label>
-            <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            <label>Disponibilités détaillées</label>
+            <input type="text" name="disponibilites" placeholder="Ex: Lun-Ven 9h-17h, Sam 10h-16h..." />
           </div>
           <div class="form-group">
-            <label>Poste recherché</label>
-            <select name="poste" required>
-              <option value="" disabled selected>Type de poste</option>
-              <option>Coiffeur(se) — Temps plein</option>
-              <option>Coiffeur(se) — Temps partiel</option>
-              <option>Barbier</option>
-              <option>Réceptionniste</option>
-              <option>Autre</option>
-            </select>
+            <label>Salaire ou taux horaire souhaité</label>
+            <input type="text" name="salaire" placeholder="Ex: 18$/h, à discuter..." />
           </div>
+
+          <p class="form-section-title">À propos de vous</p>
           <div class="form-group">
-            <label>Expérience en coiffure afro</label>
-            <select name="experience" required>
-              <option value="" disabled selected>Votre expérience</option>
-              <option>Débutant(e)</option>
-              <option>1 à 3 ans</option>
-              <option>3 à 5 ans</option>
-              <option>5 ans et plus</option>
-            </select>
+            <label>Pourquoi travailler chez Kadio ?</label>
+            <textarea name="motivation" placeholder="Dites-nous ce qui vous motive..."></textarea>
           </div>
-          <div class="form-group">
-            <label>Disponibilités</label>
-            <input type="text" name="disponibilites" placeholder="Ex: Lundi au vendredi, weekends..." />
+          <div class="form-row">
+            <div class="form-group">
+              <label>Instagram</label>
+              <input type="text" name="instagram" placeholder="@votrecompte" />
+            </div>
+            <div class="form-group">
+              <label>Portfolio</label>
+              <input type="url" name="portfolio" placeholder="https://..." />
+            </div>
           </div>
-          <div class="form-group">
-            <label>Pourquoi Kadio ? (optionnel)</label>
-            <textarea name="message" placeholder="Dites-nous pourquoi vous aimeriez travailler chez Kadio..."></textarea>
-          </div>
+
           <button type="submit" class="form-submit">Envoyer ma candidature</button>
         </form>
       </div>
@@ -362,87 +856,207 @@
     </div>
   </div>
 
-  <!-- Modal: Fournisseur -->
+  <!-- ═══ MODAL: Stage ═══ -->
+  <div class="modal-overlay" id="modal-stage">
+    <div class="modal">
+      <button class="modal-close" onclick="closeModal('stage')">&times;</button>
+      <div id="form-stage">
+        <h3>Postuler pour un stage</h3>
+        <p class="modal-sub">Apprenez aux côtés de professionnels certifiés Kadio.</p>
+        <form onsubmit="submitForm(event, 'stage')">
+          <p class="form-section-title">Informations personnelles</p>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prénom <span class="req">*</span></label>
+              <input type="text" name="prenom" required placeholder="Votre prénom" />
+            </div>
+            <div class="form-group">
+              <label>Nom <span class="req">*</span></label>
+              <input type="text" name="nom" required placeholder="Votre nom" />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+
+          <p class="form-section-title">Formation et intérêts</p>
+          <div class="form-group">
+            <label>Programme d'études actuel <span class="req">*</span></label>
+            <input type="text" name="programme" required placeholder="Ex: DEP coiffure, formation privée..." />
+          </div>
+          <div class="form-group">
+            <label>Domaine d'intérêt <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="interet" value="Coiffure afro" /><span>Coiffure afro</span></label>
+              <label><input type="checkbox" name="interet" value="Barbier" /><span>Barbier</span></label>
+              <label><input type="checkbox" name="interet" value="Esthétique" /><span>Esthétique</span></label>
+              <label><input type="checkbox" name="interet" value="Pose d'ongles" /><span>Pose d'ongles</span></label>
+              <label><input type="checkbox" name="interet" value="Extensions de cils" /><span>Extensions cils</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Durée souhaitée <span class="req">*</span></label>
+              <select name="duree" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>2 semaines</option><option>1 mois</option>
+                <option>2-3 mois</option><option>6 mois</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Disponibilités</label>
+              <input type="text" name="disponibilites" placeholder="Jours et heures disponibles" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Motivation</label>
+            <textarea name="motivation" placeholder="Pourquoi souhaitez-vous faire un stage chez Kadio ?"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">Envoyer ma demande de stage</button>
+        </form>
+      </div>
+      <div class="form-success" id="success-stage">
+        <div class="check">✓</div>
+        <h4>Demande envoyée !</h4>
+        <p>Merci pour votre intérêt. On vous recontacte bientôt.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ MODAL: Fournisseur ═══ -->
   <div class="modal-overlay" id="modal-fournisseur">
     <div class="modal">
       <button class="modal-close" onclick="closeModal('fournisseur')">&times;</button>
       <div id="form-fournisseur">
-        <h3>Devenir fournisseur</h3>
-        <p class="modal-sub">Proposez vos produits capillaires au réseau Kadio.</p>
+        <h3>Devenir fournisseur Kadio</h3>
+        <p class="modal-sub">Proposez vos produits capillaires et beauté au réseau.</p>
         <form onsubmit="submitForm(event, 'fournisseur')">
+
+          <p class="form-section-title">Informations entreprise</p>
           <div class="form-group">
-            <label>Nom de l'entreprise</label>
+            <label>Nom de l'entreprise <span class="req">*</span></label>
             <input type="text" name="entreprise" required placeholder="Nom de votre entreprise" />
           </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Personne contact <span class="req">*</span></label>
+              <input type="text" name="nom_contact" required placeholder="Prénom et nom" />
+            </div>
+            <div class="form-group">
+              <label>Poste / Rôle</label>
+              <input type="text" name="poste" placeholder="Fondateur, directeur, rep..." />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Courriel <span class="req">*</span></label>
+              <input type="email" name="email" required placeholder="votre@email.com" />
+            </div>
+            <div class="form-group">
+              <label>Téléphone <span class="req">*</span></label>
+              <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
+            </div>
+          </div>
+
+          <p class="form-section-title">Produits</p>
           <div class="form-group">
-            <label>Personne contact</label>
-            <input type="text" name="nom" required placeholder="Votre nom complet" />
+            <label>Catégories de produits <span class="req">*</span></label>
+            <div class="checkbox-group">
+              <label><input type="checkbox" name="produits" value="Huiles capillaires" /><span>Huiles capillaires</span></label>
+              <label><input type="checkbox" name="produits" value="Crèmes / Beurres" /><span>Crèmes / Beurres</span></label>
+              <label><input type="checkbox" name="produits" value="Shampooings / Après-shampooings" /><span>Shampooings</span></label>
+              <label><input type="checkbox" name="produits" value="Extensions / Mèches" /><span>Extensions / Mèches</span></label>
+              <label><input type="checkbox" name="produits" value="Perruques" /><span>Perruques</span></label>
+              <label><input type="checkbox" name="produits" value="Produits ongles" /><span>Produits ongles</span></label>
+              <label><input type="checkbox" name="produits" value="Produits cils" /><span>Produits cils</span></label>
+              <label><input type="checkbox" name="produits" value="Accessoires coiffure" /><span>Accessoires</span></label>
+              <label><input type="checkbox" name="produits" value="Outils professionnels" /><span>Outils pro</span></label>
+              <label><input type="checkbox" name="produits" value="Autre" /><span>Autre</span></label>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Zone de livraison <span class="req">*</span></label>
+              <select name="livraison" required>
+                <option value="" disabled selected>Choisir</option>
+                <option>Grand Montréal</option>
+                <option>Tout le Québec</option>
+                <option>Canada complet</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Délai de livraison moyen</label>
+              <select name="delai">
+                <option value="" disabled selected>Choisir</option>
+                <option>1-2 jours</option><option>3-5 jours</option>
+                <option>1-2 semaines</option>
+              </select>
+            </div>
           </div>
           <div class="form-group">
-            <label>Courriel</label>
-            <input type="email" name="email" required placeholder="votre@email.com" />
-          </div>
-          <div class="form-group">
-            <label>Téléphone</label>
-            <input type="tel" name="telephone" required placeholder="(514) 000-0000" />
-          </div>
-          <div class="form-group">
-            <label>Types de produits</label>
-            <input type="text" name="produits" required placeholder="Ex: Huiles, crèmes, extensions, perruques..." />
-          </div>
-          <div class="form-group">
-            <label>Zone de livraison</label>
-            <select name="livraison" required>
-              <option value="" disabled selected>Votre zone de livraison</option>
-              <option>Grand Montréal seulement</option>
-              <option>Tout le Québec</option>
-              <option>Canada complet</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Site web ou catalogue (optionnel)</label>
+            <label>Site web / catalogue en ligne</label>
             <input type="url" name="site" placeholder="https://votresite.com" />
           </div>
           <div class="form-group">
-            <label>Message (optionnel)</label>
-            <textarea name="message" placeholder="Parlez-nous de vos produits et de votre entreprise..."></textarea>
+            <label>Description de vos produits</label>
+            <textarea name="description" placeholder="Décrivez vos produits, gammes de prix, avantages..."></textarea>
           </div>
+          <div class="form-group">
+            <label>Photos disponibles ?</label>
+            <select name="photos">
+              <option value="" disabled selected>Choisir</option>
+              <option>Oui, photos professionnelles prêtes</option>
+              <option>Oui, photos basiques disponibles</option>
+              <option>Non, pas encore de photos</option>
+            </select>
+            <small>Les photos sont requises pour apparaître dans notre catalogue.</small>
+          </div>
+
           <button type="submit" class="form-submit">Proposer mes produits</button>
         </form>
       </div>
       <div class="form-success" id="success-fournisseur">
         <div class="check">✓</div>
         <h4>Demande envoyée !</h4>
-        <p>Merci pour votre proposition. Notre équipe évaluera vos produits et vous contactera sous 48h.</p>
+        <p>Merci ! Notre équipe évaluera vos produits et vous contactera sous 48h.</p>
       </div>
     </div>
   </div>
 
-  <!-- ════════ POURQUOI KADIO ════════ -->
-  <section class="why">
-    <div class="why-inner">
-      <p class="label">Pourquoi nous choisir</p>
-      <h2>L'avantage Kadio</h2>
-      <div class="why-grid">
-        <div class="why-item">
-          <div class="icon">🌍</div>
-          <h4>Réseau québécois</h4>
-          <p>Présent dans 7+ villes à travers le Québec avec une communauté grandissante.</p>
+  <!-- ════════ MODÈLE KADIO NETWORK ════════ -->
+  <section class="model">
+    <div class="model-inner">
+      <p class="section-label">Le modèle Kadio Network</p>
+      <h2 class="section-title">Comment ça fonctionne</h2>
+      <p>Un modèle simple et transparent : vous gardez 75% de vos revenus, le réseau prend 25% pour la plateforme, le marketing et le support.</p>
+      <div class="model-grid">
+        <div class="model-item">
+          <div class="icon">📝</div>
+          <h4>1. Postulez</h4>
+          <p>Remplissez le formulaire avec votre profil et vos spécialités.</p>
         </div>
-        <div class="why-item">
-          <div class="icon">👑</div>
-          <h4>Excellence afro</h4>
-          <p>Spécialisé dans la coiffure afro avec des standards de qualité élevés.</p>
+        <div class="model-item">
+          <div class="icon">✅</div>
+          <h4>2. Certification</h4>
+          <p>Notre équipe valide votre profil et vous attribue la certification Kadio.</p>
         </div>
-        <div class="why-item">
-          <div class="icon">💼</div>
-          <h4>Outils modernes</h4>
-          <p>Plateforme de réservation, gestion des rendez-vous et paiements intégrés.</p>
+        <div class="model-item">
+          <div class="icon">📱</div>
+          <h4>3. Activez votre profil</h4>
+          <p>Accédez à la plateforme, configurez vos services et horaires.</p>
         </div>
-        <div class="why-item">
-          <div class="icon">🤝</div>
-          <h4>Communauté</h4>
-          <p>Un réseau bâti sur la confiance, la fierté culturelle et l'entraide.</p>
+        <div class="model-item">
+          <div class="icon">💰</div>
+          <h4>4. Recevez des clients</h4>
+          <p>Les clients réservent en ligne, vous recevez 75% automatiquement.</p>
         </div>
       </div>
     </div>
@@ -451,8 +1065,8 @@
   <!-- ════════ CTA FINAL ════════ -->
   <section class="cta-final">
     <h2>Les places sont limitées par quartier</h2>
-    <p>Chaque zone a un nombre restreint de partenaires pour garantir la qualité du service.</p>
-    <div class="cta-final-badge">🔒 Postulez maintenant</div>
+    <p>Chaque zone a un nombre restreint de partenaires pour garantir la qualité du service et protéger votre revenu.</p>
+    <div class="cta-final-badge">🔒 Postulez maintenant — places limitées</div>
   </section>
 
   <!-- ════════ FOOTER ════════ -->
@@ -466,21 +1080,27 @@
       <a href="/rejoindre">Rejoindre</a>
       <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
     </div>
-    <p>&copy; 2025 Kadio Coiffure. Tous droits réservés.</p>
+    <p>&copy; 2025 Kadio Coiffure &amp; Esthétique. Tous droits réservés.</p>
   </footer>
 
   <script>
+    /* ── Tab switching ── */
+    function switchTab(tab) {
+      document.querySelectorAll('.cat-tab').forEach(function(t) { t.classList.remove('active'); });
+      document.querySelectorAll('.cat-content').forEach(function(c) { c.classList.remove('active'); });
+      document.getElementById('tab-' + tab).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    /* ── Modal open/close ── */
     function openModal(type) {
       document.getElementById('modal-' + type).classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-
     function closeModal(type) {
       document.getElementById('modal-' + type).classList.remove('active');
       document.body.style.overflow = '';
     }
-
-    // Close modal on overlay click
     document.querySelectorAll('.modal-overlay').forEach(function(overlay) {
       overlay.addEventListener('click', function(e) {
         if (e.target === overlay) {
@@ -489,8 +1109,6 @@
         }
       });
     });
-
-    // Close modal on Escape key
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') {
         document.querySelectorAll('.modal-overlay.active').forEach(function(m) {
@@ -500,44 +1118,71 @@
       }
     });
 
+    /* ── Form submission ── */
     function submitForm(e, type) {
       e.preventDefault();
       var form = e.target;
       var data = new FormData(form);
-      var entries = {};
-      data.forEach(function(val, key) { entries[key] = val; });
 
-      // Build email body from form data
-      var subject = '';
-      var body = '';
-      if (type === 'partenaire') {
-        subject = 'Nouvelle candidature partenaire — ' + entries.nom;
-        body = 'CANDIDATURE PARTENAIRE\n\n';
-      } else if (type === 'emploi') {
-        subject = 'Nouvelle candidature emploi — ' + entries.nom;
-        body = 'CANDIDATURE EMPLOI AU SALON\n\n';
-      } else {
-        subject = 'Nouveau fournisseur — ' + (entries.entreprise || entries.nom);
-        body = 'DEMANDE FOURNISSEUR\n\n';
-      }
+      // Collect all values including checkboxes
+      var entries = {};
+      var checkboxGroups = {};
+      data.forEach(function(val, key) {
+        if (form.querySelector('input[name="' + key + '"][type="checkbox"]')) {
+          if (!checkboxGroups[key]) checkboxGroups[key] = [];
+          checkboxGroups[key].push(val);
+        } else {
+          entries[key] = val;
+        }
+      });
+      // Merge checkbox groups
+      Object.keys(checkboxGroups).forEach(function(key) {
+        entries[key] = checkboxGroups[key].join(', ');
+      });
+
+      // Build structured email
+      var titles = {
+        coiffeur: 'CANDIDATURE COIFFEUR(SE) PARTENAIRE',
+        barbier: 'CANDIDATURE BARBIER PARTENAIRE',
+        estheticien: 'CANDIDATURE ESTHÉTICIEN(NE) PARTENAIRE',
+        emploi: 'CANDIDATURE EMPLOI AU SALON',
+        stage: 'DEMANDE DE STAGE',
+        fournisseur: 'DEMANDE FOURNISSEUR'
+      };
+      var subject = titles[type] + ' — ' + (entries.prenom ? entries.prenom + ' ' + entries.nom : entries.nom_contact || entries.entreprise);
+      var body = titles[type] + '\n' + '═'.repeat(40) + '\n\n';
+
+      var labels = {
+        prenom: 'Prénom', nom: 'Nom', email: 'Courriel', telephone: 'Téléphone',
+        ville: 'Ville', langues: 'Langues', experience: 'Expérience', formation: 'Formation',
+        specialites: 'Spécialités', services: 'Services offerts', lieu_travail: 'Lieu de travail',
+        disponibilite: 'Disponibilités', disponibilites: 'Disponibilités détaillées',
+        debut: 'Début souhaité', materiel: 'Matériel personnel', instagram: 'Instagram',
+        tiktok: 'TikTok', portfolio: 'Portfolio', motivation: 'Motivation',
+        commentaires: 'Commentaires', entreprise: 'Entreprise', nom_contact: 'Contact',
+        poste: 'Poste', contrat: 'Type de contrat', adresse: 'Adresse',
+        salaire: 'Salaire souhaité', produits: 'Produits', livraison: 'Zone livraison',
+        delai: 'Délai livraison', site: 'Site web', description: 'Description',
+        photos: 'Photos disponibles', programme: 'Programme', interet: 'Domaines intérêt',
+        duree: 'Durée stage'
+      };
 
       Object.keys(entries).forEach(function(key) {
         if (entries[key]) {
-          body += key.charAt(0).toUpperCase() + key.slice(1) + ': ' + entries[key] + '\n';
+          body += (labels[key] || key) + ': ' + entries[key] + '\n';
         }
       });
 
-      // Send via mailto as fallback (works on all devices)
+      body += '\n— Envoyé depuis kadio-app.vercel.app/rejoindre';
+
       var mailtoLink = 'mailto:kadioothniel@yahoo.fr?subject=' +
         encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
-
-      // Open mailto in background
       var a = document.createElement('a');
       a.href = mailtoLink;
       a.target = '_blank';
       a.click();
 
-      // Show success state
+      // Show success
       document.getElementById('form-' + type).style.display = 'none';
       document.getElementById('success-' + type).style.display = 'block';
     }
