@@ -339,14 +339,14 @@
   <!-- ════════ NAVBAR ════════ -->
   <header class="navbar">
     <div class="navbar-inner">
-      <a href="#" class="nav-logo">KADIO</a>
+      <a href="/" class="nav-logo">KADIO</a>
       <nav class="nav-links">
-        <a href="#">Accueil</a>
-        <a href="#">Comment ça marche</a>
-        <a href="#">Forfaits</a>
-        <a href="#">Service VIP</a>
-        <a href="#">Rejoindre</a>
-        <a href="#">Blog</a>
+        <a href="/#accueil">Accueil</a>
+        <a href="/#comment-ca-marche">Comment ça marche</a>
+        <a href="/forfaits">Forfaits</a>
+        <a href="/#services">Services</a>
+        <a href="/#rejoindre">Rejoindre</a>
+        <a href="/#temoignages">Avis</a>
       </nav>
       <div class="nav-actions">
         <a href="/app" class="btn-outline-sm">Mon espace</a>
@@ -356,7 +356,7 @@
   </header>
 
   <!-- ════════ HERO ════════ -->
-  <section class="hero" style="padding-top: 64px;">
+  <section id="accueil" class="hero" style="padding-top: 64px;">
     <h1>KADIO</h1>
     <div class="hero-line"></div>
     <p class="hero-subtitle">
@@ -440,7 +440,7 @@
   </section>
 
   <!-- ════════ ÉCOSYSTÈME ════════ -->
-  <section class="eco">
+  <section id="comment-ca-marche" class="eco">
     <div class="eco-inner">
       <div style="text-align: center; margin-bottom: 56px;">
         <p class="section-label" style="color: var(--gold);">L'écosystème</p>
@@ -462,7 +462,7 @@
   </section>
 
   <!-- ════════ FORFAITS — Psychologie de conversion ════════ -->
-  <section class="forfaits">
+  <section id="forfaits" class="forfaits">
     <div class="forfaits-inner">
       <div style="text-align: center; margin-bottom: 20px;">
         <p class="section-label" style="color: var(--gold);">Forfaits Tout Inclus</p>
@@ -556,7 +556,7 @@
   </section>
 
   <!-- ════════ SERVICES — Prix régulier vs Abonné ════════ -->
-  <section class="services">
+  <section id="services" class="services">
     <div class="services-inner">
       <div style="text-align: center; margin-bottom: 56px;">
         <p class="section-label" style="color: var(--muted);">Au salon</p>
@@ -640,7 +640,7 @@
   </section>
 
   <!-- ════════ TÉMOIGNAGES ════════ -->
-  <section class="temoignages">
+  <section id="temoignages" class="temoignages">
     <div class="temoignages-inner">
       <div style="text-align: center; margin-bottom: 56px;">
         <p class="section-label" style="color: var(--gold);">Témoignages</p>
@@ -674,7 +674,7 @@
   </section>
 
   <!-- ════════ CTA FINAL — Luxe épuré ════════ -->
-  <section class="cta-final" style="position: relative; overflow: hidden;">
+  <section id="rejoindre" class="cta-final" style="position: relative; overflow: hidden;">
     <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 1px; height: 60px; background: var(--gold); opacity: 0.25;"></div>
 
     <div style="max-width: 600px; margin: 0 auto;">
@@ -699,22 +699,22 @@
   <footer class="footer">
     <div class="footer-inner">
       <div>
-        <a href="#" class="nav-logo" style="font-size: 16px; display: inline-block; margin-bottom: 16px;">KADIO</a>
+        <a href="/" class="nav-logo" style="font-size: 16px; display: inline-block; margin-bottom: 16px;">KADIO</a>
         <p>Coiffure & Esthétique<br>Longueuil, Québec</p>
       </div>
       <div>
         <h4>Navigation</h4>
-        <a href="#" style="display: block; margin-bottom: 8px;">Accueil</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Forfaits</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Service VIP</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Blog</a>
+        <a href="/" style="display: block; margin-bottom: 8px;">Accueil</a>
+        <a href="/#comment-ca-marche" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
+        <a href="/forfaits" style="display: block; margin-bottom: 8px;">Forfaits</a>
+        <a href="/#services" style="display: block; margin-bottom: 8px;">Services</a>
+        <a href="/#temoignages" style="display: block; margin-bottom: 8px;">Avis</a>
       </div>
       <div>
         <h4>Espaces</h4>
-        <a href="#" style="display: block; margin-bottom: 8px;">Espace client</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Portail partenaire</a>
-        <a href="#" style="display: block; margin-bottom: 8px;">Devenir partenaire</a>
+        <a href="/app" style="display: block; margin-bottom: 8px;">Espace client</a>
+        <a href="/app" style="display: block; margin-bottom: 8px;">Portail partenaire</a>
+        <a href="/#rejoindre" style="display: block; margin-bottom: 8px;">Devenir partenaire</a>
       </div>
       <div>
         <h4>Contact</h4>
@@ -726,13 +726,24 @@
   </footer>
 
   <script>
-    // Wire all action buttons and placeholder anchors to the React app
-    document.querySelectorAll('button').forEach(function (btn) {
-      btn.style.cursor = 'pointer';
-      btn.addEventListener('click', function () { window.location.href = '/app'; });
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="/#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var hash = this.getAttribute('href').replace('/', '');
+        var target = document.querySelector(hash);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          history.pushState(null, '', hash);
+        }
+      });
     });
-    document.querySelectorAll('a[href="#"]').forEach(function (a) {
-      a.setAttribute('href', '/app');
+    // CTA buttons → reservation
+    document.querySelectorAll('button').forEach(function (btn) {
+      if (!btn.closest('nav')) {
+        btn.style.cursor = 'pointer';
+        btn.addEventListener('click', function () { window.location.href = '/app'; });
+      }
     });
   </script>
 
