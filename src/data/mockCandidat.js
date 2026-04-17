@@ -24,17 +24,15 @@ export const MOCK_MODULES = [
     score: 90,
     date_complete: '2026-02-22',
     icon: '⭐',
-    video: {
+    guide: {
       titre: 'Bienvenue chez Kadio — Notre mission',
       description: `Découvrez comment Kadio connecte les clients afro à des coiffeurs certifiés. Valeurs, vision et fonctionnement de la plateforme.`,
-      duree: '8 min',
-      url: null, // Remplacer par l'URL YouTube/Vimeo de la vidéo
     },
-    contenu: [
-      `La mission de Kadio est de connecter les clients afro et caribéens à des coiffeurs certifiés, partout au Québec.`,
-      `Chaque partenaire représente la marque Kadio. Ponctualité, qualité et respect sont nos 3 piliers.`,
-      `Le système de notation assure la qualité : les clients notent chaque service, et votre note influence votre visibilité.`,
-      `4 niveaux de partenariat : Partenaire → Certifié → Élite → Ambassadeur. Plus vous performez, plus vous êtes mis en avant.`,
+    etapes: [
+      { icon: 'mission', titre: 'Notre mission', description: `Kadio connecte les clients afro et caribéens à des coiffeurs certifiés, partout au Québec.` },
+      { icon: 'piliers', titre: 'Les 3 piliers', description: `Chaque partenaire représente la marque Kadio. Ponctualité, qualité et respect sont nos fondations.` },
+      { icon: 'notation', titre: 'Système de notation', description: `Les clients notent chaque service. Votre note influence directement votre visibilité sur la plateforme.` },
+      { icon: 'niveaux', titre: '4 niveaux de partenariat', description: `Partenaire → Certifié → Élite → Ambassadeur. Plus vous performez, plus vous êtes mis en avant.` },
     ],
   },
   {
@@ -46,19 +44,17 @@ export const MOCK_MODULES = [
     score: null,
     date_complete: null,
     icon: '🤝',
-    video: {
+    guide: {
       titre: 'Comment accueillir un client Kadio',
       description: `De l'arrivée du client à la fin du service : communication, professionnalisme et gestion des attentes.`,
-      duree: '10 min',
-      url: null,
     },
-    contenu: [
-      `Le client arrive avec un code QR ou un code numérique. Scannez-le dès son arrivée pour confirmer sa présence.`,
-      `Vérifiez que c'est bien la bonne personne : nom et service correspondent-ils à la réservation ?`,
-      `Notez immédiatement si le client est venu seul et s'il respecte les conditions (ex: cheveux lavés si requis).`,
-      `Les deux parties confirment le début de la prestation dans l'app.`,
-      `1h avant la fin prévue, vous recevez un rappel pour prolonger ou terminer le service.`,
-      `À la fin : le client et vous confirmez que la prestation est terminée. Vous notez le client, il vous note en retour.`,
+    etapes: [
+      { icon: 'qr', titre: 'Scan du code QR', description: `Le client arrive avec un code QR ou un code numérique. Scannez-le dès son arrivée pour confirmer sa présence.` },
+      { icon: 'identite', titre: 'Vérification identité', description: `Vérifiez que c'est bien la bonne personne : nom et service correspondent-ils à la réservation ?` },
+      { icon: 'conditions', titre: 'Conditions respectées ?', description: `Notez immédiatement si le client est venu seul et s'il respecte les conditions (ex: cheveux lavés si requis).` },
+      { icon: 'start', titre: 'Début de prestation', description: `Les deux parties confirment le début de la prestation dans l'app.` },
+      { icon: 'rappel', titre: 'Rappel 1h avant la fin', description: `1h avant la fin prévue, vous recevez un rappel pour prolonger ou terminer le service.` },
+      { icon: 'fin', titre: 'Fin et notation croisée', description: `Le client et vous confirmez que la prestation est terminée. Vous notez le client, il vous note en retour.` },
     ],
   },
   {
@@ -70,23 +66,21 @@ export const MOCK_MODULES = [
     score: null,
     date_complete: null,
     icon: '🎬',
-    video: {
+    guide: {
       titre: 'Une journée au salon Kadio — Le parcours complet',
-      description: `Suivez un RDV de bout en bout : arrivée du client, scan QR, prestation, notation croisée et paiement.`,
-      duree: '15 min',
-      url: null,
+      description: `Suivez un RDV de bout en bout : de la réservation au paiement.`,
     },
-    contenu: [
-      `Le client réserve via l'app : il choisit un partenaire sur la carte, consulte sa fiche complète, et sélectionne un créneau.`,
-      `Vous recevez une notification de nouveau RDV avec tous les détails (service, lieu, heure).`,
-      `Le jour J : le client se déplace. À son arrivée, il présente son code QR ou son code numérique.`,
-      `Vous scannez le code dans l'app → "Client arrivé". Vérifiez l'identité et les conditions.`,
-      `Les deux parties démarrent la prestation dans l'app → "En cours".`,
-      `1h avant la fin : notification de rappel. Option de prolonger ou préparer la clôture.`,
-      `Prestation terminée : vous confirmez tous les deux → "Terminé".`,
-      `Vous notez le client (ponctualité, conditions respectées). Le client vous note (qualité, propreté, professionnalisme).`,
-      `Le client est invité à laisser un avis Google. 3 SMS post-RDV sont envoyés automatiquement.`,
-      `Votre commission est créditée : 50% au salon, 75% pour les autres modes de travail.`,
+    etapes: [
+      { icon: 'carte', titre: 'Réservation via la carte', description: `Le client choisit un partenaire sur la carte, consulte sa fiche complète, et sélectionne un créneau.` },
+      { icon: 'notification', titre: 'Notification de RDV', description: `Vous recevez une notification avec tous les détails : service, lieu, heure.` },
+      { icon: 'deplacement', titre: 'Déplacement du client', description: `Le jour J : le client se déplace vers le salon ou votre emplacement.` },
+      { icon: 'qr', titre: `Scan QR à l'arrivée`, description: `Le client présente son code QR ou numérique. Vous scannez → "Client arrivé".` },
+      { icon: 'identite', titre: `Vérification`, description: `Vérifiez l'identité et les conditions (cheveux lavés, venu seul, etc.).` },
+      { icon: 'start', titre: `Début de prestation`, description: `Les deux parties démarrent la prestation dans l'app → "En cours".` },
+      { icon: 'rappel', titre: 'Rappel 1h avant la fin', description: `Notification de rappel. Option de prolonger ou préparer la clôture.` },
+      { icon: 'fin', titre: 'Prestation terminée', description: `Vous confirmez tous les deux → "Terminé".` },
+      { icon: 'etoiles', titre: 'Notation croisée', description: `Vous notez le client (ponctualité, conditions). Le client vous note (qualité, propreté, professionnalisme).` },
+      { icon: 'paiement', titre: 'Avis Google + Commission', description: `Le client laisse un avis Google. 3 SMS post-RDV envoyés. Commission : 50% au salon, 75% ailleurs.` },
     ],
   },
   {
@@ -98,17 +92,15 @@ export const MOCK_MODULES = [
     score: null,
     date_complete: null,
     icon: '✨',
-    video: {
+    guide: {
       titre: 'Hygiène et image professionnelle Kadio',
       description: `Les standards d'hygiène, de tenue et de matériel requis pour chaque service Kadio.`,
-      duree: '7 min',
-      url: null,
     },
-    contenu: [
-      `Désinfectez votre matériel entre chaque client — c'est obligatoire, pas optionnel.`,
-      `Portez une tenue professionnelle propre. Le tablier Kadio est obligatoire lors de tous les services.`,
-      `Votre kit doit toujours contenir : matériel propre, désinfectant, tablier, peigne personnel.`,
-      `Si vous vous déplacez chez un client, demandez poliment un espace propre et dégagé pour travailler.`,
+    etapes: [
+      { icon: 'desinfection', titre: 'Désinfection obligatoire', description: `Désinfectez votre matériel entre chaque client — c'est obligatoire, pas optionnel.` },
+      { icon: 'tenue', titre: 'Tenue professionnelle', description: `Portez une tenue professionnelle propre. Le tablier Kadio est obligatoire lors de tous les services.` },
+      { icon: 'kit', titre: 'Kit complet', description: `Votre kit doit toujours contenir : matériel propre, désinfectant, tablier, peigne personnel.` },
+      { icon: 'domicile', titre: 'Service à domicile', description: `Si vous vous déplacez chez un client, demandez poliment un espace propre et dégagé pour travailler.` },
     ],
   },
 ]

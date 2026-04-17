@@ -3,6 +3,378 @@ import { useNavigate } from 'react-router-dom'
 import { useFormationModules } from '@/hooks'
 import { OR, CREME, NOIR, CARD, formatDate } from '@/lib/utils'
 
+// ── Illustrations SVG pour chaque type d'étape ──
+const ILLUS = {
+  mission: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="36" fill="rgba(184,146,42,0.1)" />
+      <circle cx="40" cy="40" r="22" fill="rgba(184,146,42,0.15)" />
+      <circle cx="40" cy="40" r="10" fill="#B8922A" />
+      <path d="M40 18v-6M40 68v-6M18 40h-6M68 40h-6" stroke="#B8922A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M28 28l-3-3M55 55l-3-3M28 52l-3 3M55 25l-3 3" stroke="rgba(184,146,42,0.5)" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  ),
+  piliers: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="56" width="60" height="6" rx="3" fill="#B8922A" />
+      <rect x="16" y="26" width="10" height="30" rx="3" fill="rgba(184,146,42,0.6)" />
+      <rect x="35" y="26" width="10" height="30" rx="3" fill="rgba(184,146,42,0.8)" />
+      <rect x="54" y="26" width="10" height="30" rx="3" fill="#B8922A" />
+      <rect x="10" y="20" width="60" height="6" rx="3" fill="#B8922A" />
+      <path d="M40 12l4 8H36l4-8z" fill="#B8922A" />
+    </svg>
+  ),
+  notation: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 16l6.9 14 15.4 2.2-11.2 10.9 2.6 15.3L40 51l-13.7 7.4 2.6-15.3L17.7 32.2l15.4-2.2L40 16z" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="2" />
+      <path d="M40 22l4.8 9.7 10.7 1.6-7.8 7.5 1.8 10.6L40 46l-9.5 5.4 1.8-10.6-7.8-7.5 10.7-1.6L40 22z" fill="#B8922A" opacity="0.7" />
+    </svg>
+  ),
+  niveaux: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="8" y="52" width="14" height="16" rx="3" fill="rgba(184,146,42,0.3)" />
+      <rect x="25" y="40" width="14" height="28" rx="3" fill="rgba(184,146,42,0.5)" />
+      <rect x="42" y="28" width="14" height="40" rx="3" fill="rgba(184,146,42,0.75)" />
+      <rect x="59" y="16" width="14" height="52" rx="3" fill="#B8922A" />
+      <circle cx="66" cy="12" r="4" fill="#B8922A" />
+      <path d="M64 8l2 3 2-3" stroke="#fff" strokeWidth="1" />
+    </svg>
+  ),
+  qr: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="14" width="52" height="52" rx="8" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="2" />
+      <rect x="22" y="22" width="14" height="14" rx="2" fill="#B8922A" />
+      <rect x="44" y="22" width="14" height="14" rx="2" fill="#B8922A" />
+      <rect x="22" y="44" width="14" height="14" rx="2" fill="#B8922A" />
+      <rect x="44" y="44" width="6" height="6" rx="1" fill="#B8922A" />
+      <rect x="52" y="44" width="6" height="6" rx="1" fill="rgba(184,146,42,0.5)" />
+      <rect x="44" y="52" width="6" height="6" rx="1" fill="rgba(184,146,42,0.5)" />
+      <rect x="52" y="52" width="6" height="6" rx="1" fill="#B8922A" />
+      <rect x="25" y="25" width="8" height="8" rx="1" fill="#fff" />
+      <rect x="47" y="25" width="8" height="8" rx="1" fill="#fff" />
+      <rect x="25" y="47" width="8" height="8" rx="1" fill="#fff" />
+    </svg>
+  ),
+  identite: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="20" width="56" height="40" rx="6" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="2" />
+      <circle cx="30" cy="38" r="8" fill="rgba(184,146,42,0.3)" />
+      <circle cx="30" cy="36" r="4" fill="#B8922A" />
+      <path d="M22 46c0-4 3.6-7 8-7s8 3 8 7" stroke="#B8922A" strokeWidth="1.5" />
+      <rect x="46" y="32" width="16" height="2.5" rx="1.25" fill="rgba(184,146,42,0.4)" />
+      <rect x="46" y="38" width="12" height="2.5" rx="1.25" fill="rgba(184,146,42,0.3)" />
+      <rect x="46" y="44" width="14" height="2.5" rx="1.25" fill="rgba(184,146,42,0.3)" />
+      <circle cx="58" cy="26" r="5" fill="#10B981" opacity="0.9" />
+      <path d="M55.5 26l1.8 1.8 3.2-3.2" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  ),
+  conditions: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="16" y="14" width="48" height="56" rx="6" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="2" />
+      <rect x="30" y="10" width="20" height="8" rx="4" fill="#B8922A" />
+      <rect x="24" y="28" width="6" height="6" rx="1.5" fill="#10B981" />
+      <path d="M25.5 31l1.2 1.2 2.4-2.4" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="34" y="29" width="18" height="3" rx="1.5" fill="rgba(14,12,9,0.15)" />
+      <rect x="24" y="40" width="6" height="6" rx="1.5" fill="#10B981" />
+      <path d="M25.5 43l1.2 1.2 2.4-2.4" stroke="#fff" strokeWidth="1.2" strokeLinecap="round" />
+      <rect x="34" y="41" width="18" height="3" rx="1.5" fill="rgba(14,12,9,0.15)" />
+      <rect x="24" y="52" width="6" height="6" rx="1.5" fill="rgba(184,146,42,0.3)" />
+      <rect x="34" y="53" width="18" height="3" rx="1.5" fill="rgba(14,12,9,0.1)" />
+    </svg>
+  ),
+  start: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="30" cy="32" r="10" fill="rgba(184,146,42,0.2)" />
+      <circle cx="30" cy="30" r="5" fill="#B8922A" opacity="0.7" />
+      <path d="M22 42c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#B8922A" strokeWidth="2" />
+      <circle cx="52" cy="32" r="10" fill="rgba(16,185,129,0.15)" />
+      <circle cx="52" cy="30" r="5" fill="#10B981" opacity="0.7" />
+      <path d="M44 42c0-4.4 3.6-8 8-8s8 3.6 8 8" stroke="#10B981" strokeWidth="2" />
+      <path d="M34 54h12" stroke="#B8922A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M37 51l-3 3 3 3M43 51l3 3-3 3" stroke="#B8922A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="28" y="60" width="24" height="8" rx="4" fill="#B8922A" />
+      <text x="40" y="66" textAnchor="middle" fill="#fff" fontSize="6" fontWeight="700" fontFamily="sans-serif">START</text>
+    </svg>
+  ),
+  rappel: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="26" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="2" />
+      <circle cx="40" cy="40" r="3" fill="#B8922A" />
+      <path d="M40 24v16l10 10" stroke="#B8922A" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+      <circle cx="58" cy="20" r="9" fill="#EF4444" opacity="0.9" />
+      <text x="58" y="23.5" textAnchor="middle" fill="#fff" fontSize="10" fontWeight="700" fontFamily="sans-serif">1h</text>
+    </svg>
+  ),
+  fin: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="38" r="26" fill="rgba(16,185,129,0.08)" stroke="#10B981" strokeWidth="2" />
+      <path d="M28 38l8 8 16-16" stroke="#10B981" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="22" y="66" width="36" height="6" rx="3" fill="#10B981" opacity="0.3" />
+      <text x="40" y="71" textAnchor="middle" fill="#10B981" fontSize="5" fontWeight="700" fontFamily="sans-serif">TERMINÉ</text>
+    </svg>
+  ),
+  carte: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="14" width="60" height="52" rx="6" fill="rgba(184,146,42,0.06)" stroke="rgba(184,146,42,0.3)" strokeWidth="1.5" />
+      <path d="M10 30h60" stroke="rgba(184,146,42,0.2)" strokeWidth="1" />
+      <path d="M10 46h60" stroke="rgba(184,146,42,0.2)" strokeWidth="1" />
+      <path d="M30 14v52" stroke="rgba(184,146,42,0.2)" strokeWidth="1" />
+      <path d="M50 14v52" stroke="rgba(184,146,42,0.2)" strokeWidth="1" />
+      <circle cx="42" cy="34" r="6" fill="#EF4444" opacity="0.85" />
+      <circle cx="42" cy="33" r="2.5" fill="#fff" />
+      <path d="M42 40l-4-7h8l-4 7z" fill="#EF4444" opacity="0.85" />
+      <circle cx="26" cy="50" r="4" fill="#B8922A" opacity="0.5" />
+      <circle cx="56" cy="24" r="4" fill="#B8922A" opacity="0.5" />
+    </svg>
+  ),
+  notification: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 16c-11 0-20 8-20 18v10l-4 6h48l-4-6V34c0-10-9-18-20-18z" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="2" />
+      <path d="M34 52c0 3.3 2.7 6 6 6s6-2.7 6-6" stroke="#B8922A" strokeWidth="2" />
+      <circle cx="56" cy="22" r="8" fill="#EF4444" opacity="0.9" />
+      <text x="56" y="25.5" textAnchor="middle" fill="#fff" fontSize="9" fontWeight="700" fontFamily="sans-serif">1</text>
+    </svg>
+  ),
+  deplacement: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M20 58c8-4 16-20 20-30s12-12 20-8" stroke="#B8922A" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 3" />
+      <circle cx="20" cy="58" r="6" fill="rgba(16,185,129,0.2)" stroke="#10B981" strokeWidth="1.5" />
+      <circle cx="20" cy="58" r="2.5" fill="#10B981" />
+      <path d="M60 20c0 5-6 12-6 12s-6-7-6-12a6 6 0 0112 0z" fill="#EF4444" opacity="0.85" />
+      <circle cx="60" cy="19" r="2.5" fill="#fff" />
+    </svg>
+  ),
+  etoiles: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M24 24l3.5 7 7.7 1.1-5.6 5.5 1.3 7.6L24 41l-6.9 4.2 1.3-7.6-5.6-5.5 7.7-1.1L24 24z" fill="#B8922A" />
+      <path d="M56 24l3.5 7 7.7 1.1-5.6 5.5 1.3 7.6L56 41l-6.9 4.2 1.3-7.6-5.6-5.5 7.7-1.1L56 24z" fill="#B8922A" />
+      <path d="M24 48l-4 4M56 48l4 4" stroke="rgba(184,146,42,0.4)" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M28 56h24" stroke="#B8922A" strokeWidth="2" strokeLinecap="round" />
+      <path d="M32 52l-4 4 4 4M48 52l4 4-4 4" stroke="#B8922A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <text x="40" y="65" textAnchor="middle" fill="rgba(184,146,42,0.6)" fontSize="5" fontWeight="600" fontFamily="sans-serif">MUTUELLE</text>
+    </svg>
+  ),
+  paiement: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="24" width="36" height="32" rx="4" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="1.5" />
+      <rect x="12" y="32" width="36" height="6" fill="rgba(184,146,42,0.15)" />
+      <rect x="16" y="44" width="12" height="3" rx="1.5" fill="rgba(184,146,42,0.3)" />
+      <rect x="16" y="50" width="8" height="3" rx="1.5" fill="rgba(184,146,42,0.2)" />
+      <path d="M58 22l5.5 3v6L58 34l-5.5-3v-6L58 22z" fill="#FBBC04" stroke="#F59E0B" strokeWidth="1" />
+      <text x="58" y="29.5" textAnchor="middle" fill="#fff" fontSize="5.5" fontWeight="700" fontFamily="sans-serif">G</text>
+      <path d="M56 38v4l-4 2" stroke="rgba(184,146,42,0.4)" strokeWidth="1" strokeLinecap="round" />
+      <path d="M60 38v8l-4 2" stroke="rgba(184,146,42,0.4)" strokeWidth="1" strokeLinecap="round" />
+      <path d="M64 38v12l-4 2" stroke="rgba(184,146,42,0.4)" strokeWidth="1" strokeLinecap="round" />
+      <text x="60" y="60" textAnchor="middle" fill="rgba(184,146,42,0.5)" fontSize="4.5" fontWeight="600" fontFamily="sans-serif">AVIS</text>
+    </svg>
+  ),
+  desinfection: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="30" y="18" width="20" height="44" rx="6" fill="rgba(59,130,246,0.08)" stroke="#3B82F6" strokeWidth="2" />
+      <rect x="34" y="14" width="12" height="8" rx="3" fill="#3B82F6" opacity="0.7" />
+      <path d="M36 36h8M40 32v8" stroke="#3B82F6" strokeWidth="2" strokeLinecap="round" />
+      <circle cx="24" cy="30" r="3" fill="rgba(59,130,246,0.3)" />
+      <circle cx="56" cy="34" r="2" fill="rgba(59,130,246,0.3)" />
+      <circle cx="22" cy="42" r="2" fill="rgba(59,130,246,0.2)" />
+      <circle cx="58" cy="26" r="3" fill="rgba(59,130,246,0.2)" />
+      <path d="M26 54l4-4M54 50l-4-4" stroke="rgba(59,130,246,0.3)" strokeWidth="1" strokeLinecap="round" />
+    </svg>
+  ),
+  tenue: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M30 28l-12 6v26h8V38l4-4" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="1.5" />
+      <path d="M50 28l12 6v26h-8V38l-4-4" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="1.5" />
+      <path d="M30 28c0-6 4.5-12 10-12s10 6 10 12v32H30V28z" fill="rgba(184,146,42,0.1)" stroke="#B8922A" strokeWidth="2" />
+      <path d="M36 28l4 6 4-6" stroke="#B8922A" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+      <rect x="36" y="40" width="8" height="10" rx="2" fill="#B8922A" opacity="0.2" />
+      <text x="40" y="47" textAnchor="middle" fill="#B8922A" fontSize="5" fontWeight="700" fontFamily="sans-serif">K</text>
+    </svg>
+  ),
+  kit: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="14" y="28" width="52" height="34" rx="6" fill="rgba(184,146,42,0.08)" stroke="#B8922A" strokeWidth="2" />
+      <rect x="28" y="22" width="24" height="10" rx="3" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="1.5" />
+      <path d="M40 22v-4" stroke="#B8922A" strokeWidth="2" strokeLinecap="round" />
+      <rect x="34" y="38" width="12" height="12" rx="3" fill="#B8922A" opacity="0.2" />
+      <path d="M37 44h6M40 41v6" stroke="#B8922A" strokeWidth="1.5" strokeLinecap="round" />
+      <circle cx="24" cy="42" r="3" fill="rgba(184,146,42,0.3)" />
+      <circle cx="56" cy="42" r="3" fill="rgba(184,146,42,0.3)" />
+      <rect x="22" y="50" width="36" height="2" rx="1" fill="rgba(184,146,42,0.15)" />
+    </svg>
+  ),
+  domicile: (
+    <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 14L14 34v30h52V34L40 14z" fill="rgba(184,146,42,0.06)" stroke="#B8922A" strokeWidth="2" strokeLinejoin="round" />
+      <rect x="32" y="44" width="16" height="20" rx="2" fill="rgba(184,146,42,0.15)" stroke="#B8922A" strokeWidth="1.5" />
+      <circle cx="44" cy="54" r="1.5" fill="#B8922A" />
+      <rect x="20" y="36" width="10" height="8" rx="1" fill="rgba(184,146,42,0.1)" stroke="#B8922A" strokeWidth="1" />
+      <rect x="50" y="36" width="10" height="8" rx="1" fill="rgba(184,146,42,0.1)" stroke="#B8922A" strokeWidth="1" />
+      <path d="M25 36v8M55 36v8" stroke="rgba(184,146,42,0.3)" strokeWidth="0.5" />
+    </svg>
+  ),
+}
+
+// Fallback pour les icônes non définies
+function StepIllustration({ type }) {
+  const svg = ILLUS[type]
+  if (!svg) {
+    return (
+      <div style={{
+        width: '100%', height: '100%',
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        background: 'rgba(184,146,42,0.08)', borderRadius: '12px',
+        fontSize: '28px',
+      }}>
+        📋
+      </div>
+    )
+  }
+  return <div style={{ width: '100%', height: '100%' }}>{svg}</div>
+}
+
+// ── Guide illustré étape par étape ──
+function GuideIllustre({ module }) {
+  const [currentStep, setCurrentStep] = useState(0)
+  const etapes = module.etapes || []
+  if (etapes.length === 0) return null
+
+  const etape = etapes[currentStep]
+
+  return (
+    <div style={{
+      background: '#fff', border: '1px solid rgba(184,146,42,0.2)',
+      borderRadius: '14px', overflow: 'hidden', marginBottom: '14px',
+    }}>
+      {/* Header du guide */}
+      {module.guide && (
+        <div style={{
+          background: 'rgba(184,146,42,0.06)',
+          padding: '12px 16px',
+          borderBottom: '1px solid rgba(184,146,42,0.1)',
+        }}>
+          <div style={{ fontSize: '13px', fontWeight: '700', color: NOIR }}>
+            {module.guide.titre}
+          </div>
+          <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.45)', marginTop: '2px' }}>
+            {module.guide.description}
+          </div>
+        </div>
+      )}
+
+      {/* Illustration principale */}
+      <div style={{
+        padding: '24px 20px 16px',
+        display: 'flex', flexDirection: 'column', alignItems: 'center',
+      }}>
+        {/* SVG illustration */}
+        <div style={{
+          width: '120px', height: '120px',
+          marginBottom: '16px',
+          transition: 'all 0.3s ease',
+        }}>
+          <StepIllustration type={etape.icon} />
+        </div>
+
+        {/* Étape badge */}
+        <div style={{
+          background: OR, color: '#fff',
+          borderRadius: '20px', padding: '3px 14px',
+          fontSize: '11px', fontWeight: '700',
+          marginBottom: '10px',
+        }}>
+          {`Étape ${currentStep + 1} / ${etapes.length}`}
+        </div>
+
+        {/* Titre */}
+        <div style={{
+          fontSize: '16px', fontWeight: '700', color: NOIR,
+          textAlign: 'center', marginBottom: '8px',
+        }}>
+          {etape.titre}
+        </div>
+
+        {/* Description */}
+        <div style={{
+          fontSize: '13px', color: 'rgba(14,12,9,0.6)',
+          lineHeight: 1.6, textAlign: 'center',
+          maxWidth: '320px',
+        }}>
+          {etape.description}
+        </div>
+      </div>
+
+      {/* Navigation dots + flèches */}
+      <div style={{
+        padding: '0 16px 16px',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <button
+          onClick={() => setCurrentStep(Math.max(0, currentStep - 1))}
+          disabled={currentStep === 0}
+          style={{
+            background: 'transparent', border: '1px solid rgba(14,12,9,0.1)',
+            borderRadius: '10px', padding: '8px 14px',
+            fontSize: '13px', fontWeight: 600, cursor: currentStep === 0 ? 'default' : 'pointer',
+            opacity: currentStep === 0 ? 0.3 : 1,
+            color: NOIR, fontFamily: `'DM Sans', sans-serif`,
+          }}
+        >
+          ← Préc.
+        </button>
+
+        {/* Dots */}
+        <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+          {etapes.map((_, i) => (
+            <div
+              key={i}
+              onClick={() => setCurrentStep(i)}
+              style={{
+                width: i === currentStep ? '18px' : '7px',
+                height: '7px',
+                borderRadius: '4px',
+                background: i === currentStep ? OR : 'rgba(14,12,9,0.12)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+            />
+          ))}
+        </div>
+
+        <button
+          onClick={() => setCurrentStep(Math.min(etapes.length - 1, currentStep + 1))}
+          disabled={currentStep === etapes.length - 1}
+          style={{
+            background: currentStep === etapes.length - 1 ? 'transparent' : OR,
+            border: currentStep === etapes.length - 1 ? '1px solid rgba(14,12,9,0.1)' : 'none',
+            borderRadius: '10px', padding: '8px 14px',
+            fontSize: '13px', fontWeight: 700,
+            cursor: currentStep === etapes.length - 1 ? 'default' : 'pointer',
+            opacity: currentStep === etapes.length - 1 ? 0.3 : 1,
+            color: currentStep === etapes.length - 1 ? NOIR : '#fff',
+            fontFamily: `'DM Sans', sans-serif`,
+          }}
+        >
+          Suiv. →
+        </button>
+      </div>
+
+      {/* Mini-timeline en bas */}
+      <div style={{
+        height: '3px',
+        background: 'rgba(184,146,42,0.1)',
+      }}>
+        <div style={{
+          height: '100%',
+          width: `${((currentStep + 1) / etapes.length) * 100}%`,
+          background: OR,
+          borderRadius: '0 2px 2px 0',
+          transition: 'width 0.3s ease',
+        }} />
+      </div>
+    </div>
+  )
+}
+
 function ModuleCard({ module, navigate, expanded, onToggle }) {
   const isVerrouille = module.statut === 'verrouille'
   const isComplete = module.statut === 'complete'
@@ -71,8 +443,7 @@ function ModuleCard({ module, navigate, expanded, onToggle }) {
             {`Module ${module.id} — ${module.titre}`}
           </div>
           <div style={{ fontSize: '12px', color: 'rgba(14,12,9,0.45)', marginTop: '1px' }}>
-            {`${module.duree_minutes} min`}
-            {module.video && ` · Vidéo ${module.video.duree}`}
+            {`${module.duree_minutes} min · ${(module.etapes || []).length} étapes illustrées`}
           </div>
         </div>
       </div>
@@ -82,69 +453,13 @@ function ModuleCard({ module, navigate, expanded, onToggle }) {
         {module.description}
       </div>
 
-      {/* ── Contenu expandable : vidéo + points clés ── */}
+      {/* ── Contenu expandable : guide illustré ── */}
       {expanded && !isVerrouille && (
-        <div style={{ marginBottom: '14px' }}>
-          {/* Vidéo formative */}
-          {module.video && (
-            <div style={{
-              background: 'rgba(14,12,9,0.04)', border: '1px solid rgba(14,12,9,0.08)',
-              borderRadius: '12px', padding: '14px', marginBottom: '12px',
-            }}>
-              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
-                <span style={{ fontSize: '20px' }}>🎬</span>
-                <div>
-                  <div style={{ fontSize: '13px', fontWeight: '700', color: NOIR }}>{module.video.titre}</div>
-                  <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.45)' }}>{module.video.duree}</div>
-                </div>
-              </div>
-              <div style={{ fontSize: '12px', color: 'rgba(14,12,9,0.55)', lineHeight: 1.5, marginBottom: '10px' }}>
-                {module.video.description}
-              </div>
-              {module.video.url ? (
-                <a href={module.video.url} target="_blank" rel="noopener noreferrer"
-                  style={{
-                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                    background: OR, color: NOIR, border: 'none', borderRadius: '10px',
-                    padding: '10px 16px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',
-                    fontFamily: `'DM Sans', sans-serif`,
-                  }}>
-                  ▶ Regarder la vidéo
-                </a>
-              ) : (
-                <div style={{
-                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
-                  background: 'rgba(184,146,42,0.1)', border: `1px dashed ${OR}`,
-                  borderRadius: '10px', padding: '24px 16px', color: OR, fontSize: '13px', fontWeight: 600,
-                }}>
-                  🎥 Vidéo bientôt disponible
-                </div>
-              )}
-            </div>
-          )}
-
-          {/* Points clés du module */}
-          {module.contenu && module.contenu.length > 0 && (
-            <div style={{
-              background: 'rgba(184,146,42,0.05)', border: '1px solid rgba(184,146,42,0.15)',
-              borderRadius: '12px', padding: '14px',
-            }}>
-              <div style={{ fontSize: '12px', fontWeight: '700', color: OR, marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
-                Points clés à retenir
-              </div>
-              {module.contenu.map((point, i) => (
-                <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: i < module.contenu.length - 1 ? '8px' : 0 }}>
-                  <span style={{ color: OR, fontSize: '12px', fontWeight: 700, flexShrink: 0 }}>{i + 1}.</span>
-                  <span style={{ color: 'rgba(14,12,9,0.65)', fontSize: '12px', lineHeight: 1.5 }}>{point}</span>
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
+        <GuideIllustre module={module} />
       )}
 
       {/* Expand/collapse button for active modules */}
-      {!isVerrouille && !expanded && (module.video || module.contenu) && (
+      {!isVerrouille && !expanded && (module.etapes || []).length > 0 && (
         <button onClick={() => onToggle && onToggle(module.id)}
           style={{
             background: 'transparent', border: '1px solid rgba(14,12,9,0.1)',
@@ -152,7 +467,7 @@ function ModuleCard({ module, navigate, expanded, onToggle }) {
             color: 'rgba(14,12,9,0.5)', cursor: 'pointer', marginBottom: '10px',
             fontFamily: `'DM Sans', sans-serif`, fontWeight: 600,
           }}>
-          📖 Voir le contenu du module
+          🖼️ Voir le guide illustré
         </button>
       )}
 
