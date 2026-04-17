@@ -30,18 +30,22 @@ export async function createCheckoutSession({
   montant,         // en cents CAD
   description,
   clientEmail,
+  cardNum = null,  // pour simulation dev (test carte refusée)
   rdvId = null,
   successUrl = `${window.location.origin}/client/confirmation`,
   cancelUrl = `${window.location.origin}/client/carte`,
 }) {
   if (!isStripeConfigured) {
-    // ── DEV fallback ──
+    // ── DEV fallback — simule succès/échec selon numéro de carte ──
     console.log('[Stripe DEV] Checkout simulé:', { montant, description })
     await new Promise(r => setTimeout(r, 800))
+    // Carte test refusée : 4000 0000 0000 0002
+    if (cardNum && cardNum.replace(/\s/g, '') === '4000000000000002') {
+      return { ok: false, message: 'Carte refusée. Essayez une autre carte.' }
+    }
     return {
       ok: true,
       sessionId: `cs_dev_${Date.now()}`,
-      url: successUrl + '?dev=true',
     }
   }
 
@@ -64,10 +68,14 @@ export async function createSubscription({
   stripePriceId,   // ID Stripe du prix récurrent
   clientEmail,
   clientId,
+  cardNum = null,  // pour simulation dev
 }) {
   if (!isStripeConfigured) {
     console.log('[Stripe DEV] Abonnement simulé:', { planId, stripePriceId })
     await new Promise(r => setTimeout(r, 800))
+    if (cardNum && cardNum.replace(/\s/g, '') === '4000000000000002') {
+      return { ok: false, message: 'Carte refusée. Essayez une autre carte.' }
+    }
     return {
       ok: true,
       subscriptionId: `sub_dev_${Date.now()}`,

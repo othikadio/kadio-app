@@ -80,7 +80,8 @@ export default function ClientAbonnement() {
         planId: selectedPlan.id,
         stripePriceId: selectedPlan.stripePriceId || 'price_placeholder',
         clientEmail: 'client-aminata@kadio.app',
-        clientId: 'client-aminata'
+        clientId: 'client-aminata',
+        cardNum: cardNum,
       })
       if (!subscription.ok) {
         setPayError(subscription.message || 'Souscription échouée.')
