@@ -81,8 +81,8 @@ export default function ClientCarte() {
       {/* Barre de recherche + filtres — flottante sur la carte */}
       <div style={{
         position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
-        background: `linear-gradient(${CREME}, ${CREME}ee, transparent)`,
-        padding: '12px 12px 20px',
+        background: `linear-gradient(${CREME}f0, ${CREME}cc, transparent)`,
+        padding: '8px 12px 16px',
       }}>
         {/* Recherche */}
         <div style={{ display: 'flex', gap: 8, marginBottom: 10 }}>
