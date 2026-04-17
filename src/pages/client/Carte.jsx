@@ -76,7 +76,7 @@ export default function ClientCarte() {
   }
 
   return (
-    <div style={{ fontFamily: `'DM Sans', sans-serif`, background: CREME, position: 'fixed', inset: 0, bottom: 64, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
+    <div style={{ fontFamily: `'DM Sans', sans-serif`, background: CREME, height: 'calc(100vh - 56px - 64px)', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}>
 
       {/* Barre de recherche + filtres — flottante sur la carte */}
       <div style={{
