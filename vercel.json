@@ -36,8 +36,8 @@
       "destination": "/comment-ca-marche.html"
     },
     {
-      "source": "/blog",
-      "destination": "/blog.html"
+      "source": "/cartes-cadeaux",
+      "destination": "/cartes-cadeaux.html"
     }
   ]
 }
