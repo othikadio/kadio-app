@@ -55,8 +55,8 @@ export default function ClientCarte() {
     setSelectedId(p.id)
   }
 
-  function handleReserver(p) {
-    navigate(`/client/reserver/${p.id}`)
+  function handleVoirProfil(p) {
+    navigate(`/client/partenaire/${p.id}`)
   }
 
   // Touch drag pour le panel
@@ -282,22 +282,21 @@ export default function ClientCarte() {
                   </div>
                 </div>
 
-                {/* Bouton réserver — visible seulement sur la carte sélectionnée */}
+                {/* Boutons — visible seulement sur la carte sélectionnée */}
                 {isSelected && (
                   <div style={{ marginTop: 12, display: 'flex', gap: 8 }}>
                     <button
-                      onClick={e => { e.stopPropagation(); handleReserver(p) }}
-                      disabled={!p.disponible}
+                      onClick={e => { e.stopPropagation(); handleVoirProfil(p) }}
                       style={{
                         flex: 1, padding: '10px 0',
-                        background: p.disponible ? OR : 'rgba(14,12,9,0.08)',
-                        color: p.disponible ? '#fff' : 'rgba(14,12,9,0.3)',
+                        background: OR,
+                        color: '#fff',
                         border: 'none', borderRadius: 10,
-                        fontWeight: 700, fontSize: 13, cursor: p.disponible ? 'pointer' : 'default',
+                        fontWeight: 700, fontSize: 13, cursor: 'pointer',
                         fontFamily: `'DM Sans', sans-serif`,
                       }}
                     >
-                      {p.disponible ? 'Réserver maintenant' : 'Indisponible'}
+                      Voir le profil
                     </button>
                   </div>
                 )}

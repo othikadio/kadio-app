@@ -51,6 +51,7 @@ const ClientReserver    = lazy(() => import('@/pages/client/Reserver'))
 const ClientFactures    = lazy(() => import('@/pages/client/Factures'))
 const ClientParrainage  = lazy(() => import('@/pages/client/Parrainage'))
 const ClientFidelite    = lazy(() => import('@/pages/client/Fidelite'))
+const ClientFichePartenaire = lazy(() => import('@/pages/client/FichePartenaire'))
 
 // ── Partenaire pages ──
 const PartAccueil       = lazy(() => import('@/pages/partenaire/Accueil'))
@@ -155,6 +156,7 @@ export default function App() {
                 <Route path="abonnement"             element={<ClientAbonnement />} />
                 <Route path="historique"             element={<ClientHistorique />} />
                 <Route path="profil"                 element={<ClientProfil />} />
+                <Route path="partenaire/:partenaireId" element={<ClientFichePartenaire />} />
                 <Route path="reserver/:partenaireId" element={<ClientReserver />} />
                 <Route path="factures"               element={<ClientFactures />} />
                 <Route path="parrainage"             element={<ClientParrainage />} />

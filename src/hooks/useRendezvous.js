@@ -3,6 +3,7 @@ import { useSupabaseData, useSupabaseMutation } from './useData'
 import { getRdvByClient, getRdvByPartenaire, getRdvByEmploye, getAllRdv, createRdv, updateRdvStatut, cancelRdv } from '@/services'
 import { MOCK_RDV_AMINATA } from '@/data/mockClient'
 import { MOCK_RDV_DIANE } from '@/data/mockPartenaire'
+import { MOCK_RDV_MARCUS } from '@/data/mockEmploye'
 
 /** RDV d'un client */
 export function useRdvClient(clientId) {
@@ -28,7 +29,7 @@ export function useRdvPartenaire(partenaireId) {
 export function useRdvEmploye(employeId) {
   return useSupabaseData(
     employeId ? () => getRdvByEmploye(employeId) : null,
-    [],
+    MOCK_RDV_MARCUS || [],
     [employeId],
     !employeId
   )
