@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Service VIP — Kadio Coiffure</title>
+  <meta name="description" content="Profitez de notre service VIP en salon : boissons offertes à chaque visite. Bière, vin, café, thé, jus, eau et chocolat chaud." />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    :root {
+      --white: #FAFAF8;
+      --ivoire: #F5F0E8;
+      --black: #0E0C09;
+      --gold: #B8922A;
+      --muted: rgba(14,12,9,0.65);
+      --border: rgba(14,12,9,0.08);
+    }
+    body {
+      font-family: 'DM Sans', -apple-system, sans-serif;
+      background: var(--white); color: var(--black);
+      font-weight: 400; line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; text-decoration: none; }
+    .serif { font-family: 'Cormorant Garamond', serif; font-weight: 400; }
+
+    /* ── Nav ── */
+    .nav { position: sticky; top: 0; z-index: 100; background: rgba(250,250,248,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 22px; letter-spacing: 0.12em; color: var(--black); }
+    .nav-links { display: flex; gap: 32px; }
+    .nav-links a { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--black); opacity: 0.75; }
+    .nav-links a:hover, .nav-links a.active { opacity: 1; color: var(--gold); }
+    .nav-cta { padding: 10px 22px; background: var(--black); color: var(--white); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 600; }
+    @media (max-width: 768px) { .nav-links { display: none; } }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 100px 24px 80px;
+      text-align: center;
+      background: var(--black);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(184,146,42,0.15) 0%, transparent 70%);
+    }
+    .hero .label {
+      font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 20px; position: relative;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(40px, 7vw, 72px); line-height: 1.05;
+      margin-bottom: 20px; position: relative;
+    }
+    .hero h1 em { color: var(--gold); font-style: normal; }
+    .hero p.sub {
+      max-width: 600px; margin: 0 auto;
+      color: rgba(250,250,248,0.7); font-size: 17px; line-height: 1.7;
+      position: relative;
+    }
+
+    /* ── Intro ── */
+    .intro {
+      padding: 80px 24px;
+      background: var(--ivoire);
+      text-align: center;
+    }
+    .intro-inner { max-width: 720px; margin: 0 auto; }
+    .intro .label {
+      font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .intro h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(28px, 4vw, 44px); line-height: 1.15;
+      margin-bottom: 24px; color: var(--black);
+    }
+    .intro p {
+      color: var(--muted); font-size: 16px; line-height: 1.7;
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── Boissons Grid ── */
+    .drinks {
+      padding: 80px 24px;
+      background: var(--white);
+    }
+    .drinks-inner { max-width: 900px; margin: 0 auto; }
+    .drinks-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 24px;
+    }
+    .drink-card {
+      background: var(--ivoire);
+      border-radius: 16px;
+      padding: 36px 24px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .drink-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(14,12,9,0.08);
+    }
+    .drink-icon {
+      font-size: 40px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .drink-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 22px; font-weight: 400;
+      color: var(--black); margin-bottom: 6px;
+    }
+    .drink-desc {
+      font-size: 13px; color: var(--muted); line-height: 1.5;
+    }
+
+    /* ── Ambiance ── */
+    .ambiance {
+      padding: 80px 24px;
+      background: var(--black);
+      color: var(--white);
+      text-align: center;
+    }
+    .ambiance-inner { max-width: 800px; margin: 0 auto; }
+    .ambiance .label {
+      font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .ambiance h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(28px, 4vw, 44px); line-height: 1.15;
+      margin-bottom: 24px;
+    }
+    .ambiance p {
+      color: rgba(250,250,248,0.7); font-size: 16px; line-height: 1.7;
+      max-width: 600px; margin: 0 auto 40px;
+    }
+    .ambiance-features {
+      display: flex; gap: 40px; justify-content: center; flex-wrap: wrap;
+    }
+    .ambiance-feat {
+      display: flex; flex-direction: column; align-items: center; gap: 10px;
+    }
+    .ambiance-feat .icon {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 1px solid rgba(184,146,42,0.4);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 22px;
+    }
+    .ambiance-feat span {
+      font-size: 13px; letter-spacing: 0.06em; color: rgba(250,250,248,0.8);
+    }
+
+    /* ── CTA ── */
+    .cta-section {
+      padding: 80px 24px;
+      background: var(--ivoire);
+      text-align: center;
+    }
+    .cta-section h2 {
+      font-family: 'Cormorant Garamond', serif; font-weight: 300;
+      font-size: clamp(28px, 4vw, 44px); line-height: 1.15;
+      margin-bottom: 16px; color: var(--black);
+    }
+    .cta-section p {
+      color: var(--muted); font-size: 16px; margin-bottom: 32px;
+    }
+    .cta-btn {
+      display: inline-block; padding: 16px 40px;
+      background: var(--black); color: var(--white);
+      font-size: 12px; letter-spacing: 0.14em;
+      text-transform: uppercase; font-weight: 600;
+      transition: background 0.3s;
+    }
+    .cta-btn:hover { background: var(--gold); }
+
+    /* ── Footer ── */
+    .footer {
+      background: var(--black); color: rgba(250,250,248,0.55);
+      padding: 48px 24px; text-align: center; font-size: 13px;
+    }
+    .footer a { color: var(--gold); }
+    .footer-links { margin-bottom: 16px; display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; }
+    .footer-links a { color: rgba(250,250,248,0.7); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .footer-links a:hover { color: var(--gold); }
+    .gold-line { width: 40px; height: 1px; background: var(--gold); margin: 0 auto 16px; }
+  </style>
+</head>
+<body>
+
+  <!-- ════════ NAV ════════ -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">KADIO</a>
+      <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/forfaits">Forfaits</a>
+        <a href="/services">Services</a>
+        <a href="/service-vip" class="active">VIP</a>
+        <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+      </div>
+      <a href="/app" class="nav-cta">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- ════════ HERO ════════ -->
+  <section class="hero">
+    <p class="label">Expérience exclusive</p>
+    <h1 class="serif">Service <em>VIP</em></h1>
+    <p class="sub">Chez Kadio, chaque visite est un moment de détente. Profitez de boissons offertes pendant votre rendez-vous en salon.</p>
+  </section>
+
+  <!-- ════════ INTRO ════════ -->
+  <section class="intro">
+    <div class="intro-inner">
+      <p class="label">Offert à chaque visite</p>
+      <h2 class="serif">Boissons offertes en salon</h2>
+      <p>Dès votre arrivée, on vous propose une boisson au choix — offerte avec chaque service. C'est notre façon de rendre votre expérience encore plus agréable.</p>
+    </div>
+  </section>
+
+  <!-- ════════ BOISSONS ════════ -->
+  <section class="drinks">
+    <div class="drinks-inner">
+      <div class="drinks-grid">
+
+        <div class="drink-card">
+          <span class="drink-icon">☕</span>
+          <p class="drink-name">Café</p>
+          <p class="drink-desc">Espresso ou allongé, pour bien commencer votre rendez-vous</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">🍵</span>
+          <p class="drink-name">Thé</p>
+          <p class="drink-desc">Sélection de thés pour un moment de relaxation</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">🍫</span>
+          <p class="drink-name">Chocolat chaud</p>
+          <p class="drink-desc">Onctueux et réconfortant, parfait en toute saison</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">🧃</span>
+          <p class="drink-name">Jus</p>
+          <p class="drink-desc">Jus frais pour une touche de fraîcheur</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">💧</span>
+          <p class="drink-name">Eau</p>
+          <p class="drink-desc">Plate ou pétillante, toujours à votre disposition</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">🍺</span>
+          <p class="drink-name">Bière</p>
+          <p class="drink-desc">Pour ceux qui veulent se détendre pleinement</p>
+        </div>
+
+        <div class="drink-card">
+          <span class="drink-icon">🍷</span>
+          <p class="drink-name">Vin</p>
+          <p class="drink-desc">Un verre de vin pour une expérience véritablement luxe</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ AMBIANCE ════════ -->
+  <section class="ambiance">
+    <div class="ambiance-inner">
+      <p class="label">Plus qu'un salon</p>
+      <h2 class="serif">Une expérience complète</h2>
+      <p>Le service VIP fait partie de l'ADN Kadio. Chaque détail est pensé pour que vous vous sentiez accueilli, valorisé et détendu du début à la fin de votre visite.</p>
+      <div class="ambiance-features">
+        <div class="ambiance-feat">
+          <div class="icon">🥂</div>
+          <span>Boissons offertes</span>
+        </div>
+        <div class="ambiance-feat">
+          <div class="icon">🎵</div>
+          <span>Ambiance musicale</span>
+        </div>
+        <div class="ambiance-feat">
+          <div class="icon">✨</div>
+          <span>Accueil personnalisé</span>
+        </div>
+        <div class="ambiance-feat">
+          <div class="icon">🛋️</div>
+          <span>Espace détente</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════ CTA ════════ -->
+  <section class="cta-section">
+    <h2 class="serif">Prêt à vivre l'expérience Kadio?</h2>
+    <p>Réservez votre prochain rendez-vous et profitez du service VIP.</p>
+    <a href="/app" class="cta-btn">Réserver maintenant</a>
+  </section>
+
+  <!-- ════════ FOOTER ════════ -->
+  <footer class="footer">
+    <div class="gold-line"></div>
+    <div class="footer-links">
+      <a href="/">Accueil</a>
+      <a href="/forfaits">Forfaits</a>
+      <a href="/services">Services</a>
+      <a href="/service-vip">VIP</a>
+      <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+    </div>
+    <p>&copy; 2025 Kadio Coiffure. Tous droits réservés.</p>
+  </footer>
+
+</body>
+</html>
