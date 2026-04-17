@@ -51,8 +51,8 @@ const DEV_PERSONAS = {
 }
 
 const DEV_OTP = '123456'
-// Forcer mode demo tant que Twilio/SMS n'est pas configuré
-const USE_REAL_AUTH = false
+// Forcer mode demo — Twilio/SMS pas configuré (20003)
+const USE_REAL_AUTH = false // IMPORTANT: ne pas changer
 
 // ─── Helpers ──────────────────────────────────────────────────
 function normalizePhone(raw) {
