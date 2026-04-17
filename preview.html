@@ -344,7 +344,7 @@
         <a href="/#accueil">Accueil</a>
         <a href="/#comment-ca-marche">Comment ça marche</a>
         <a href="/forfaits">Forfaits</a>
-        <a href="/#services">Services</a>
+        <a href="/services">Services</a>
         <a href="/#rejoindre">Rejoindre</a>
         <a href="/#temoignages">Avis</a>
       </nav>
@@ -420,24 +420,6 @@
       <span>Longueuil · Montréal · Laval · Brossard · Québec · Gatineau · Sherbrooke ·</span>
     </div>
   </div>
-
-  <!-- ════════ CARTE RÉSEAU (juste sous les villes) ════════ -->
-  <section style="background: var(--white); padding: 80px 24px 60px;">
-    <div style="max-width: 1100px; margin: 0 auto;">
-      <div style="text-align: center; margin-bottom: 32px;">
-        <p class="section-label" style="color: var(--gold);">Trouvez le salon le plus proche</p>
-        <h2 class="section-title" style="color: var(--black); font-size: clamp(28px, 4vw, 40px); line-height: 1.15;">Un coiffeur certifié près de chez vous</h2>
-        <p style="color: var(--muted); font-size: 15px; margin-top: 12px;">Cliquez sur un point doré pour voir les coiffeurs disponibles dans votre secteur.</p>
-      </div>
-      <div style="position: relative; border: 1px solid rgba(14,12,9,0.08); box-shadow: 0 4px 24px rgba(14,12,9,0.04);">
-        <div id="map" style="height: 480px; width: 100%; background: #f5f0e8;"></div>
-        <div style="position: absolute; bottom: 16px; left: 12px; z-index: 400; background: rgba(250,250,248,0.95); padding: 10px 16px; display: flex; gap: 18px; font-size: 12px; color: #0E0C09; backdrop-filter: blur(8px); border: 1px solid rgba(14,12,9,0.06); pointer-events: none;">
-          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 12px; height: 12px; border-radius: 50%; background: #B8922A; border: 2px solid #0E0C09; display: inline-block;"></span>Salon Kadio (siège)</span>
-          <span style="display: flex; align-items: center; gap: 6px;"><span style="width: 10px; height: 10px; border-radius: 50%; background: #FAFAF8; border: 2px solid #B8922A; display: inline-block;"></span>Partenaires certifiés</span>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ════════ ÉCOSYSTÈME ════════ -->
   <section id="comment-ca-marche" class="eco">
@@ -555,90 +537,6 @@
     </div>
   </section>
 
-  <!-- ════════ SERVICES — Prix régulier vs Abonné ════════ -->
-  <section id="services" class="services">
-    <div class="services-inner">
-      <div style="text-align: center; margin-bottom: 56px;">
-        <p class="section-label" style="color: var(--muted);">Au salon</p>
-        <h2 class="section-title" style="color: var(--black);">Nos services</h2>
-        <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">Voyez combien vous économisez avec votre abonnement</p>
-      </div>
-
-      <!-- En-tête colonnes -->
-      <div class="services-header">
-        <span>Service</span>
-        <span>À l'unité</span>
-        <span>Avec abonnement</span>
-      </div>
-
-      <!-- Knotless braids -->
-      <div class="service-row">
-        <div><div class="name">Knotless braids</div><div class="cat">Tresses · Knotless Signature · 110$/mois</div></div>
-        <div class="price-reg">85 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Tresses classiques -->
-      <div class="service-row">
-        <div><div class="name">Tresses classiques</div><div class="cat">Tresses · Tresses Essentiel · 75$/mois</div></div>
-        <div class="price-reg">65 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Locs installation -->
-      <div class="service-row">
-        <div><div class="name">Locs installation</div><div class="cat">Locs · Locs Premium · 90$/mois</div></div>
-        <div class="price-reg">170 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Locs entretien -->
-      <div class="service-row">
-        <div><div class="name">Locs entretien</div><div class="cat">Locs · Locs Mensuel · 60$/mois</div></div>
-        <div class="price-reg">64 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Coupe homme fade -->
-      <div class="service-row">
-        <div><div class="name">Coupe homme fade</div><div class="cat">Barbier · Barbier Essentiel · 29$/mois</div></div>
-        <div class="price-reg">26 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Tissage simple -->
-      <div class="service-row">
-        <div><div class="name">Tissage simple</div><div class="cat">Tissage · Tout Compris · 149$/mois</div></div>
-        <div class="price-reg">102 $</div>
-        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
-      </div>
-
-      <!-- Coupes enfant -->
-      <div class="service-row">
-        <div><div class="name">Coupes enfant (−12)</div><div class="cat">Enfants · Famille Enfants · 55$/mois</div></div>
-        <div class="price-reg">21 $</div>
-        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
-      </div>
-
-      <!-- Soin cuir chevelu -->
-      <div class="service-row">
-        <div><div class="name">Soin cuir chevelu</div><div class="cat">Soins · Tout Compris · 149$/mois</div></div>
-        <div class="price-reg">45 $</div>
-        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
-      </div>
-
-      <!-- Bannière économies -->
-      <div class="services-banner">
-        <strong>Économisez jusqu'à 100%</strong> sur vos services avec un abonnement Kadio
-      </div>
-
-      <div style="text-align: center; margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-        <button class="btn-solid" style="font-size: 12px;">Voir les forfaits</button>
-        <button class="btn-outline" style="font-size: 12px;">Tous les services</button>
-      </div>
-    </div>
-  </section>
-
   <!-- ════════ TÉMOIGNAGES ════════ -->
   <section id="temoignages" class="temoignages">
     <div class="temoignages-inner">
@@ -707,7 +605,7 @@
         <a href="/" style="display: block; margin-bottom: 8px;">Accueil</a>
         <a href="/#comment-ca-marche" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
         <a href="/forfaits" style="display: block; margin-bottom: 8px;">Forfaits</a>
-        <a href="/#services" style="display: block; margin-bottom: 8px;">Services</a>
+        <a href="/services" style="display: block; margin-bottom: 8px;">Services</a>
         <a href="/#temoignages" style="display: block; margin-bottom: 8px;">Avis</a>
       </div>
       <div>

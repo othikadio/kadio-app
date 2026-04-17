@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nos Services — Kadio Coiffure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    function initKadioMap() {
+      if (!document.getElementById('map') || !window.L) return;
+      const map = L.map('map', { zoomControl: true, scrollWheelZoom: false, attributionControl: false })
+        .setView([45.5316, -73.5180], 10);
+      L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+        subdomains: 'abcd', maxZoom: 19
+      }).addTo(map);
+      const salonIcon = L.divIcon({
+        className: '', html: '<div style="width:22px;height:22px;border-radius:50%;background:#B8922A;border:3px solid #0E0C09;box-shadow:0 2px 8px rgba(0,0,0,.25);"></div>',
+        iconSize: [22,22], iconAnchor: [11,11]
+      });
+      const partnerIcon = L.divIcon({
+        className: '', html: '<div style="width:16px;height:16px;border-radius:50%;background:#FAFAF8;border:2px solid #B8922A;box-shadow:0 2px 6px rgba(0,0,0,.2);"></div>',
+        iconSize: [16,16], iconAnchor: [8,8]
+      });
+      L.marker([45.5197, -73.4977], { icon: salonIcon }).addTo(map).bindPopup('<strong>Salon Kadio</strong><br>Longueuil — Siège');
+      const partenaires = [
+        { lat: 45.5243, lng: -73.4934, nom: 'Diane Mbaye — Longueuil' },
+        { lat: 45.5005, lng: -73.4189, nom: 'Fatou Konaté — Brossard' },
+        { lat: 45.5991, lng: -73.6199, nom: 'Sandra Pierre — Montréal' },
+        { lat: 45.6066, lng: -73.7124, nom: 'Aminata Coulibaly — Laval' },
+        { lat: 45.4579, lng: -73.4584, nom: 'Rachel Ndoye — Saint-Lambert' },
+        { lat: 45.5405, lng: -73.4960, nom: 'Marcus Durand — Vieux-Longueuil' },
+        { lat: 46.8139, lng: -71.2080, nom: 'Partenaire Québec' },
+        { lat: 45.4765, lng: -75.7013, nom: 'Partenaire Gatineau' },
+        { lat: 45.4042, lng: -71.8929, nom: 'Partenaire Sherbrooke' },
+      ];
+      const group = [[45.5197, -73.4977]];
+      partenaires.forEach(p => {
+        L.marker([p.lat, p.lng], { icon: partnerIcon }).addTo(map).bindPopup('<strong>' + p.nom + '</strong>');
+        group.push([p.lat, p.lng]);
+      });
+      map.fitBounds(group, { padding: [40,40] });
+    }
+    document.addEventListener('DOMContentLoaded', initKadioMap);
+  </script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: #FAFAF8;
+      color: #0E0C09;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    :root {
+      --white: #FAFAF8;
+      --ivoire: #F5F0E8;
+      --black: #0E0C09;
+      --gold: #B8922A;
+      --muted: rgba(14,12,9,0.65);
+      --border: rgba(14,12,9,0.08);
+    }
+
+    /* ── Nav ── */
+    .nav { position: sticky; top: 0; z-index: 1000; background: rgba(250,250,248,0.97); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 0 24px; }
+    .nav-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; height: 56px; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 500; letter-spacing: 0.15em; color: var(--black); text-decoration: none; }
+    .nav-links { display: flex; gap: 28px; }
+    .nav-links a { font-size: 12px; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--gold); }
+    .nav-cta { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; background: var(--black); color: var(--white); padding: 10px 24px; text-decoration: none; transition: background 0.2s; }
+    .nav-cta:hover { background: #1a1815; }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ── Section labels & titles ── */
+    .section-label { font-size: 11px; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 12px; }
+    .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px, 5vw, 48px); font-weight: 300; line-height: 1.1; }
+
+    /* ── Hero ── */
+    .hero { background: var(--ivoire); padding: 80px 24px 60px; text-align: center; }
+    .hero-inner { max-width: 800px; margin: 0 auto; }
+
+    /* ── Services table ── */
+    .services { background: var(--white); padding: 80px 24px; }
+    .services-inner { max-width: 1100px; margin: 0 auto; }
+    .services-header {
+      display: grid; grid-template-columns: 1fr 120px 120px;
+      padding: 0 28px 16px; border-bottom: 1px solid var(--border);
+    }
+    .services-header span {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .services-header span:not(:first-child) { text-align: center; }
+    .service-row {
+      padding: 20px 28px; border-bottom: 1px solid var(--border);
+      display: grid; grid-template-columns: 1fr 120px 120px; align-items: center;
+    }
+    .service-row .name { color: var(--black); font-weight: 500; font-size: 15px; }
+    .service-row .cat { color: var(--muted); font-size: 12px; margin-top: 2px; }
+    .service-row .price-reg { color: var(--black); font-size: 15px; text-align: center; font-weight: 500; }
+    .service-row .price-abo { text-align: center; }
+    .badge-inclus {
+      display: inline-block; background: var(--black); color: var(--white);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 4px 14px;
+    }
+    .badge-reduc {
+      display: inline-block; border: 1px solid var(--gold); color: var(--gold);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+      padding: 4px 14px;
+    }
+    .services-banner {
+      margin-top: 32px; padding: 20px 28px; background: var(--ivoire);
+      text-align: center; font-size: 14px; color: var(--black); letter-spacing: 0.02em;
+    }
+    .services-banner strong { font-weight: 600; }
+    @media (max-width: 640px) {
+      .services-header, .service-row { grid-template-columns: 1fr 90px 90px; padding: 16px 16px; }
+      .badge-inclus, .badge-reduc { font-size: 10px; padding: 3px 10px; }
+    }
+
+    /* ── Category title ── */
+    .cat-title { font-family: 'Cormorant Garamond', serif; font-size: 24px; font-weight: 400; color: var(--black); margin: 48px 0 8px; padding: 0 28px; }
+    .cat-count { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; padding: 0 28px; margin-bottom: 16px; }
+
+    /* ── Map section ── */
+    .map-section { background: var(--white); padding: 80px 24px 60px; }
+    .map-inner { max-width: 1100px; margin: 0 auto; }
+    .map-box { position: relative; border: 1px solid rgba(14,12,9,0.08); box-shadow: 0 4px 24px rgba(14,12,9,0.04); }
+    .map-legend { position: absolute; bottom: 16px; left: 12px; z-index: 400; background: rgba(250,250,248,0.95); padding: 10px 16px; display: flex; gap: 18px; font-size: 12px; color: #0E0C09; backdrop-filter: blur(8px); border: 1px solid rgba(14,12,9,0.06); pointer-events: none; }
+    .legend-dot { display: inline-block; border-radius: 50%; vertical-align: middle; }
+
+    /* ── CTA ── */
+    .btn-solid { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; background: var(--black); color: var(--white); border: none; padding: 16px 40px; cursor: pointer; text-decoration: none; display: inline-block; transition: background 0.2s; }
+    .btn-solid:hover { background: #1a1815; }
+    .btn-outline { font-family: 'DM Sans', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; background: transparent; color: var(--black); border: 1px solid var(--black); padding: 16px 40px; cursor: pointer; text-decoration: none; display: inline-block; transition: all 0.2s; }
+    .btn-outline:hover { background: var(--black); color: var(--white); }
+
+    /* ── Footer ── */
+    .footer { background: var(--black); color: rgba(250,250,248,0.6); padding: 40px 24px; text-align: center; font-size: 12px; border-top: 1px solid rgba(250,250,248,0.1); }
+    .footer a { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+  <!-- Nav -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">KADIO</a>
+      <div class="nav-links">
+        <a href="/">Accueil</a>
+        <a href="/forfaits">Forfaits</a>
+        <a href="/services" class="active">Services</a>
+        <a href="/#temoignages">Avis</a>
+        <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+      </div>
+      <a href="/app" class="nav-cta">Réserver</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="section-label" style="color: var(--gold);">NOS SERVICES</p>
+      <h1 class="section-title" style="margin-bottom: 20px;">Coiffure afro d'excellence.<br><span style="color: var(--gold);">Partout au Québec.</span></h1>
+      <p style="color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto; line-height: 1.7;">
+        Du barbier aux tresses, des locs aux perruques — tous nos services sont disponibles à l'unité ou inclus avec votre abonnement. Économisez jusqu'à 100%.
+      </p>
+    </div>
+  </section>
+
+  <!-- Carte du réseau -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div style="text-align: center; margin-bottom: 32px;">
+        <p class="section-label" style="color: var(--gold);">Notre réseau</p>
+        <h2 class="section-title" style="color: var(--black); font-size: clamp(28px, 4vw, 40px);">Trouvez un coiffeur certifié près de chez vous</h2>
+        <p style="color: var(--muted); font-size: 15px; margin-top: 12px;">Cliquez sur un point doré pour voir les coiffeurs disponibles dans votre secteur.</p>
+      </div>
+      <div class="map-box">
+        <div id="map" style="height: 480px; width: 100%; background: #f5f0e8;"></div>
+        <div class="map-legend">
+          <span style="display: flex; align-items: center; gap: 6px;"><span class="legend-dot" style="width: 12px; height: 12px; background: #B8922A; border: 2px solid #0E0C09;"></span>Salon Kadio (siège)</span>
+          <span style="display: flex; align-items: center; gap: 6px;"><span class="legend-dot" style="width: 10px; height: 10px; background: #FAFAF8; border: 2px solid #B8922A;"></span>Partenaires certifiés</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tableau de services complet -->
+  <section class="services">
+    <div class="services-inner">
+      <div style="text-align: center; margin-bottom: 56px;">
+        <p class="section-label" style="color: var(--muted);">Tarifs</p>
+        <h2 class="section-title" style="color: var(--black);">Nos services et prix</h2>
+        <p style="color: var(--muted); font-size: 14px; margin-top: 12px;">Voyez combien vous économisez avec votre abonnement</p>
+      </div>
+
+      <div class="services-header">
+        <span>Service</span>
+        <span>À l'unité</span>
+        <span>Avec abonnement</span>
+      </div>
+
+      <!-- ═══ BARBIER ═══ -->
+      <div class="cat-title">Barbier</div>
+      <div class="cat-count">4 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Coupe homme fade</div><div class="cat">Barbier Essentiel · 29$/mois</div></div>
+        <div class="price-reg">26 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Coupe + Barbe complète</div><div class="cat">Barbier Premium · 45$/mois</div></div>
+        <div class="price-reg">40 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Barbe seule (rasoir)</div><div class="cat">Ajout barbier</div></div>
+        <div class="price-reg">18 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Teinture homme</div><div class="cat">Ajout barbier</div></div>
+        <div class="price-reg">15 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- ═══ TRESSES & KNOTLESS ═══ -->
+      <div class="cat-title">Tresses & Knotless</div>
+      <div class="cat-count">5 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Knotless braids</div><div class="cat">Knotless Signature · 110$/mois</div></div>
+        <div class="price-reg">85 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Tresses classiques (nattes collées)</div><div class="cat">Tresses Essentiel · 75$/mois</div></div>
+        <div class="price-reg">65 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Barrel twists</div><div class="cat">Tresse rapide · 80$/mois</div></div>
+        <div class="price-reg">55 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Vanilles / Twists</div><div class="cat">Tresses Essentiel · 75$/mois</div></div>
+        <div class="price-reg">60 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Défrisage tresses</div><div class="cat">Ajout tresses</div></div>
+        <div class="price-reg">30 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- ═══ LOCS ═══ -->
+      <div class="cat-title">Locs</div>
+      <div class="cat-count">3 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Locs installation complète</div><div class="cat">Locs Premium · 90$/mois</div></div>
+        <div class="price-reg">170 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Locs entretien mensuel</div><div class="cat">Locs Mensuel · 60$/mois</div></div>
+        <div class="price-reg">64 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Réparation / Retouches locs</div><div class="cat">Ajout locs</div></div>
+        <div class="price-reg">45 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- ═══ PERRUQUES & TISSAGE ═══ -->
+      <div class="cat-title">Perruques & Tissage</div>
+      <div class="cat-count">3 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Pose perruque (lace front)</div><div class="cat">Tout Compris · 149$/mois</div></div>
+        <div class="price-reg">75 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Tissage simple</div><div class="cat">Tout Compris · 149$/mois</div></div>
+        <div class="price-reg">102 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Retrait + Lavage post-tissage</div><div class="cat">Ajout tissage</div></div>
+        <div class="price-reg">35 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- ═══ ENFANTS ═══ -->
+      <div class="cat-title">Enfants</div>
+      <div class="cat-count">4 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Coupe enfant (−12 ans)</div><div class="cat">Famille Enfants · 55$/mois</div></div>
+        <div class="price-reg">21 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Tresses enfant</div><div class="cat">Famille Enfants · 55$/mois</div></div>
+        <div class="price-reg">35 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Coupe ado (12–17 ans)</div><div class="cat">Famille Ados · 39$/mois</div></div>
+        <div class="price-reg">24 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Tresses ado</div><div class="cat">Famille Ados · 39$/mois</div></div>
+        <div class="price-reg">45 $</div>
+        <div class="price-abo"><span class="badge-inclus">Inclus</span></div>
+      </div>
+
+      <!-- ═══ SOINS & AUTRES ═══ -->
+      <div class="cat-title">Soins & Autres</div>
+      <div class="cat-count">3 services</div>
+
+      <div class="service-row">
+        <div><div class="name">Soin cuir chevelu</div><div class="cat">Tout Compris · 149$/mois</div></div>
+        <div class="price-reg">45 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Lavage + Traitement protéiné</div><div class="cat">Ajout soins</div></div>
+        <div class="price-reg">35 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+      <div class="service-row">
+        <div><div class="name">Coloration complète</div><div class="cat">Ajout coloration</div></div>
+        <div class="price-reg">55 $</div>
+        <div class="price-abo"><span class="badge-reduc">−25%</span></div>
+      </div>
+
+      <!-- Bannière économies -->
+      <div class="services-banner">
+        <strong>Économisez jusqu'à 100%</strong> sur vos services avec un abonnement Kadio
+      </div>
+
+      <div style="text-align: center; margin-top: 48px; display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+        <a href="/forfaits" class="btn-solid">Voir les forfaits</a>
+        <a href="/app" class="btn-outline">Réserver maintenant</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p>© 2026 Kadio Coiffure et Esthétique · Longueuil, QC · <a href="tel:+15149195970">(514) 919-5970</a></p>
+  </footer>
+
+</body>
+</html>
