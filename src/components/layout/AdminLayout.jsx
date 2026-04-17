@@ -50,6 +50,8 @@ const NAV_SECTIONS = [
     items: [
       { to: '/admin/config',      icon: '⚙️',  label: 'Configuration' },
       { to: '/admin/stats',       icon: '📈', label: 'Stats avancées' },
+      { to: '/admin/migration',   icon: '🔄', label: 'Migration' },
+      { to: '/admin/parametres',  icon: '🛠️', label: 'Paramètres' },
     ],
   },
 ]

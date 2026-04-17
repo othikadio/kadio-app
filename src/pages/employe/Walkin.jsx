@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useRdvEmploye } from '@/hooks'
+import { useAuthStore } from '@/stores/authStore'
 import { OR, CREME, NOIR, CARD, formatMontant } from '@/lib/utils'
 
 const TODAY = '2026-03-28'
@@ -43,7 +44,9 @@ const labelStyle = {
 
 export default function EmployeWalkin() {
   const navigate = useNavigate()
-  const { data: rdvList = [], loading: loadingRdv } = useRdvEmploye('emp-marcus')
+  const { employe } = useAuthStore()
+  const employeId = employe?.id || 'emp-marcus'
+  const { data: rdvList = [], loading: loadingRdv } = useRdvEmploye(employeId)
   const [prenom, setPrenom] = useState('')
   const [telephone, setTelephone] = useState('')
   const [service, setService] = useState(SERVICES[0].nom)

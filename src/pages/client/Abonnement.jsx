@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { OR, CREME, NOIR, CARD, formatDate } from '@/lib/utils'
 import { useAbonnementClient, usePlans } from '@/hooks'
+import { useAuthStore } from '@/stores/authStore'
 import { createSubscription } from '@/lib/stripe'
 
 // ── Formatters carte ─────────────────────────────────────────────
@@ -49,7 +50,9 @@ function PlanCard({ forfait, isActive, onSelect }) {
 
 export default function ClientAbonnement() {
   const navigate = useNavigate()
-  const { data: abo, loading: loadingAbo } = useAbonnementClient('client-aminata')
+  const { client, user } = useAuthStore()
+  const clientId = client?.id || 'cli-aminata'
+  const { data: abo, loading: loadingAbo } = useAbonnementClient(clientId)
   const { data: plans } = usePlans()
 
   const [showChangePlan, setShowChangePlan]   = useState(false)
@@ -79,8 +82,8 @@ export default function ClientAbonnement() {
       const subscription = await createSubscription({
         planId: selectedPlan.id,
         stripePriceId: selectedPlan.stripePriceId || 'price_placeholder',
-        clientEmail: 'client-aminata@kadio.app',
-        clientId: 'client-aminata',
+        clientEmail: user?.email || 'client@kadio.app',
+        clientId: clientId,
         cardNum: cardNum,
       })
       if (!subscription.ok) {

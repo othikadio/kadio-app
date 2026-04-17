@@ -24,10 +24,12 @@ function statutAccentColor(statut) {
 
 export default function EmployeAccueil() {
   const navigate = useNavigate()
-  const { user } = useAuthStore()
+  const { user, employe } = useAuthStore()
+  const employeId = employe?.id || 'emp-marcus'
+  const userId = employe?.user_id || 'usr-marcus'
   const [disponible, setDisponible] = useState(true)
-  const { data: rdvList = [], loading: loadingRdv } = useRdvEmploye('emp-marcus')
-  const { data: profil, loading: loadingProfil } = useEmployeProfil('usr-marcus')
+  const { data: rdvList = [], loading: loadingRdv } = useRdvEmploye(employeId)
+  const { data: profil, loading: loadingProfil } = useEmployeProfil(userId)
 
   if (loadingRdv || loadingProfil) {
     return <div className="p-8 text-center text-zinc-400">Chargement...</div>

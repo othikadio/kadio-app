@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
 import { useDispoStore } from '@/stores/dispoStore'
@@ -29,8 +29,11 @@ export default function PartenaireAccueil() {
   const partenaireId = partenaire?.id || 'part-diane'
   const userId = partenaire?.user_id || 'usr-diane'
 
-  const { data: rdvList, loading: loadingRdv } = useRdvPartenaire(partenaireId)
+  const { data: rdvData, loading: loadingRdv } = useRdvPartenaire(partenaireId)
+  const [rdvList, setRdvList] = useState([])
   const { data: profil, loading: loadingProfil } = usePartenaireProfil(userId)
+
+  useEffect(() => { if (rdvData) setRdvList(rdvData) }, [rdvData])
 
   // Dispo synchronisée via dispoStore (temps réel)
   const partId = partenaire?.id || partenaireId
