@@ -6,6 +6,8 @@
   <title>Comment ça marche — Kadio Coiffure & Network</title>
   <meta name="description" content="Découvrez comment fonctionne Kadio : réservation pour les clients, opportunités pour les coiffeurs et esthéticiennes, et marketplace pour les fournisseurs." />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
@@ -101,6 +103,21 @@
     .cta-btn.outline { background: transparent; color: var(--black); border: 1.5px solid var(--black); }
     .cta-btn.outline:hover { border-color: var(--gold); color: var(--gold); }
 
+    /* ── Map section ── */
+    .map-section { padding: 80px 24px; background: var(--ivoire); }
+    .map-inner { max-width: 1000px; margin: 0 auto; }
+    .map-content { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; margin-top: 40px; }
+    @media (max-width: 768px) { .map-content { grid-template-columns: 1fr; } }
+    #map-quebec { height: 420px; border-radius: 16px; border: 1px solid var(--border); }
+    .map-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; margin-bottom: 16px; }
+    .map-text h3 em { color: var(--gold); font-style: normal; }
+    .map-text p { color: var(--muted); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+    .map-cities { display: flex; flex-wrap: wrap; gap: 8px; }
+    .map-city {
+      padding: 8px 16px; background: var(--white); border: 1px solid rgba(184,146,42,0.2);
+      border-radius: 20px; font-size: 13px; color: var(--black);
+    }
+
     /* ── Footer ── */
     .footer { background: var(--black); color: rgba(250,250,248,0.55); padding: 48px 24px; text-align: center; font-size: 13px; }
     .footer a { color: var(--gold); }
@@ -162,6 +179,37 @@
     </div>
   </section>
 
+  <!-- ════════ CARTE QUÉBEC ════════ -->
+  <section class="map-section">
+    <div class="map-inner">
+      <div class="section-center">
+        <p class="label">Partout au Québec</p>
+        <h2 class="section-title">Vous choisissez où vous travaillez</h2>
+        <p class="section-sub">Le réseau Kadio couvre tout le Québec. Que vous soyez professionnel ou client, vous avez accès aux meilleurs services de beauté afro peu importe où vous êtes.</p>
+      </div>
+      <div class="map-content">
+        <div id="map-quebec"></div>
+        <div class="map-text">
+          <h3>Un réseau <em>sans frontières</em></h3>
+          <p>Coiffeurs, barbiers et esthéticiennes — choisissez n'importe quelle ville du Québec comme zone de travail. Studio, domicile, mobile : c'est vous qui décidez.</p>
+          <p>Nos clients peuvent réserver un professionnel certifié Kadio partout au Québec, avec la même qualité garantie.</p>
+          <div class="map-cities">
+            <span class="map-city">Montréal</span>
+            <span class="map-city">Longueuil</span>
+            <span class="map-city">Laval</span>
+            <span class="map-city">Québec</span>
+            <span class="map-city">Gatineau</span>
+            <span class="map-city">Sherbrooke</span>
+            <span class="map-city">Trois-Rivières</span>
+            <span class="map-city">Drummondville</span>
+            <span class="map-city">Saint-Jérôme</span>
+            <span class="map-city">Et partout ailleurs...</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ════════ PARCOURS CLIENT ════════ -->
   <section class="parcours bg-ivoire">
     <div class="parcours-inner">
@@ -211,7 +259,7 @@
         <div class="icon">✂️</div>
         <h2>Vous êtes <em>coiffeur(se) ou barbier</em></h2>
       </div>
-      <p class="parcours-intro">Rejoignez le réseau Kadio et développez votre clientèle sans les tracas de gestion. Vous coiffez, on s'occupe du reste. Vous gardez 75% de chaque service.</p>
+      <p class="parcours-intro">Rejoignez le réseau Kadio et développez votre clientèle partout au Québec, sans les tracas de gestion. Vous coiffez, on s'occupe du reste. Vous gardez 75% de chaque service.</p>
 
       <div class="steps">
         <div class="step">
@@ -242,7 +290,7 @@
         <div class="avantage"><span>✓</span> 100% flexible — vos horaires</div>
         <div class="avantage"><span>✓</span> Clientèle garantie par Kadio</div>
         <div class="avantage"><span>✓</span> Application de gestion incluse</div>
-        <div class="avantage"><span>✓</span> Travaillez où vous voulez</div>
+        <div class="avantage"><span>✓</span> Partout au Québec — choisissez votre zone</div>
       </div>
     </div>
   </section>
@@ -254,7 +302,7 @@
         <div class="icon">💅</div>
         <h2>Vous êtes <em>esthéticien(ne)</em></h2>
       </div>
-      <p class="parcours-intro">Pose d'ongles, cils, soins, maquillage — rejoignez le réseau et recevez des clients directement via l'application. Travaillez depuis votre studio, à domicile ou en mobile. Vous gardez 75%.</p>
+      <p class="parcours-intro">Pose d'ongles, cils, soins, maquillage — rejoignez le réseau et recevez des clients directement via l'application. Travaillez depuis votre studio, à domicile ou en mobile, partout au Québec. Vous gardez 83%.</p>
 
       <div class="steps">
         <div class="step">
@@ -275,13 +323,13 @@
         <div class="step">
           <div class="step-num">4</div>
           <h4>Recevez vos revenus</h4>
-          <p>75% de chaque prestation. Paiement automatique sur votre compte après chaque service.</p>
+          <p>83% de chaque prestation. Paiement automatique sur votre compte après chaque service.</p>
         </div>
       </div>
 
       <div class="avantages">
-        <div class="avantage"><span>✓</span> 75% de chaque prestation</div>
-        <div class="avantage"><span>✓</span> Pas besoin d'un local au salon</div>
+        <div class="avantage"><span>✓</span> 83% de chaque prestation</div>
+        <div class="avantage"><span>✓</span> Partout au Québec — vous choisissez votre zone</div>
         <div class="avantage"><span>✓</span> Studio, domicile ou mobile</div>
         <div class="avantage"><span>✓</span> 0$ pour commencer</div>
         <div class="avantage"><span>✓</span> Clientèle Kadio automatique</div>
@@ -356,6 +404,44 @@
     </div>
     <p>&copy; 2025 Kadio Coiffure. Tous droits réservés.</p>
   </footer>
+
+  <script>
+    var map = L.map('map-quebec', { scrollWheelZoom: false }).setView([47.5, -71.5], 5.5);
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+      attribution: '© OpenStreetMap © CARTO',
+      maxZoom: 12
+    }).addTo(map);
+
+    var goldIcon = L.divIcon({
+      className: '',
+      html: '<div style="width:14px;height:14px;background:#B8922A;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,0.25);"></div>',
+      iconSize: [14, 14], iconAnchor: [7, 7]
+    });
+
+    var cities = [
+      { name: 'Longueuil (Salon Kadio)', lat: 45.5312, lng: -73.5186, main: true },
+      { name: 'Montréal', lat: 45.5017, lng: -73.5673 },
+      { name: 'Laval', lat: 45.6066, lng: -73.7124 },
+      { name: 'Québec', lat: 46.8139, lng: -71.2080 },
+      { name: 'Gatineau', lat: 45.4765, lng: -75.7013 },
+      { name: 'Sherbrooke', lat: 45.4042, lng: -71.8929 },
+      { name: 'Trois-Rivières', lat: 46.3432, lng: -72.5410 },
+      { name: 'Drummondville', lat: 45.8838, lng: -72.4843 },
+      { name: 'Saint-Jérôme', lat: 45.7805, lng: -74.0027 },
+      { name: 'Saguenay', lat: 48.4279, lng: -71.0548 },
+      { name: 'Rimouski', lat: 48.4489, lng: -68.5239 },
+      { name: 'Saint-Jean-sur-Richelieu', lat: 45.3073, lng: -73.2628 },
+      { name: 'Granby', lat: 45.4001, lng: -72.7329 },
+      { name: 'Blainville', lat: 45.6700, lng: -73.8800 },
+      { name: 'Terrebonne', lat: 45.7053, lng: -73.6373 }
+    ];
+
+    cities.forEach(function(c) {
+      var marker = L.marker([c.lat, c.lng], { icon: goldIcon }).addTo(map);
+      var label = c.main ? '<strong style="color:#B8922A;">' + c.name + '</strong>' : c.name;
+      marker.bindPopup(label);
+    });
+  </script>
 
 </body>
 </html>
