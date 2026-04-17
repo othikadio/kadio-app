@@ -76,7 +76,7 @@ export default function ClientCarte() {
   }
 
   return (
-    <div style={{ fontFamily: `'DM Sans', sans-serif`, background: CREME, height: '100vh', display: 'flex', flexDirection: 'column', overflow: 'hidden', position: 'relative' }}>
+    <div style={{ fontFamily: `'DM Sans', sans-serif`, background: CREME, position: 'fixed', inset: 0, bottom: 64, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
 
       {/* Barre de recherche + filtres — flottante sur la carte */}
       <div style={{
@@ -182,7 +182,7 @@ export default function ClientCarte() {
         onTouchEnd={onTouchEnd}
         style={{
           position: 'absolute',
-          bottom: 64, // au-dessus de la bottom nav
+          bottom: 0,
           left: 0, right: 0,
           background: CREME,
           borderRadius: '20px 20px 0 0',
@@ -192,7 +192,7 @@ export default function ClientCarte() {
           transform: panelOpen
             ? `translateY(${dragY}px)`
             : `translateY(calc(100% - ${selected ? '200px' : '56px'}))`,
-          maxHeight: 'calc(100vh - 140px)',
+          maxHeight: '70%',
           display: 'flex',
           flexDirection: 'column',
         }}
