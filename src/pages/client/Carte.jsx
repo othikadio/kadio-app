@@ -80,7 +80,7 @@ export default function ClientCarte() {
 
       {/* Barre de recherche + filtres — flottante sur la carte */}
       <div style={{
-        position: 'absolute', top: 0, left: 0, right: 0, zIndex: 10,
+        position: 'absolute', top: 0, left: 0, right: 0, zIndex: 1000,
         background: `linear-gradient(${CREME}f0, ${CREME}cc, transparent)`,
         padding: '8px 12px 16px',
       }}>
@@ -187,7 +187,7 @@ export default function ClientCarte() {
           background: CREME,
           borderRadius: '20px 20px 0 0',
           boxShadow: '0 -4px 24px rgba(0,0,0,0.12)',
-          zIndex: 20,
+          zIndex: 1001,
           transition: dragY > 0 ? 'none' : 'transform 0.3s cubic-bezier(0.4,0,0.2,1)',
           transform: panelOpen
             ? `translateY(${dragY}px)`
