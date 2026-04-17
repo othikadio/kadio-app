@@ -34,6 +34,10 @@
     {
       "source": "/comment-ca-marche",
       "destination": "/comment-ca-marche.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
     }
   ]
 }
