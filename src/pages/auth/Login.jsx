@@ -119,7 +119,7 @@ export default function Login() {
     if (digits.length < 10) { setError(`Numéro incomplet`); return }
     setError(''); setLoading(true)
     await new Promise(r => setTimeout(r, 600))
-    const result = requestOTP(phone)
+    const result = await requestOTP(phone)
     if (IS_DEV) setDevCode(result.simCode)
     setStep(2); setResendCd(30); setLoading(false)
   }
@@ -128,16 +128,16 @@ export default function Login() {
     if (otp.length < 6) return
     setError(''); setLoading(true)
     await new Promise(r => setTimeout(r, 500))
-    const result = verifyOTP(otp)
+    const result = await verifyOTP(otp)
     setLoading(false)
     if (!result.ok) { setError(result.error); setOtp(''); return }
     navigate(result.redirectTo)
   }
 
-  function handleResend() {
+  async function handleResend() {
     if (resendCd > 0) return
     setOtp(''); setError('')
-    const result = requestOTP(phone)
+    const result = await requestOTP(phone)
     if (IS_DEV) setDevCode(result.simCode)
     setResendCd(30)
   }
