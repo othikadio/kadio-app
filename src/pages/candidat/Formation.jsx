@@ -1,8 +1,9 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useFormationModules } from '@/hooks'
 import { OR, CREME, NOIR, CARD, formatDate } from '@/lib/utils'
 
-function ModuleCard({ module, navigate }) {
+function ModuleCard({ module, navigate, expanded, onToggle }) {
   const isVerrouille = module.statut === 'verrouille'
   const isComplete = module.statut === 'complete'
   const isActif = module.statut === 'en_cours' || module.statut === 'disponible'
@@ -52,8 +53,11 @@ function ModuleCard({ module, navigate }) {
         </div>
       )}
 
-      {/* Icon + title */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', paddingRight: '90px' }}>
+      {/* Icon + title — clickable to expand */}
+      <div
+        onClick={() => !isVerrouille && onToggle && onToggle(module.id)}
+        style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '8px', paddingRight: '90px', cursor: isVerrouille ? 'default' : 'pointer' }}
+      >
         <div style={{
           fontSize: '24px',
           width: '44px', height: '44px', flexShrink: 0,
@@ -68,6 +72,7 @@ function ModuleCard({ module, navigate }) {
           </div>
           <div style={{ fontSize: '12px', color: 'rgba(14,12,9,0.45)', marginTop: '1px' }}>
             {`${module.duree_minutes} min`}
+            {module.video && ` · Vidéo ${module.video.duree}`}
           </div>
         </div>
       </div>
@@ -76,6 +81,80 @@ function ModuleCard({ module, navigate }) {
       <div style={{ fontSize: '13px', color: 'rgba(14,12,9,0.6)', lineHeight: '1.5', marginBottom: '14px' }}>
         {module.description}
       </div>
+
+      {/* ── Contenu expandable : vidéo + points clés ── */}
+      {expanded && !isVerrouille && (
+        <div style={{ marginBottom: '14px' }}>
+          {/* Vidéo formative */}
+          {module.video && (
+            <div style={{
+              background: 'rgba(14,12,9,0.04)', border: '1px solid rgba(14,12,9,0.08)',
+              borderRadius: '12px', padding: '14px', marginBottom: '12px',
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '8px' }}>
+                <span style={{ fontSize: '20px' }}>🎬</span>
+                <div>
+                  <div style={{ fontSize: '13px', fontWeight: '700', color: NOIR }}>{module.video.titre}</div>
+                  <div style={{ fontSize: '11px', color: 'rgba(14,12,9,0.45)' }}>{module.video.duree}</div>
+                </div>
+              </div>
+              <div style={{ fontSize: '12px', color: 'rgba(14,12,9,0.55)', lineHeight: 1.5, marginBottom: '10px' }}>
+                {module.video.description}
+              </div>
+              {module.video.url ? (
+                <a href={module.video.url} target="_blank" rel="noopener noreferrer"
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                    background: OR, color: NOIR, border: 'none', borderRadius: '10px',
+                    padding: '10px 16px', textDecoration: 'none', fontWeight: 700, fontSize: '13px',
+                    fontFamily: `'DM Sans', sans-serif`,
+                  }}>
+                  ▶ Regarder la vidéo
+                </a>
+              ) : (
+                <div style={{
+                  display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                  background: 'rgba(184,146,42,0.1)', border: `1px dashed ${OR}`,
+                  borderRadius: '10px', padding: '24px 16px', color: OR, fontSize: '13px', fontWeight: 600,
+                }}>
+                  🎥 Vidéo bientôt disponible
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* Points clés du module */}
+          {module.contenu && module.contenu.length > 0 && (
+            <div style={{
+              background: 'rgba(184,146,42,0.05)', border: '1px solid rgba(184,146,42,0.15)',
+              borderRadius: '12px', padding: '14px',
+            }}>
+              <div style={{ fontSize: '12px', fontWeight: '700', color: OR, marginBottom: '10px', textTransform: 'uppercase', letterSpacing: '0.04em' }}>
+                Points clés à retenir
+              </div>
+              {module.contenu.map((point, i) => (
+                <div key={i} style={{ display: 'flex', gap: '8px', marginBottom: i < module.contenu.length - 1 ? '8px' : 0 }}>
+                  <span style={{ color: OR, fontSize: '12px', fontWeight: 700, flexShrink: 0 }}>{i + 1}.</span>
+                  <span style={{ color: 'rgba(14,12,9,0.65)', fontSize: '12px', lineHeight: 1.5 }}>{point}</span>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Expand/collapse button for active modules */}
+      {!isVerrouille && !expanded && (module.video || module.contenu) && (
+        <button onClick={() => onToggle && onToggle(module.id)}
+          style={{
+            background: 'transparent', border: '1px solid rgba(14,12,9,0.1)',
+            borderRadius: '8px', padding: '6px 12px', fontSize: '12px',
+            color: 'rgba(14,12,9,0.5)', cursor: 'pointer', marginBottom: '10px',
+            fontFamily: `'DM Sans', sans-serif`, fontWeight: 600,
+          }}>
+          📖 Voir le contenu du module
+        </button>
+      )}
 
       {/* Complete info */}
       {isComplete && (
@@ -110,7 +189,7 @@ function ModuleCard({ module, navigate }) {
             fontFamily: `'DM Sans', sans-serif`,
           }}
         >
-          {`Commencer le quiz →`}
+          {`Passer l'examen →`}
         </button>
       )}
       {isComplete && (
@@ -125,7 +204,7 @@ function ModuleCard({ module, navigate }) {
             fontFamily: `'DM Sans', sans-serif`,
           }}
         >
-          {`Revoir le quiz`}
+          {`Revoir l'examen`}
         </button>
       )}
     </div>
@@ -135,6 +214,7 @@ function ModuleCard({ module, navigate }) {
 export default function CandidatFormation() {
   const navigate = useNavigate()
   const { data: modules = [], loading } = useFormationModules()
+  const [expandedId, setExpandedId] = useState(null)
   const completed = modules.filter(m => m.statut === 'complete').length
   const total = modules.length
   const pct = total > 0 ? (completed / total) * 100 : 0
@@ -190,7 +270,13 @@ export default function CandidatFormation() {
 
         {/* Module cards */}
         {modules.map(module => (
-          <ModuleCard key={module.id} module={module} navigate={navigate} />
+          <ModuleCard
+            key={module.id}
+            module={module}
+            navigate={navigate}
+            expanded={expandedId === module.id}
+            onToggle={(id) => setExpandedId(prev => prev === id ? null : id)}
+          />
         ))}
 
         {/* Footer note */}
