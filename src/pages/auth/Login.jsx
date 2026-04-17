@@ -3,8 +3,8 @@ import { useNavigate, Link } from 'react-router-dom'
 import { OR, CREME, NOIR, CARD } from '@/lib/utils'
 import { useAuthStore } from '@/stores/authStore'
 
-// Mode dev activé quand Supabase n'est pas configuré (personas + OTP simulé)
-const IS_DEV = import.meta.env.DEV || !import.meta.env.VITE_SUPABASE_URL
+// Mode demo activé tant que Supabase n'est pas en place
+const IS_DEV = true
 
 const inputStyle = {
   width: '100%', padding: '14px 16px', background: `rgba(255,255,255,0.05)`,
