@@ -204,7 +204,7 @@ export default function AdminConfig() {
       <Section title="Intégrations">
         <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
           {[
-            { key: 'square_actif', label: 'Square Payments', desc: 'Paiements par carte' },
+            { key: 'stripe_actif', label: 'Stripe Payments', desc: 'Paiements par carte' },
             { key: 'twilio_actif', label: 'Twilio SMS', desc: 'Notifications SMS' },
             { key: 'supabase_actif', label: 'Supabase', desc: 'Base de données & Auth' },
           ].map(({ key, label, desc }) => (

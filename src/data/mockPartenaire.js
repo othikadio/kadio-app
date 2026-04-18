@@ -45,7 +45,7 @@ export const MOCK_TRANSACTIONS_DIANE = [
   { id: 't1', type: 'commission',   date: '2026-03-25', description: 'Knotless braids — Bintou',   montant: +105.00, solde_apres: 283.00 },
   { id: 't2', type: 'commission',   date: '2026-03-22', description: 'Tresses classiques — Reine', montant: +71.25,  solde_apres: 178.00 },
   { id: 't3', type: 'bonus',        date: '2026-03-15', description: 'Bonus conversion Aminata',   montant: +15.00,  solde_apres: 106.75 },
-  { id: 't4', type: 'retrait',      date: '2026-03-10', description: 'Virement Square',            montant: -150.00, solde_apres: 91.75  },
+  { id: 't4', type: 'retrait',      date: '2026-03-10', description: 'Virement Stripe',            montant: -150.00, solde_apres: 91.75  },
   { id: 't5', type: 'commission',   date: '2026-03-08', description: 'Knotless braids — Fatoumata',montant: +105.00, solde_apres: 241.75 },
   { id: 't6', type: 'commission',   date: '2026-03-05', description: 'Locs resserrage — Christelle (salon)',montant: +40.00, solde_apres: 136.75 },
   { id: 't7', type: 'bonus',        date: '2026-03-01', description: 'Bonus conversion Naomi',     montant: +10.00,  solde_apres: 96.75  },

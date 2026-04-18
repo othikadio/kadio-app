@@ -1,6 +1,6 @@
-// ── Square simulé — Kadio Coiffure ───────────────────────────────
+// ── Stripe simulé — Kadio Coiffure ───────────────────────────────
 // En mode dev : toujours succès sauf cartes test d'erreur
-// En prod : appeler Edge Function Supabase /api/square
+// En prod : appeler Edge Function Supabase /api/stripe
 
 const DEV_DELAY_MS = 800
 
@@ -8,7 +8,7 @@ function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms))
 }
 
-// Cartes test connues
+// Cartes test connues (Stripe test cards)
 const CARD_OUTCOMES = {
   '4242424242424242': { ok: true },
   '4000000000000002': { ok: false, code: 'carte_refusee',       message: 'Carte refusée. Veuillez utiliser une autre carte.' },
@@ -17,16 +17,19 @@ const CARD_OUTCOMES = {
 }
 
 /**
- * Initialise un intent de paiement Square.
+ * Initialise un intent de paiement Stripe.
  * @returns {{ ok: boolean, paymentId: string, amount: number, currency: string }}
  */
-export async function initSquarePayment(amount, currency = 'CAD') {
+export async function initStripePayment(amount, currency = 'CAD') {
   await delay(300)
-  return { ok: true, paymentId: `sq_init_${Date.now()}`, amount, currency }
+  return { ok: true, paymentId: `pi_${Date.now()}`, amount, currency }
 }
 
+// Alias pour compatibilité
+export const initSquarePayment = initStripePayment
+
 /**
- * Traite un paiement Square avec le numéro de carte (chiffres seulement).
+ * Traite un paiement Stripe avec le numéro de carte (chiffres seulement).
  * @param {string} cardNumber — numéro brut (16 chiffres, sans espaces)
  * @param {number} amount
  * @returns {{ ok: boolean, transactionId?: string, code?: string, message?: string }}
@@ -39,27 +42,27 @@ export async function processPayment(cardNumber, amount) {
   // Cartes test connues
   const outcome = CARD_OUTCOMES[clean]
   if (outcome) {
-    if (outcome.ok) return { ok: true, transactionId: `sq_${Date.now()}`, amount, method: 'Square' }
+    if (outcome.ok) return { ok: true, transactionId: `pi_${Date.now()}`, amount, method: 'Stripe' }
     return { ok: false, code: outcome.code, message: outcome.message }
   }
 
   // Carte valide générique → succès
   if (clean.length === 16 && /^\d+$/.test(clean)) {
-    return { ok: true, transactionId: `sq_${Date.now()}`, amount, method: 'Square' }
+    return { ok: true, transactionId: `pi_${Date.now()}`, amount, method: 'Stripe' }
   }
 
   return { ok: false, code: 'carte_invalide', message: 'Numéro de carte invalide (16 chiffres requis).' }
 }
 
 /**
- * Crée un abonnement Square.
+ * Crée un abonnement Stripe.
  * @returns {{ ok: boolean, subscriptionId: string, status: string }}
  */
 export async function createSubscription(planId, customerId) {
   await delay(DEV_DELAY_MS)
   return {
     ok: true,
-    subscriptionId: `sq_sub_${Date.now()}`,
+    subscriptionId: `sub_${Date.now()}`,
     planId,
     customerId,
     status: 'active',
@@ -68,7 +71,7 @@ export async function createSubscription(planId, customerId) {
 }
 
 /**
- * Annule un abonnement Square.
+ * Annule un abonnement Stripe.
  * @returns {{ ok: boolean, status: string }}
  */
 export async function cancelSubscription(subscriptionId) {
