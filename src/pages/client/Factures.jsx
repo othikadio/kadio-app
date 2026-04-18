@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { OR, CREME, NOIR, CARD, formatDate, statutColor } from '@/lib/utils'
 import { MOCK_FACTURES_AMINATA } from '@/data/mockClient'
+import { exportFacturePdf } from '@/utils/exportPdf'
 
 function StatutBadge({ statut }) {
   const color = statutColor(statut === 'paye' ? 'termine' : statut)
@@ -132,7 +133,7 @@ export default function ClientFactures() {
                           <DetailRow label="Statut" value="Payée" />
                         </div>
                         <button
-                          onClick={() => alert(`Téléchargement simulé — disponible en prod`)}
+                          onClick={() => exportFacturePdf(fac)}
                           style={{
                             width: '100%',
                             padding: '10px 0',

@@ -25,6 +25,7 @@ import FournisseurGuard from '@/components/guards/FournisseurGuard'
 // ── Public pages ──
 const Accueil           = lazy(() => import('@/pages/public/Accueil'))
 const ServiceVIP        = lazy(() => import('@/pages/public/ServiceVIP'))
+const KadioVegetal      = lazy(() => import('@/pages/public/KadioVegetal'))
 const CommentCaMarche   = lazy(() => import('@/pages/public/CommentCaMarche'))
 const Forfaits          = lazy(() => import('@/pages/public/Forfaits'))
 const Rejoindre         = lazy(() => import('@/pages/public/Rejoindre'))
@@ -139,6 +140,7 @@ export default function App() {
               <Route path="tirage"           element={<Tirage />} />
               <Route path="contact"           element={<Contact />} />
               <Route path="service-vip"       element={<ServiceVIP />} />
+              <Route path="kadio-vegetal"     element={<KadioVegetal />} />
             </Route>
 
             {/* ── Auth ── */}
