@@ -30,6 +30,46 @@
     {
       "source": "/fournisseurs",
       "destination": "/fournisseurs.html"
+    },
+    {
+      "source": "/admin/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/client/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/partenaire/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/employe/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/candidat/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/fournisseur/:path*",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/connexion",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/inscription",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/otp",
+      "destination": "/app.html"
+    },
+    {
+      "source": "/choix-role",
+      "destination": "/app.html"
     }
   ]
 }
