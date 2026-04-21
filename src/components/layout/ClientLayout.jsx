@@ -21,7 +21,7 @@ export default function ClientLayout() {
         <div style={{ height: '56px', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
           <span style={{ fontFamily: `'Cormorant Garamond', serif`, fontWeight: 400, fontSize: '18px', letterSpacing: '0.08em', textTransform: 'uppercase', textIndent: '0.08em', color: '#B8922A', display: 'inline-block' }}>KADIO</span>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            {(client?.is_abonne || user?.is_abonne) && (
+            {user?.is_abonne && (
               <span style={{ fontSize: '10px', background: `rgba(184,146,42,0.15)`, color: OR, padding: '3px 8px', borderRadius: '20px', fontWeight: 600 }}>ABONNÉ</span>
             )}
             <NavLink to="/client/profil" style={{ width: '32px', height: '32px', borderRadius: '50%', background: `rgba(184,146,42,0.15)`, border: `1px solid rgba(184,146,42,0.3)`, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '14px', textDecoration: 'none' }}>

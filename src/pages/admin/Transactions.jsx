@@ -2,7 +2,6 @@ import { useState } from 'react'
 import { OR, CREME, NOIR, CARD, MUTED, BORDER_OR, formatMontant, formatDate, statutColor } from '@/lib/utils'
 import { MOCK_STATS_ADMIN } from '@/data/mockAdmin'
 import { useAllTransactions } from '@/hooks'
-import { exportTransactionsCsv } from '@/utils/exportCsv'
 
 const TYPE_LABELS = {
   abonnement: 'Abonnement',
@@ -39,14 +38,7 @@ export default function AdminTransactions() {
           <p style={{ color: MUTED, margin: 0, fontSize: '13px' }}>Mars 2026</p>
         </div>
         <button
-          onClick={() => {
-            if (transactions.length > 0) {
-              exportTransactionsCsv(transactions)
-              showToast('Export CSV réussi')
-            } else {
-              showToast('Aucune transaction à exporter')
-            }
-          }}
+          onClick={() => { showToast('Export CSV simulé') }}
           style={{ padding: '8px 16px', borderRadius: '8px', border: `1px solid ${BORDER_OR}`, background: 'none', color: OR, fontWeight: '600', cursor: 'pointer', fontSize: '13px' }}
         >{`Export CSV`}</button>
       </div>

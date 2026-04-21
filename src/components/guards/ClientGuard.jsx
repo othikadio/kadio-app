@@ -1,9 +1,4 @@
-import { Navigate } from 'react-router-dom'
-import { useAuthStore } from '@/stores/authStore'
-
+// TODO prod : vérifier useAuthStore().isClient()
 export default function ClientGuard({ children }) {
-  const { isAuthenticated, isClient } = useAuthStore()
-  if (!isAuthenticated()) return <Navigate to="/connexion" replace />
-  if (!isClient())        return <Navigate to="/choix-role" replace />
   return children
 }

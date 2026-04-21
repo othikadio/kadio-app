@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { useRdvEmploye } from '@/hooks'
-import { useAuthStore } from '@/stores/authStore'
 import { OR, CREME, NOIR, CARD, formatHeure } from '@/lib/utils'
 
 // Base week: 2026-03-28 (samedi) = offset 0
@@ -39,10 +38,8 @@ const TIME_W = 36
 const COL_W  = 90
 
 export default function EmployeCalendrier() {
-  const { employe } = useAuthStore()
-  const employeId = employe?.id || 'emp-marcus'
   const [weekOffset, setWeekOffset] = useState(0)
-  const { data: rdvList = [], loading } = useRdvEmploye(employeId)
+  const { data: rdvList = [], loading } = useRdvEmploye('emp-marcus')
   const weekDates = getWeekDates(weekOffset)
   const weekLabel = formatWeekLabel(weekDates)
   const weekRdvs  = rdvList.filter(r => weekDates.includes(r.date_rdv))

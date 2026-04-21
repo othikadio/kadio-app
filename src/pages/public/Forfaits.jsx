@@ -14,7 +14,8 @@ const PASSES = [
 ]
 
 const PAIEMENTS = [
-  { nom: 'Stripe', logo: '⚡', desc: 'Carte crédit/débit · En ligne et en personne' },
+  { nom: 'Square', logo: '◼', desc: 'Carte crédit/débit en personne' },
+  { nom: 'Stripe', logo: '⚡', desc: 'Paiement en ligne sécurisé' },
   { nom: 'Cash', logo: '$', desc: 'Argent comptant accepté' },
   { nom: 'Interac', logo: '⇄', desc: 'Virement Interac instantané' },
 ]

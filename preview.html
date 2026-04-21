@@ -368,15 +368,14 @@
     <div class="navbar-inner">
       <a href="/" class="nav-logo">KADIO</a>
       <nav class="nav-links">
-        <a href="/">Accueil</a>
-        <a href="/comment-ca-marche">Comment ça marche</a>
+        <a href="/#accueil">Accueil</a>
+        <a href="/#comment-ca-marche">Comment ça marche</a>
         <a href="/forfaits">Forfaits</a>
         <a href="/services">Services</a>
         <a href="/service-vip">VIP</a>
         <a href="/fournisseurs">Boutique</a>
         <a href="/rejoindre">Rejoindre</a>
-        <a href="/cartes-cadeaux">Cartes Cadeaux</a>
-        <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
+        <a href="/#temoignages">Avis</a>
       </nav>
       <div class="nav-actions">
         <a href="/app" class="btn-outline-sm">Mon espace</a>
@@ -397,36 +396,36 @@
     <div style="margin-top: 40px; width: 100%; max-width: 900px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: rgba(14,12,9,0.06); animation: slideUp 1s ease 0.9s both;">
 
       <!-- Je suis client -->
-      <a href="/cartes-cadeaux" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s; text-decoration: none; color: inherit;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--black); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">✂</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis client</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Réservez une coiffeuse certifiée</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--black); padding-bottom: 1px; margin-top: 2px;">Réserver</span>
-      </a>
+      </div>
 
       <!-- Je suis abonné -->
-      <a href="/app" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s; text-decoration: none; color: inherit;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/app'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--white); font-size: 16px;">♛</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis abonné</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Accédez à tout le réseau partout au Québec</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Mon espace</span>
-      </a>
+      </div>
 
       <!-- Coiffeur(se) / Emploi -->
-      <a href="/rejoindre" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s; text-decoration: none; color: inherit;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/rejoindre'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">★</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Coiffeur(se) / Emploi</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Rejoignez le réseau ou postulez au salon</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Rejoindre</span>
-      </a>
+      </div>
 
       <!-- Je suis fournisseur -->
-      <a href="/fournisseurs" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s; text-decoration: none; color: inherit;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
+      <div onclick="window.location.href='/rejoindre'" style="background: var(--white); padding: 28px 16px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px; transition: background 0.3s;" onmouseover="this.style.background='#F5F0E8'" onmouseout="this.style.background='var(--white)'">
         <div style="width: 40px; height: 40px; border-radius: 50%; border: 1.5px solid var(--gold); display: flex; align-items: center; justify-content: center;"><span style="color: var(--gold); font-size: 16px;">📦</span></div>
         <div style="font-size: 13px; font-weight: 500; color: var(--black); font-family: 'Cormorant Garamond', serif; text-align: center;">Je suis fournisseur</div>
         <div style="font-size: 11px; color: var(--muted); text-align: center; line-height: 1.4;">Photos requises · Livraison partout au Québec · Commandes autonomes</div>
         <span style="font-size: 10px; color: var(--black); font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 1px solid var(--gold); padding-bottom: 1px; margin-top: 2px;">Devenir fournisseur</span>
-      </a>
+      </div>
     </div>
 
     <!-- Preuve sociale sous les parcours -->
@@ -670,14 +669,11 @@
       <div>
         <h4>Navigation</h4>
         <a href="/" style="display: block; margin-bottom: 8px;">Accueil</a>
-        <a href="/comment-ca-marche" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
+        <a href="/#comment-ca-marche" style="display: block; margin-bottom: 8px;">Comment ça marche</a>
         <a href="/forfaits" style="display: block; margin-bottom: 8px;">Forfaits</a>
         <a href="/services" style="display: block; margin-bottom: 8px;">Services</a>
         <a href="/service-vip" style="display: block; margin-bottom: 8px;">VIP</a>
-        <a href="/fournisseurs" style="display: block; margin-bottom: 8px;">Boutique</a>
-        <a href="/rejoindre" style="display: block; margin-bottom: 8px;">Rejoindre</a>
-        <a href="/cartes-cadeaux" style="display: block; margin-bottom: 8px;">Cartes Cadeaux</a>
-        <a href="mailto:kadioothniel@yahoo.fr" style="display: block; margin-bottom: 8px;">Contact</a>
+        <a href="/#temoignages" style="display: block; margin-bottom: 8px;">Avis</a>
       </div>
       <div>
         <h4>Espaces</h4>

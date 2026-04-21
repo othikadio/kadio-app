@@ -1,9 +1,4 @@
-import { Navigate } from 'react-router-dom'
-import { useAuthStore } from '@/stores/authStore'
-
+// TODO prod : vérifier useAuthStore().isCandidat()
 export default function CandidatGuard({ children }) {
-  const { isAuthenticated, isCandidat } = useAuthStore()
-  if (!isAuthenticated()) return <Navigate to="/connexion" replace />
-  if (!isCandidat())      return <Navigate to="/choix-role" replace />
   return children
 }

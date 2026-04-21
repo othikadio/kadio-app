@@ -5,7 +5,7 @@ export { useRdvClient, useRdvPartenaire, useRdvEmploye, useAllRdv, useCreateRdv,
 export { useServicesPublic, useAllServices } from './useServices'
 export { useArticles, useArticle } from './useArticles'
 export { usePlans, useAbonnementClient, useAllAbonnements, useCreateAbonnement, useCancelAbonnement, useUpsertPlan } from './useAbonnements'
-export { useCandidature, useAllCandidatures, useFormationModules, useFormationProgression, useSubmitCandidature, useUpdateCandidatureStatut, useCompleteModule, useFormationPartenaire, useFormationFournisseur } from './useCandidatures'
+export { useCandidature, useAllCandidatures, useFormationModules, useFormationProgression, useSubmitCandidature, useUpdateCandidatureStatut, useCompleteModule } from './useCandidatures'
 export { useChaises, useChaisesAdmin, useReservationsPartenaire, useReservationsJour, useCreateReservation, useCancelReservation } from './useChaises'
 export { useClientProfil, useAllClients, useCreateClient, useUpdateClient } from './useClients'
 export { useEmployeProfil, useAllEmployes, useUpsertEmploye } from './useEmployes'

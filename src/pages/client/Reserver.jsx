@@ -100,27 +100,18 @@ export default function ClientReserver() {
     if (!formValid || paying) return
     setPaying(true)
     setPayError('')
-    try {
-      const result = await createCheckoutSession({
-        montant: depot * 100,
-        description: selectedService?.nom,
-        cardNum: cardNum,
-        rdvId: confirmedCode
-      })
-      setPaying(false)
-      if (result?.ok) {
-        // En mode Stripe live, redirige vers Checkout ; sinon affiche la confirmation
-        if (result?.url) {
-          window.location.href = result.url
-        } else {
-          setStep(5)
-        }
-      } else {
-        setPayError(result?.message || 'Paiement échoué. Réessayez.')
-      }
-    } catch (err) {
-      setPaying(false)
-      setPayError(err.message || 'Erreur lors du paiement.')
+    const result = await createCheckoutSession({
+      montant: depot * 100,
+      description: selectedService?.nom,
+      rdvId: confirmedCode
+    })
+    setPaying(false)
+    if (result?.url) {
+      window.location.href = result.url
+    } else if (result?.ok) {
+      setStep(5)
+    } else {
+      setPayError(result?.message || 'Paiement échoué. Réessayez.')
     }
   }
 

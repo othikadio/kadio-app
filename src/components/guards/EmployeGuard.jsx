@@ -1,9 +1,4 @@
-import { Navigate } from 'react-router-dom'
-import { useAuthStore } from '@/stores/authStore'
-
+// TODO prod : vérifier useAuthStore().isEmploye()
 export default function EmployeGuard({ children }) {
-  const { isAuthenticated, isEmploye } = useAuthStore()
-  if (!isAuthenticated()) return <Navigate to="/connexion" replace />
-  if (!isEmploye())       return <Navigate to="/choix-role" replace />
   return children
 }

@@ -168,13 +168,11 @@
       <a href="/" class="nav-logo">KADIO</a>
       <div class="nav-links">
         <a href="/">Accueil</a>
-        <a href="/comment-ca-marche">Comment ça marche</a>
         <a href="/forfaits">Forfaits</a>
         <a href="/services">Services</a>
         <a href="/service-vip">VIP</a>
         <a href="/fournisseurs">Boutique</a>
         <a href="/rejoindre" class="active">Rejoindre</a>
-        <a href="/cartes-cadeaux">Cartes Cadeaux</a>
         <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
       </div>
       <a href="/app" class="nav-cta">Réserver</a>
@@ -248,10 +246,10 @@
             <div class="opp-icon">💅</div>
             <h3>Esthéticien(ne)</h3>
             <p class="card-desc">Pose d'ongles, extensions de cils, soins du visage, maquillage, épilation — tous les services beauté.</p>
-            <div class="commission">83% de vos revenus — 17% réseau</div>
+            <div class="commission">75% de vos revenus — 25% réseau</div>
             <ul>
               <li>Élargissez votre clientèle grâce au réseau</li>
-              <li>Studio, domicile ou mobile — partout au Québec</li>
+              <li>Espace dédié esthétique au salon ou mobile</li>
               <li>Horaire flexible, travaillez quand vous voulez</li>
               <li>Certification Kadio Network incluse</li>
               <li>Profil en ligne + portfolio sur la plateforme</li>
@@ -1041,13 +1039,10 @@
     <div class="gold-line"></div>
     <div class="footer-links">
       <a href="/">Accueil</a>
-      <a href="/comment-ca-marche">Comment ça marche</a>
       <a href="/forfaits">Forfaits</a>
       <a href="/services">Services</a>
       <a href="/service-vip">VIP</a>
-      <a href="/fournisseurs">Boutique</a>
       <a href="/rejoindre">Rejoindre</a>
-      <a href="/cartes-cadeaux">Cartes Cadeaux</a>
       <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
     </div>
     <p>&copy; 2025 Kadio Coiffure &amp; Esthétique. Tous droits réservés.</p>
@@ -1088,16 +1083,29 @@
       }
     });
 
-    /* ── Form submission via FormSubmit ── */
+    /* ── Form submission ── */
     function submitForm(e, type) {
       e.preventDefault();
       var form = e.target;
       var data = new FormData(form);
-      var btn = form.querySelector('button[type="submit"]');
-      var btnText = btn.textContent;
-      btn.textContent = 'Envoi en cours...';
-      btn.disabled = true;
 
+      // Collect all values including checkboxes
+      var entries = {};
+      var checkboxGroups = {};
+      data.forEach(function(val, key) {
+        if (form.querySelector('input[name="' + key + '"][type="checkbox"]')) {
+          if (!checkboxGroups[key]) checkboxGroups[key] = [];
+          checkboxGroups[key].push(val);
+        } else {
+          entries[key] = val;
+        }
+      });
+      // Merge checkbox groups
+      Object.keys(checkboxGroups).forEach(function(key) {
+        entries[key] = checkboxGroups[key].join(', ');
+      });
+
+      // Build structured email
       var titles = {
         coiffeur: 'CANDIDATURE COIFFEUR(SE) PARTENAIRE',
         barbier: 'CANDIDATURE BARBIER PARTENAIRE',
@@ -1106,26 +1114,42 @@
         stage: 'DEMANDE DE STAGE',
         fournisseur: 'DEMANDE FOURNISSEUR'
       };
+      var subject = titles[type] + ' — ' + (entries.prenom ? entries.prenom + ' ' + entries.nom : entries.nom_contact || entries.entreprise);
+      var body = titles[type] + '\n' + '═'.repeat(40) + '\n\n';
 
-      data.append('_subject', titles[type] || 'Nouvelle candidature Kadio');
-      data.append('_template', 'table');
-      data.append('_captcha', 'false');
-      data.append('Type de candidature', titles[type] || type);
+      var labels = {
+        prenom: 'Prénom', nom: 'Nom', email: 'Courriel', telephone: 'Téléphone',
+        ville: 'Ville', langues: 'Langues', experience: 'Expérience', formation: 'Formation',
+        specialites: 'Spécialités', services: 'Services offerts', lieu_travail: 'Lieu de travail',
+        disponibilite: 'Disponibilités', disponibilites: 'Disponibilités détaillées',
+        debut: 'Début souhaité', materiel: 'Matériel personnel', instagram: 'Instagram',
+        tiktok: 'TikTok', portfolio: 'Portfolio', motivation: 'Motivation',
+        commentaires: 'Commentaires', entreprise: 'Entreprise', nom_contact: 'Contact',
+        poste: 'Poste', contrat: 'Type de contrat', adresse: 'Adresse',
+        salaire: 'Salaire souhaité', produits: 'Produits', livraison: 'Zone livraison',
+        delai: 'Délai livraison', site: 'Site web', description: 'Description',
+        photos: 'Photos disponibles', programme: 'Programme', interet: 'Domaines intérêt',
+        duree: 'Durée stage'
+      };
 
-      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
-        method: 'POST',
-        body: data
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(result) {
-        document.getElementById('form-' + type).style.display = 'none';
-        document.getElementById('success-' + type).style.display = 'block';
-      })
-      .catch(function(err) {
-        alert('Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter à kadioothniel@yahoo.fr');
-        btn.textContent = btnText;
-        btn.disabled = false;
+      Object.keys(entries).forEach(function(key) {
+        if (entries[key]) {
+          body += (labels[key] || key) + ': ' + entries[key] + '\n';
+        }
       });
+
+      body += '\n— Envoyé depuis kadio-app.vercel.app/rejoindre';
+
+      var mailtoLink = 'mailto:kadioothniel@yahoo.fr?subject=' +
+        encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      var a = document.createElement('a');
+      a.href = mailtoLink;
+      a.target = '_blank';
+      a.click();
+
+      // Show success
+      document.getElementById('form-' + type).style.display = 'none';
+      document.getElementById('success-' + type).style.display = 'block';
     }
   </script>
 

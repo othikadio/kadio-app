@@ -48,17 +48,10 @@ const DEV_PERSONAS = {
     client: null, partenaire: null, employe: null,
     fournisseur: { id: 'four-jean', user_id: 'usr-four', nom_entreprise: `Beauté Afro Supply`, actif: true },
   },
-  '5147770001': {
-    user:       { id: 'usr-mariam', telephone: '514-777-0001', prenom: 'Mariam',  nom: 'Touré',    email: 'mariam@gmail.com', langue: 'fr' },
-    roles:      [{ role: 'candidat', statut: 'actif' }],
-    activeRole: 'candidat',
-    client: null, partenaire: null, employe: null, fournisseur: null,
-  },
 }
 
 const DEV_OTP = '123456'
-// Forcer mode demo — Twilio/SMS pas configuré (20003)
-const USE_REAL_AUTH = false // IMPORTANT: ne pas changer
+const USE_REAL_AUTH = isSupabaseConfigured
 
 // ─── Helpers ──────────────────────────────────────────────────
 function normalizePhone(raw) {

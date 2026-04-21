@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS clients (
   credits_parrainage  integer DEFAULT 0,
   code_parrainage     text UNIQUE,
   portal_pin          text,
-  stripe_customer_id  text,
+  square_customer_id  text,
   created_at          timestamptz DEFAULT now()
 );
 
@@ -89,7 +89,7 @@ CREATE TABLE IF NOT EXISTS partenaires (
   portefeuille_solde      numeric(10,2) DEFAULT 0,
   portefeuille_total_gagne numeric(10,2) DEFAULT 0,
   stripe_account_id       text,
-  stripe_account_id       text,
+  square_account_id       text,
   is_disponible           boolean DEFAULT true,
   mode_vacances           boolean DEFAULT false,
   mode_vacances_debut     date,
@@ -301,7 +301,7 @@ CREATE TABLE IF NOT EXISTS abonnements (
   plan_nom                text,
   prix_mensuel            numeric(10,2),
   statut                  text DEFAULT 'actif' CHECK (statut IN ('actif','suspendu','annule','expire')),
-  stripe_subscription_id  text,
+  square_subscription_id  text,
   date_debut              date,
   date_renouvellement     date,
   visits_used_this_month  integer DEFAULT 0,

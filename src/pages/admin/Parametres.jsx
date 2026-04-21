@@ -27,7 +27,7 @@ const TABS_NAV = [
   { key: 'coiffeurs',   label: 'Coiffeurs',    icon: '✂️' },
   { key: 'depot',       label: 'Dépôt',        icon: '💰' },
   { key: 'sms',         label: 'SMS',          icon: '📱' },
-  { key: 'stripe',      label: 'Stripe',       icon: '💳' },
+  { key: 'square',      label: 'Square',       icon: '💳' },
   { key: 'supabase',    label: 'Supabase',     icon: '🗄️' },
   { key: 'noshow',      label: 'No-show',      icon: '🚫' },
   { key: 'abonnements', label: 'Abonnements',  icon: '🔄' },
@@ -130,9 +130,9 @@ export default function AdminParametres() {
   const [twilio, setTwilio] = useState({ accountSid: import.meta.env.VITE_TWILIO_ACCOUNT_SID || '', authToken: '', numExp: '+1 (438) 000-0000', testDest: '' })
   const [smsSent, setSmsSent] = useState(false)
 
-  // ── Stripe
-  const [stripe, setStripe]     = useState({ mode: 'test', publishableKey: import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY || '', secretKey: '' })
-  const [stripeTest, setStripeTest] = useState(false)
+  // ── Square
+  const [square, setSquare]     = useState({ mode: 'sandbox', appId: import.meta.env.VITE_SQUARE_APP_ID || '', locationId: import.meta.env.VITE_SQUARE_LOCATION_ID || '' })
+  const [squareTest, setSquareTest] = useState(false)
 
   // ── Supabase
   const [supa, setSupa] = useState({ url: import.meta.env.VITE_SUPABASE_URL || '', anonKey: import.meta.env.VITE_SUPABASE_ANON_KEY || '' })
@@ -178,7 +178,7 @@ export default function AdminParametres() {
 
   const supaConnected    = supa.url.includes('supabase.co')
   const twilioConnected  = twilio.accountSid.startsWith('AC')
-  const stripeConnected  = stripe.publishableKey.length > 6
+  const squareConnected  = square.appId.length > 6
 
   const inp2 = { width: '100%', boxSizing: 'border-box', background: '#0d0a08', border: `1px solid rgba(14,12,9,0.08)`, borderRadius: '8px', padding: '10px 14px', color: NOIR, fontSize: '14px', fontFamily: 'DM Sans, sans-serif', outline: 'none' }
 
@@ -475,44 +475,45 @@ export default function AdminParametres() {
         </CardSection>
       )}
 
-      {/* ── TAB: STRIPE ── */}
-      {activeTab === 'stripe' && (
+      {/* ── TAB: SQUARE ── */}
+      {activeTab === 'square' && (
         <CardSection>
-          <SectionTitle>💳 PARAMÈTRES STRIPE — PAIEMENTS</SectionTitle>
+          <SectionTitle>💳 PARAMÈTRES SQUARE — PAIEMENTS</SectionTitle>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '4px', flexWrap: 'wrap' }}>
-              <span style={{ fontSize: '14px', color: `rgba(14,12,9,0.6)` }}>Statut connexion Stripe:</span>
-              <StatusBadge ok={stripeConnected} okLabel="Connecté" koLabel="Non configuré" />
+              <span style={{ fontSize: '14px', color: `rgba(14,12,9,0.6)` }}>Statut connexion Square:</span>
+              <StatusBadge ok={squareConnected} okLabel="Connecté" koLabel="Non configuré" />
             </div>
             <div>
               <Label>MODE</Label>
               <div style={{ display: 'flex', gap: '10px' }}>
-                {['test', 'live'].map(mode => {
-                  const sel = stripe.mode === mode
+                {['sandbox', 'production'].map(mode => {
+                  const sel = square.mode === mode
                   return (
-                    <button key={mode} onClick={() => setStripe(s => ({ ...s, mode }))}
-                      style={{ flex: 1, padding: '10px', borderRadius: '8px', border: `2px solid`, borderColor: sel ? (mode === 'live' ? '#22c55e' : '#fbbf24') : 'rgba(14,12,9,0.08)', background: sel ? (mode === 'live' ? 'rgba(34,197,94,0.08)' : 'rgba(251,191,36,0.08)') : 'transparent', color: sel ? (mode === 'live' ? '#22c55e' : '#fbbf24') : `rgba(14,12,9,0.45)`, fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: sel ? 600 : 400, cursor: 'pointer', textTransform: 'capitalize' }}>
-                      {mode === 'live' ? '🟢 Live (production)' : '🟡 Test (sandbox)'}
+                    <button key={mode} onClick={() => setSquare(s => ({ ...s, mode }))}
+                      style={{ flex: 1, padding: '10px', borderRadius: '8px', border: `2px solid`, borderColor: sel ? (mode === 'production' ? '#22c55e' : '#fbbf24') : 'rgba(14,12,9,0.08)', background: sel ? (mode === 'production' ? 'rgba(34,197,94,0.08)' : 'rgba(251,191,36,0.08)') : 'transparent', color: sel ? (mode === 'production' ? '#22c55e' : '#fbbf24') : `rgba(14,12,9,0.45)`, fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: sel ? 600 : 400, cursor: 'pointer', textTransform: 'capitalize' }}>
+                      {mode === 'production' ? '🟢 Production' : '🟡 Sandbox (test)'}
                     </button>
                   )
                 })}
               </div>
             </div>
             {[
-              { key: 'publishableKey', label: 'PUBLISHABLE KEY (VITE_STRIPE_PUBLISHABLE_KEY)', ph: 'pk_test_xxxxxxxx' },
+              { key: 'appId',      label: 'APP ID (VITE_SQUARE_APP_ID)',           ph: 'sq0idp-xxxxxxxx' },
+              { key: 'locationId', label: 'LOCATION ID (VITE_SQUARE_LOCATION_ID)', ph: 'LXXXXXXXXXX' },
             ].map(({ key, label, ph }) => (
               <div key={key}>
                 <Label>{label}</Label>
-                <Inp value={stripe[key]} onChange={e => setStripe(s => ({ ...s, [key]: e.target.value }))} placeholder={ph} style={{ fontFamily: 'monospace' }} />
+                <Inp value={square[key]} onChange={e => setSquare(s => ({ ...s, [key]: e.target.value }))} placeholder={ph} style={{ fontFamily: 'monospace' }} />
               </div>
             ))}
-            <button onClick={() => { setStripeTest(true); setTimeout(() => setStripeTest(false), 2500) }}
-              style={{ alignSelf: 'flex-start', padding: '10px 20px', borderRadius: '8px', background: stripeTest ? 'rgba(34,197,94,0.12)' : `rgba(14,12,9,0.08)`, border: `1px solid ${stripeTest ? 'rgba(34,197,94,0.3)' : 'rgba(184,146,42,0.22)'}`, color: stripeTest ? '#22c55e' : OR, fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}>
-              {stripeTest ? `✓ Paiement test OK` : `Tester la connexion Stripe`}
+            <button onClick={() => { setSquareTest(true); setTimeout(() => setSquareTest(false), 2500) }}
+              style={{ alignSelf: 'flex-start', padding: '10px 20px', borderRadius: '8px', background: squareTest ? 'rgba(34,197,94,0.12)' : `rgba(14,12,9,0.08)`, border: `1px solid ${squareTest ? 'rgba(34,197,94,0.3)' : 'rgba(184,146,42,0.22)'}`, color: squareTest ? '#22c55e' : OR, fontFamily: 'DM Sans, sans-serif', fontSize: '13px', fontWeight: 600, cursor: 'pointer', transition: 'all 0.2s' }}>
+              {squareTest ? `✓ Paiement test OK` : `Tester la connexion Square`}
             </button>
             <div style={{ background: `rgba(184,146,42,0.05)`, border: `1px solid rgba(14,12,9,0.08)`, borderRadius: '8px', padding: '12px 14px' }}>
               <p style={{ fontSize: '12px', color: `rgba(14,12,9,0.4)`, lineHeight: 1.6 }}>
-                {`Utilisez le mode Test pour valider les paiements. Passez en Live uniquement avec de vraies clés Stripe live.`}
+                {`Utilisez le mode Sandbox pour tester les paiements. Passez en Production uniquement avec de vraies clés Square live.`}
               </p>
             </div>
           </div>
@@ -610,7 +611,7 @@ export default function AdminParametres() {
               </p>
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
-              <Toggle checked={aboConfig.autoRenouvellement} onChange={v => setAboConfig(c => ({ ...c, autoRenouvellement: v }))} label="Proposer le renouvellement automatique (Stripe)" />
+              <Toggle checked={aboConfig.autoRenouvellement} onChange={v => setAboConfig(c => ({ ...c, autoRenouvellement: v }))} label="Proposer le renouvellement automatique (Square)" />
               <Toggle checked={aboConfig.notifJ7}        onChange={v => setAboConfig(c => ({ ...c, notifJ7: v }))}        label="Notification SMS 7 jours avant expiration" />
               <Toggle checked={aboConfig.notifJ1}        onChange={v => setAboConfig(c => ({ ...c, notifJ1: v }))}        label="Notification SMS 1 jour avant expiration" />
               <Toggle checked={aboConfig.notifExpire}    onChange={v => setAboConfig(c => ({ ...c, notifExpire: v }))}    label={`Notification SMS le jour de l'expiration`} />

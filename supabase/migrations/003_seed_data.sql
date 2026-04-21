@@ -101,7 +101,7 @@ INSERT INTO salon_config (cle, valeur) VALUES
 ('noshow_seuil',        '4'),
 ('noshow_fenetre_jours','30'),
 ('sms_actif',           'false'),
-('stripe_mode',         'test'),
+('square_mode',         'sandbox'),
 ('horaires', '{
   "lun": {"ouvert": true,  "debut": "12:00", "fin": "19:00"},
   "mar": {"ouvert": false, "debut": "10:00", "fin": "18:00"},

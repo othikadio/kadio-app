@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { OR, CREME, NOIR, CARD, formatDate, formatDateShort, statutColor, formatMontant } from '@/lib/utils'
 import { useRdvClient } from '@/hooks'
-import { useAuthStore } from '@/stores/authStore'
 
 const FILTRES = ['Tous', 'Terminés', 'Annulés', 'No-show']
 
@@ -29,9 +28,7 @@ function StatutBadge({ statut }) {
 }
 
 export default function ClientHistorique() {
-  const { client } = useAuthStore()
-  const clientId = client?.id || 'cli-aminata'
-  const { data: rdvList, loading } = useRdvClient(clientId)
+  const { data: rdvList, loading } = useRdvClient('client-aminata')
   const [filtre, setFiltre] = useState('Tous')
   const [expandedId, setExpandedId] = useState(null)
 

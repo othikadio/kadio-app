@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { OR, CREME, NOIR, CARD, formatDate, formatDateShort, statutColor, initiales } from '@/lib/utils'
 import { useRdvClient } from '@/hooks'
-import { useAuthStore } from '@/stores/authStore'
 import QRDisplay from '@/components/ui/QRDisplay'
 
 const LIEU_ICON = {
@@ -136,9 +135,7 @@ function InlineRating({ rdvId, onSubmit }) {
 }
 
 export default function ClientRDV() {
-  const { client } = useAuthStore()
-  const clientId = client?.id || 'cli-aminata'
-  const { data: rdvList, loading } = useRdvClient(clientId)
+  const { data: rdvList, loading } = useRdvClient('client-aminata')
   const [qrRdv, setQrRdv] = useState(null)
   const [cancelConfirm, setCancelConfirm] = useState(null)
   const [cancelledIds, setCancelledIds] = useState([])

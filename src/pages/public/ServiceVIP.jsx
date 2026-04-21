@@ -21,7 +21,7 @@ const ENGAGEMENTS = [
   { icon: '🤫', titre: 'Espace intimiste', desc: 'Musique douce, lumières tamisées. Votre moment rien qu\'à vous.' },
   { icon: '📱', titre: 'SMS de rappel', desc: '48h et 2h avant le RDV — plus jamais de rendez-vous oublié.' },
   { icon: '🔄', titre: 'Retouche gratuite', desc: 'Pas satisfait(e) ? On revient corriger gratuitement sous 7 jours.' },
-  { icon: '🔒', titre: 'Paiement sécurisé', desc: 'Paiement Stripe chiffré. Jamais de surprise sur votre facture.' },
+  { icon: '🔒', titre: 'Paiement sécurisé', desc: 'Dépôt Square chiffré. Jamais de surprise sur votre facture.' },
 ]
 
 export default function ServiceVIP() {

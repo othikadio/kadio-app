@@ -164,24 +164,6 @@
       cursor: pointer; transition: all 0.2s; margin-bottom: 20px;
     }
     .btn-add-product:hover { background: rgba(184,146,42,0.06); }
-
-    /* ── Payment options ── */
-    .payment-options { display: flex; flex-direction: column; gap: 10px; }
-    .payment-option { cursor: pointer; }
-    .payment-option input { display: none; }
-    .payment-option-content {
-      display: flex; align-items: center; gap: 14px;
-      padding: 14px 18px; border: 1.5px solid var(--border); border-radius: 8px;
-      transition: all 0.2s;
-    }
-    .payment-option input:checked + .payment-option-content {
-      border-color: var(--gold); background: rgba(184,146,42,0.06);
-    }
-    .payment-option-content strong { display: block; font-size: 14px; font-weight: 600; color: var(--black); }
-    .payment-option-content small { font-size: 12px; color: var(--muted); }
-    .payment-icon { font-size: 24px; }
-    .payment-fields { margin-top: 12px; padding: 16px; background: var(--ivoire); border-radius: 8px; }
-
     .form-submit {
       width: 100%; padding: 14px; background: var(--black); color: var(--white);
       border: none; font-family: inherit; font-size: 12px; font-weight: 600;
@@ -229,13 +211,10 @@
       <a href="/" class="nav-logo">KADIO</a>
       <div class="nav-links">
         <a href="/">Accueil</a>
-        <a href="/comment-ca-marche">Comment ça marche</a>
         <a href="/forfaits">Forfaits</a>
         <a href="/services">Services</a>
-        <a href="/service-vip">VIP</a>
         <a href="/fournisseurs" class="active">Boutique</a>
         <a href="/rejoindre">Rejoindre</a>
-        <a href="/cartes-cadeaux">Cartes Cadeaux</a>
         <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
       </div>
       <a href="/app" class="nav-cta">Réserver</a>
@@ -281,7 +260,11 @@
     <div class="supplier-cta-inner">
       <p class="label">Vendez sur Kadio</p>
       <h2>Devenez fournisseur</h2>
-      <p>Proposez vos produits à notre réseau de professionnels et clients partout au Québec. Inscription gratuite.</p>
+      <p>Proposez vos produits à notre réseau de professionnels et clients partout au Québec. Inscription gratuite, commission transparente.</p>
+
+      <div class="supplier-commission">
+        <span>💰 Commission : seulement 10% par vente</span>
+      </div>
 
       <div class="supplier-steps">
         <div class="supplier-step">
@@ -297,7 +280,7 @@
         <div class="supplier-step">
           <div class="num">3</div>
           <h4>Vendez</h4>
-          <p>Les clients commandent directement sur la plateforme et vous livrez</p>
+          <p>Les clients commandent, vous livrez. Vous gardez 90% de chaque vente</p>
         </div>
         <div class="supplier-step">
           <div class="num">4</div>
@@ -420,87 +403,6 @@
             <span style="font-size: 18px;">+</span> Ajouter un autre produit
           </button>
 
-          <p class="form-section-title">Recevoir vos paiements</p>
-          <p style="font-size: 13px; color: var(--muted); margin-bottom: 16px;">Choisissez comment recevoir vos revenus après chaque vente. Commission Kadio : 10% par vente.</p>
-
-          <div class="form-group">
-            <label>Mode de paiement <span class="req">*</span></label>
-            <div class="payment-options">
-              <label class="payment-option">
-                <input type="radio" name="mode_paiement" value="virement" required onchange="showPaymentFields(this.value)" />
-                <div class="payment-option-content">
-                  <span class="payment-icon">🏦</span>
-                  <div>
-                    <strong>Virement bancaire</strong>
-                    <small>Directement sur votre compte</small>
-                  </div>
-                </div>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="mode_paiement" value="carte" onchange="showPaymentFields(this.value)" />
-                <div class="payment-option-content">
-                  <span class="payment-icon">💳</span>
-                  <div>
-                    <strong>Carte bancaire</strong>
-                    <small>Visa, Mastercard, etc.</small>
-                  </div>
-                </div>
-              </label>
-              <label class="payment-option">
-                <input type="radio" name="mode_paiement" value="kadio" onchange="showPaymentFields(this.value)" />
-                <div class="payment-option-content">
-                  <span class="payment-icon">⭐</span>
-                  <div>
-                    <strong>Carte virtuelle Kadio</strong>
-                    <small>Recevez sur votre carte Kadio</small>
-                  </div>
-                </div>
-              </label>
-            </div>
-          </div>
-
-          <div id="payment-fields-virement" class="payment-fields" style="display:none;">
-            <div class="form-group">
-              <label>Nom du titulaire du compte <span class="req">*</span></label>
-              <input type="text" name="titulaire_compte" placeholder="Nom complet tel qu'il apparaît sur le compte" />
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Institution bancaire <span class="req">*</span></label>
-                <input type="text" name="banque" placeholder="Ex: Desjardins, RBC, TD..." />
-              </div>
-              <div class="form-group">
-                <label>Courriel pour virement Interac <span class="req">*</span></label>
-                <input type="email" name="email_interac" placeholder="votre@email.com" />
-              </div>
-            </div>
-          </div>
-
-          <div id="payment-fields-carte" class="payment-fields" style="display:none;">
-            <div class="form-group">
-              <label>Nom sur la carte <span class="req">*</span></label>
-              <input type="text" name="nom_carte" placeholder="Nom complet sur la carte" />
-            </div>
-            <div class="form-row">
-              <div class="form-group">
-                <label>Numéro de carte <span class="req">*</span></label>
-                <input type="text" name="num_carte" placeholder="XXXX XXXX XXXX XXXX" maxlength="19" />
-              </div>
-              <div class="form-group">
-                <label>Courriel associé <span class="req">*</span></label>
-                <input type="email" name="email_carte" placeholder="votre@email.com" />
-              </div>
-            </div>
-          </div>
-
-          <div id="payment-fields-kadio" class="payment-fields" style="display:none;">
-            <div class="form-group">
-              <label>Numéro de carte virtuelle Kadio <span class="req">*</span></label>
-              <input type="text" name="carte_kadio" placeholder="Entrez votre numéro de carte Kadio" />
-            </div>
-            <p style="font-size: 12px; color: var(--gold); margin-top: -8px;">Vous n'avez pas encore de carte Kadio ? Vous en recevrez une lors de la validation de votre inscription.</p>
-          </div>
-
           <button type="submit" class="form-submit">Soumettre mon inscription</button>
         </form>
       </div>
@@ -522,41 +424,7 @@
       <p class="detail-price" id="detail-price"></p>
       <p class="detail-desc" id="detail-desc"></p>
       <div class="detail-meta" id="detail-meta"></div>
-      <div id="order-form-container">
-        <p style="font-size: 13px; font-weight: 600; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--gold);">Commander ce produit</p>
-        <form onsubmit="orderProduct(event)">
-          <div class="form-row">
-            <div class="form-group">
-              <label>Votre nom <span class="req">*</span></label>
-              <input type="text" name="client_nom" required placeholder="Prénom et nom" />
-            </div>
-            <div class="form-group">
-              <label>Téléphone <span class="req">*</span></label>
-              <input type="tel" name="client_tel" required placeholder="(514) 000-0000" />
-            </div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label>Courriel <span class="req">*</span></label>
-              <input type="email" name="client_email" required placeholder="votre@email.com" />
-            </div>
-            <div class="form-group">
-              <label>Adresse de livraison <span class="req">*</span></label>
-              <input type="text" name="client_adresse" required placeholder="Adresse complète" />
-            </div>
-          </div>
-          <div class="form-group">
-            <label>Quantité</label>
-            <input type="number" name="quantite" value="1" min="1" style="max-width: 100px;" />
-          </div>
-          <button type="submit" class="btn-order">Confirmer la commande</button>
-        </form>
-      </div>
-      <div id="order-success" style="display:none; text-align:center; padding: 20px 0;">
-        <div style="font-size: 40px; margin-bottom: 12px;">✓</div>
-        <h4 style="margin-bottom: 8px;">Commande envoyée !</h4>
-        <p style="color: var(--muted); font-size: 14px;">Nous vous contacterons pour confirmer la livraison.</p>
-      </div>
+      <button class="btn-order" onclick="orderProduct()">Commander — Livraison partout au Québec</button>
     </div>
   </div>
 
@@ -565,13 +433,10 @@
     <div class="gold-line"></div>
     <div class="footer-links">
       <a href="/">Accueil</a>
-      <a href="/comment-ca-marche">Comment ça marche</a>
       <a href="/forfaits">Forfaits</a>
       <a href="/services">Services</a>
-      <a href="/service-vip">VIP</a>
       <a href="/fournisseurs">Boutique</a>
       <a href="/rejoindre">Rejoindre</a>
-      <a href="/cartes-cadeaux">Cartes Cadeaux</a>
       <a href="mailto:kadioothniel@yahoo.fr">Contact</a>
     </div>
     <p>&copy; 2025 Kadio Coiffure & Esthétique. Tous droits réservés.</p>
@@ -624,7 +489,7 @@
               '<span class="product-price">' + p.price.toFixed(2) + ' $</span>' +
               '<span class="product-tag">' + p.cat + '</span>' +
             '</div>' +
-            '<button class="btn-add" onclick="event.stopPropagation(); showDetail(' + p.id + ')">Commander</button>' +
+            '<button class="btn-add" onclick="event.stopPropagation(); orderProduct(' + p.id + ')">Commander</button>' +
           '</div></div>';
       }).join('');
     }
@@ -648,49 +513,23 @@
         '<span>🚚 <em>' + p.delivery + '</em></span>' +
         '<span>🌍 <em>' + p.origin + '</em></span>' +
         '<span>📦 <em>' + p.cat + '</em></span>';
-      // Reset order form state
-      document.getElementById('order-form-container').style.display = 'block';
-      document.getElementById('order-success').style.display = 'none';
-      var orderForm = document.querySelector('#order-form-container form');
-      if (orderForm) orderForm.reset();
-      var orderBtn = document.querySelector('#order-form-container button[type="submit"]');
-      if (orderBtn) { orderBtn.textContent = 'Confirmer la commande'; orderBtn.disabled = false; }
       openModal('detail');
     }
 
-    function orderProduct(e) {
-      if (e && e.preventDefault) e.preventDefault();
-      var p = currentDetail;
+    function orderProduct(id) {
+      var p = id ? products.find(function(x) { return x.id === id; }) : currentDetail;
       if (!p) return;
-      var form = e.target;
-      var btn = form.querySelector('button[type="submit"]');
-      var btnText = btn.textContent;
-      btn.textContent = 'Envoi en cours...';
-      btn.disabled = true;
-
-      var data = new FormData(form);
-      data.append('Produit', p.name);
-      data.append('Prix', p.price.toFixed(2) + ' $');
-      data.append('Fournisseur', p.supplier);
-      data.append('Catégorie', p.category);
-      data.append('_subject', 'COMMANDE — ' + p.name + ' — ' + data.get('client_nom'));
-      data.append('_template', 'table');
-      data.append('_captcha', 'false');
-
-      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
-        method: 'POST',
-        body: data
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(result) {
-        document.getElementById('order-form-container').style.display = 'none';
-        document.getElementById('order-success').style.display = 'block';
-      })
-      .catch(function(err) {
-        alert('Erreur lors de l\'envoi. Veuillez réessayer.');
-        btn.textContent = btnText;
-        btn.disabled = false;
-      });
+      var subject = 'Commande — ' + p.name;
+      var body = 'Bonjour,\n\nJe souhaite commander :\n\n' +
+        'Produit : ' + p.name + '\n' +
+        'Prix : ' + p.price.toFixed(2) + ' $\n' +
+        'Fournisseur : ' + p.supplier + '\n\n' +
+        'Merci de me confirmer la disponibilité et les détails de livraison.\n\n' +
+        'Cordialement';
+      var a = document.createElement('a');
+      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      a.target = '_blank';
+      a.click();
     }
 
     /* ══════ MODALS ══════ */
@@ -716,12 +555,6 @@
 
     /* ══════ SUPPLIER FORM ══════ */
     var productCount = 1;
-
-    function showPaymentFields(mode) {
-      document.querySelectorAll('.payment-fields').forEach(function(el) { el.style.display = 'none'; });
-      var target = document.getElementById('payment-fields-' + mode);
-      if (target) target.style.display = 'block';
-    }
 
     function addProduct() {
       productCount++;
@@ -773,14 +606,21 @@
     function submitSupplier(e) {
       e.preventDefault();
       var form = e.target;
-      var btn = form.querySelector('button[type="submit"]');
-      var btnText = btn.textContent;
-      btn.textContent = 'Envoi en cours...';
-      btn.disabled = true;
-
       var data = new FormData(form);
+      var entries = {};
+      var checkboxGroups = {};
 
-      // Collect products into readable text
+      data.forEach(function(val, key) {
+        if (key === 'categories') {
+          if (!checkboxGroups[key]) checkboxGroups[key] = [];
+          checkboxGroups[key].push(val);
+        } else if (!key.startsWith('prod_')) {
+          entries[key] = val;
+        }
+      });
+      Object.keys(checkboxGroups).forEach(function(k) { entries[k] = checkboxGroups[k].join(', '); });
+
+      // Collect products
       var prods = [];
       document.querySelectorAll('.product-add-card').forEach(function(card) {
         var idx = card.getAttribute('data-index');
@@ -789,28 +629,44 @@
         var cat = form.querySelector('[name="prod_cat_' + idx + '"]');
         var desc = form.querySelector('[name="prod_desc_' + idx + '"]');
         if (nom && nom.value) {
-          prods.push(nom.value + ' — ' + (prix ? prix.value + '$' : '') + ' — ' + (cat ? cat.value : '') + (desc && desc.value ? ' — ' + desc.value : ''));
+          prods.push({
+            nom: nom.value,
+            prix: prix ? prix.value + ' $' : '',
+            categorie: cat ? cat.value : '',
+            description: desc ? desc.value : ''
+          });
         }
       });
-      data.append('Produits soumis', prods.join('\n'));
-      data.append('_subject', 'INSCRIPTION FOURNISSEUR — ' + (data.get('entreprise') || ''));
-      data.append('_template', 'table');
-      data.append('_captcha', 'false');
 
-      fetch('https://formsubmit.co/ajax/kadioothniel@yahoo.fr', {
-        method: 'POST',
-        body: data
-      })
-      .then(function(res) { return res.json(); })
-      .then(function(result) {
-        document.getElementById('form-supplier').style.display = 'none';
-        document.getElementById('success-supplier').style.display = 'block';
-      })
-      .catch(function(err) {
-        alert('Erreur lors de l\'envoi. Veuillez réessayer ou nous contacter à kadioothniel@yahoo.fr');
-        btn.textContent = btnText;
-        btn.disabled = false;
+      var subject = 'INSCRIPTION FOURNISSEUR — ' + entries.entreprise;
+      var body = 'INSCRIPTION FOURNISSEUR KADIO\n' + '═'.repeat(40) + '\n\n';
+      body += 'Entreprise: ' + entries.entreprise + '\n';
+      body += 'Contact: ' + entries.nom_contact + '\n';
+      body += 'Courriel: ' + entries.email + '\n';
+      body += 'Téléphone: ' + entries.telephone + '\n';
+      if (entries.site) body += 'Site web: ' + entries.site + '\n';
+      body += 'Livraison: ' + entries.livraison + '\n';
+      if (entries.delai) body += 'Délai: ' + entries.delai + '\n';
+      body += 'Catégories: ' + entries.categories + '\n';
+      body += '\n── PRODUITS SOUMIS ──\n\n';
+      prods.forEach(function(p, i) {
+        body += 'Produit ' + (i + 1) + ':\n';
+        body += '  Nom: ' + p.nom + '\n';
+        body += '  Prix: ' + p.prix + '\n';
+        body += '  Catégorie: ' + p.categorie + '\n';
+        if (p.description) body += '  Description: ' + p.description + '\n';
+        body += '\n';
       });
+      body += '(Photos jointes séparément si applicable)\n';
+      body += '\n— Envoyé depuis kadio-app.vercel.app/fournisseurs';
+
+      var a = document.createElement('a');
+      a.href = 'mailto:kadioothniel@yahoo.fr?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body);
+      a.target = '_blank';
+      a.click();
+
+      document.getElementById('form-supplier').style.display = 'none';
+      document.getElementById('success-supplier').style.display = 'block';
     }
 
     // Init

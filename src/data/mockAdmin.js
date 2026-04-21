@@ -193,7 +193,7 @@ export const MOCK_CONFIG_SALON = {
     { distance_min_km: 10, distance_max_km: 20, tarif_normal: 40, tarif_abonne: 28 },
     { distance_min_km: 20, distance_max_km: 99, tarif_normal: 55, tarif_abonne: 35 },
   ],
-  stripe_actif: true,
+  square_actif: true,
   twilio_actif: true,
   supabase_actif: true,
 }

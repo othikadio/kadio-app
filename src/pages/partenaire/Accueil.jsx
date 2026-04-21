@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuthStore } from '@/stores/authStore'
-import { useDispoStore } from '@/stores/dispoStore'
 import { useRdvPartenaire, usePartenaireProfil } from '@/hooks'
 import { OR, CREME, NOIR, CARD, formatMontant, statutColor } from '@/lib/utils'
 
@@ -29,16 +28,10 @@ export default function PartenaireAccueil() {
   const partenaireId = partenaire?.id || 'part-diane'
   const userId = partenaire?.user_id || 'usr-diane'
 
-  const { data: rdvData, loading: loadingRdv } = useRdvPartenaire(partenaireId)
-  const [rdvList, setRdvList] = useState([])
+  const { data: rdvList, loading: loadingRdv } = useRdvPartenaire(partenaireId)
   const { data: profil, loading: loadingProfil } = usePartenaireProfil(userId)
 
-  useEffect(() => { if (rdvData) setRdvList(rdvData) }, [rdvData])
-
-  // Dispo synchronisée via dispoStore (temps réel)
-  const partId = partenaire?.id || partenaireId
-  const disponible = useDispoStore(s => s.getDispo(partId))
-  const toggleDispo = useDispoStore(s => s.toggleDispo)
+  const [disponible, setDisponible] = useState(profil?.is_disponible ?? true)
 
   if (loadingRdv || loadingProfil) {
     return <div style={{ fontFamily: `'DM Sans', sans-serif`, color: NOIR, padding: '16px', textAlign: 'center' }}>Chargement...</div>
@@ -85,7 +78,7 @@ export default function PartenaireAccueil() {
         </div>
         {/* Disponibilité toggle */}
         <button
-          onClick={() => toggleDispo(partId)}
+          onClick={() => setDisponible(v => !v)}
           style={{
             display: 'flex', alignItems: 'center', gap: '8px',
             background: disponible ? 'rgba(34,197,94,0.15)' : 'rgba(107,114,128,0.2)',

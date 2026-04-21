@@ -323,7 +323,7 @@ export default function PartenaireMateriel() {
                         </div>
                       )}
                       {mode === 'carte' && (
-                        <div style={{ fontSize: '12px', color: MUTED, marginTop: '2px' }}>Visa / Mastercard via Stripe</div>
+                        <div style={{ fontSize: '12px', color: MUTED, marginTop: '2px' }}>Visa / Mastercard via Square</div>
                       )}
                     </div>
                   </label>

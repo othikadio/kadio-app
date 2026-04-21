@@ -48,8 +48,8 @@ export default function PartenairePortefeuille() {
   const [activeTab, setActiveTab] = useState('tout')
   const [showSheet, setShowSheet] = useState(false)
   const [montant, setMontant]     = useState('')
-  const [methode, setMethode]     = useState('stripe')
-  const [compte, setCompte]       = useState('')   // Email Stripe Connect
+  const [methode, setMethode]     = useState('square')
+  const [compte, setCompte]       = useState('')   // Square ID ou email Stripe
   const [processing, setProcessing] = useState(false)
   const [result, setResult]       = useState(null) // { ok, message, arrivalDate? }
 
@@ -66,8 +66,13 @@ export default function PartenairePortefeuille() {
     setResult(null)
 
     let res
-    // Stripe Connect — transfert vers le compte du partenaire
-    res = await transferToPartner(montantVal, `acct_${compte.trim().replace(/\W/g, '')}`)
+    if (methode === 'stripe') {
+      res = await transferToPartner(montantVal, `acct_diane_${compte.trim().replace(/\W/g, '')}`)
+    } else {
+      // Square simulé — délai 800ms
+      await new Promise(r => setTimeout(r, 800))
+      res = { ok: true, arrivalDate: addBusinessDays(3), method: 'Square' }
+    }
 
     setProcessing(false)
     setResult(res)
@@ -149,7 +154,7 @@ export default function PartenairePortefeuille() {
                 <div style={{ fontSize: 40, marginBottom: 12 }}>✅</div>
                 <p style={{ color: '#22c55e', fontSize: 16, fontWeight: 700, margin: '0 0 8px' }}>Demande envoyée !</p>
                 <p style={{ color: 'rgba(14,12,9,0.5)', fontSize: 13, margin: '0 0 4px' }}>
-                  {formatMontant(montantVal)} via Stripe Connect
+                  {formatMontant(montantVal)} via {methode === 'stripe' ? 'Stripe Connect' : 'Square'}
                 </p>
                 <p style={{ color: 'rgba(14,12,9,0.4)', fontSize: 12, margin: '0 0 20px' }}>
                   Virement en 3-5 jours ouvrables · Arrivée estimée : {result.arrivalDate}
@@ -182,24 +187,30 @@ export default function PartenairePortefeuille() {
                 {/* Méthode */}
                 <div style={{ marginBottom: '14px' }}>
                   <label style={{ fontSize: '12px', color: `rgba(14,12,9,0.5)`, display: 'block', marginBottom: '10px' }}>Méthode de paiement</label>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '10px', padding: '10px', borderRadius: '10px', background: `rgba(14,12,9,0.08)`, border: `1px solid ${OR}` }}>
-                    <span style={{ fontSize: '20px' }}>💳</span>
-                    <div>
-                      <span style={{ fontWeight: 600, fontSize: '14px', color: NOIR }}>Stripe Connect</span>
-                      <span style={{ fontSize: '11px', color: 'rgba(14,12,9,0.4)', marginLeft: 8 }}>2-3 jours ouvrables</span>
-                    </div>
-                  </div>
+                  {['square', 'stripe'].map(m => (
+                    <label key={m} style={{ display: 'flex', alignItems: 'center', gap: '10px', cursor: 'pointer', padding: '10px', borderRadius: '10px', marginBottom: '8px', background: methode === m ? `rgba(14,12,9,0.08)` : 'transparent', border: `1px solid ${methode === m ? OR : 'rgba(14,12,9,0.08)'}` }}>
+                      <input type="radio" name="methode" value={m} checked={methode === m} onChange={() => { setMethode(m); setCompte('') }} style={{ accentColor: OR }} />
+                      <div>
+                        <span style={{ fontWeight: 600, fontSize: '14px', color: NOIR }}>
+                          {m === 'square' ? 'Square' : 'Stripe Connect'}
+                        </span>
+                        <span style={{ fontSize: '11px', color: 'rgba(14,12,9,0.4)', marginLeft: 8 }}>
+                          {m === 'square' ? '3-5 jours ouvrables' : '2-3 jours ouvrables'}
+                        </span>
+                      </div>
+                    </label>
+                  ))}
                 </div>
 
                 {/* Champ compte */}
                 <div style={{ marginBottom: '16px' }}>
                   <label style={{ fontSize: '12px', color: `rgba(14,12,9,0.5)`, display: 'block', marginBottom: '6px' }}>
-                    Email Stripe Connect
+                    {methode === 'stripe' ? 'Email Stripe Connect' : 'Numéro de compte Square'}
                   </label>
                   <input
                     value={compte}
                     onChange={e => setCompte(e.target.value)}
-                    placeholder="diane@example.com"
+                    placeholder={methode === 'stripe' ? 'diane@example.com' : 'sq0idp-XXXXXXXXXXXX'}
                     style={{ width: '100%', background: '#FAFAF8', border: `1px solid ${compte && !compteValid ? '#ef4444' : 'rgba(184,146,42,0.25)'}`, borderRadius: '10px', padding: '12px 14px', color: NOIR, fontFamily: `'DM Sans', sans-serif`, fontSize: '14px', boxSizing: 'border-box' }}
                   />
                 </div>

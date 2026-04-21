@@ -3,8 +3,7 @@ import { useNavigate, Link } from 'react-router-dom'
 import { OR, CREME, NOIR, CARD } from '@/lib/utils'
 import { useAuthStore } from '@/stores/authStore'
 
-// Mode demo activé tant que Supabase n'est pas en place
-const IS_DEV = true
+const IS_DEV = import.meta.env.DEV
 
 const inputStyle = {
   width: '100%', padding: '14px 16px', background: `rgba(255,255,255,0.05)`,
@@ -119,7 +118,7 @@ export default function Login() {
     if (digits.length < 10) { setError(`Numéro incomplet`); return }
     setError(''); setLoading(true)
     await new Promise(r => setTimeout(r, 600))
-    const result = await requestOTP(phone)
+    const result = requestOTP(phone)
     if (IS_DEV) setDevCode(result.simCode)
     setStep(2); setResendCd(30); setLoading(false)
   }
@@ -128,16 +127,16 @@ export default function Login() {
     if (otp.length < 6) return
     setError(''); setLoading(true)
     await new Promise(r => setTimeout(r, 500))
-    const result = await verifyOTP(otp)
+    const result = verifyOTP(otp)
     setLoading(false)
     if (!result.ok) { setError(result.error); setOtp(''); return }
     navigate(result.redirectTo)
   }
 
-  async function handleResend() {
+  function handleResend() {
     if (resendCd > 0) return
     setOtp(''); setError('')
-    const result = await requestOTP(phone)
+    const result = requestOTP(phone)
     if (IS_DEV) setDevCode(result.simCode)
     setResendCd(30)
   }
