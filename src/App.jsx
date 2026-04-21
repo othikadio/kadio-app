@@ -106,6 +106,7 @@ const AdminConfig       = lazy(() => import('@/pages/admin/Config'))
 const AdminStats        = lazy(() => import('@/pages/admin/Stats'))
 const AdminMigration    = lazy(() => import('@/pages/admin/Migration'))
 const AdminParametres   = lazy(() => import('@/pages/admin/Parametres'))
+const AdminIAManager    = lazy(() => import('@/pages/admin/IAManager'))
 
 // ── 404 ──
 const NotFound          = lazy(() => import('@/pages/NotFound'))
@@ -239,6 +240,7 @@ export default function App() {
                 <Route path="stats"        element={<AdminStats />} />
                 <Route path="migration"    element={<AdminMigration />} />
                 <Route path="parametres"   element={<AdminParametres />} />
+                <Route path="ia"           element={<AdminIAManager />} />
               </Route>
             </Route>
 

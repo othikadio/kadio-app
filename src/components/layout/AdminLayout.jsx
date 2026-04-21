@@ -7,6 +7,7 @@ const NAV_SECTIONS = [
   {
     label: `Vue d'ensemble`,
     items: [
+      { to: '/admin/ia',          icon: '🤖', label: 'IA Manager' },
       { to: '/admin/dashboard',   icon: '📊', label: 'Dashboard' },
       { to: '/admin/calendrier',  icon: '📅', label: 'Calendrier' },
     ],
