@@ -2,6 +2,10 @@
   "buildCommand": "bash build.sh",
   "outputDirectory": "dist",
   "framework": null,
+  "functions": {
+    "api/ia.js": { "maxDuration": 60 },
+    "api/ia-execute.js": { "maxDuration": 30 }
+  },
   "rewrites": [
     {
       "source": "/app",

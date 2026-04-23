@@ -327,7 +327,7 @@ export default async function handler(req, res) {
 
     // Boucle d'exécution des tools (max 8 itérations)
     let iterations = 0
-    const maxIterations = 8
+    const maxIterations = 5
     const actionsExecuted = []
     let currentMessages = [...messages]
 
