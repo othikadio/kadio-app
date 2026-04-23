@@ -3,7 +3,7 @@ import { OR, CREME, NOIR, IVOIRE, SABLE, CARD, MUTED, BORDER_OR, formatMontant, 
 import { supabase, isSupabaseConfigured } from '@/lib/supabase'
 
 // ─── Configuration ──────────────────────────────────────────
-const EDGE_FN_URL = `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/ia-assistant`
+const IA_API_URL = '/api/ia'
 
 // ─── Agents spécialisés ─────────────────────────────────────
 const AGENTS = [
@@ -174,14 +174,9 @@ function useSpeech() {
 // ─── Chat avec IA (Edge Function ou fallback) ───────────────
 async function sendToIA(message, history) {
   try {
-    const { data: { session } } = await supabase.auth.getSession()
-    const res = await fetch(EDGE_FN_URL, {
+    const res = await fetch(IA_API_URL, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${session?.access_token || import.meta.env.VITE_SUPABASE_ANON_KEY}`,
-        'apikey': import.meta.env.VITE_SUPABASE_ANON_KEY,
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ message, conversationHistory: history }),
     })
     const data = await res.json()
