@@ -259,17 +259,33 @@ export default function IAManager() {
     const now = new Date().toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' })
     setActivityLog(prev => [{ time: now, agent: selectedAgent, action: `Message reçu: "${msg.slice(0, 60)}${msg.length > 60 ? '...' : ''}"`, type: 'message' }, ...prev].slice(0, 50))
 
-    // Essayer l'Edge Function, sinon fallback
+    // Essayer l'API, sinon fallback
     const result = await sendToIA(msg, chatMessages.filter(m => m.role !== 'system').slice(-10).map(m => ({ role: m.role === 'ia' ? 'assistant' : 'user', content: m.text })))
 
     let reply = result.reply || getFallbackResponse(msg)
     const agent = selectedAgent
 
-    setChatMessages(prev => [...prev, { role: 'ia', text: reply, agent }])
+    setChatMessages(prev => [...prev, { role: 'ia', text: reply, agent, actions: result.actionsExecuted }])
     setChatLoading(false)
+
+    // Log les actions exécutées par l'IA
+    if (result.actionsExecuted?.length) {
+      const actionLogs = result.actionsExecuted.map(a => ({
+        time: new Date().toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' }),
+        agent,
+        action: `${a.success ? '✅' : '❌'} ${a.summary}`,
+        type: a.success ? 'action' : 'error',
+      }))
+      setActivityLog(prev => [...actionLogs, ...prev].slice(0, 50))
+    }
 
     // Log la réponse
     setActivityLog(prev => [{ time: new Date().toLocaleTimeString('fr-CA', { hour: '2-digit', minute: '2-digit' }), agent, action: `Réponse envoyée (${reply.length} car.)`, type: 'response' }, ...prev].slice(0, 50))
+
+    // Rafraîchir les données si l'IA a modifié la DB
+    if (result.actionsExecuted?.some(a => a.tool?.startsWith('db_') && a.success)) {
+      refreshData()
+    }
 
     // Lecture vocale si activé
     if (autoSpeak) speak(reply)
@@ -491,6 +507,17 @@ export default function IAManager() {
                   }}>
                     {m.text}
                   </div>
+                  {m.role === 'ia' && m.actions?.length > 0 && (
+                    <div style={{ marginTop: '6px', padding: '8px 10px', background: 'rgba(34,197,94,0.06)', borderRadius: '8px', border: '1px solid rgba(34,197,94,0.15)' }}>
+                      <div style={{ fontSize: '10px', fontWeight: 700, color: '#22c55e', marginBottom: '4px', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Actions exécutées</div>
+                      {m.actions.map((a, j) => (
+                        <div key={j} style={{ fontSize: '11px', color: NOIR, padding: '2px 0', display: 'flex', gap: '6px', alignItems: 'center' }}>
+                          <span>{a.success ? '✅' : '❌'}</span>
+                          <span>{a.summary}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
                   {m.role === 'ia' && (
                     <button onClick={() => speak(m.text)}
                       style={{ background: 'none', border: 'none', fontSize: '11px', color: MUTED, cursor: 'pointer', padding: '4px 0', marginTop: '2px' }}>
