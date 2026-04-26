@@ -4,7 +4,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClient } from '@/lib/queryClient'
 import { NOIR } from '@/lib/utils'
 
-// ── Layouts ──
+// ââ Layouts ââ
 import PublicLayout      from '@/components/layout/PublicLayout'
 import AuthLayout        from '@/components/layout/AuthLayout'
 import ClientLayout      from '@/components/layout/ClientLayout'
@@ -14,7 +14,7 @@ import CandidatLayout    from '@/components/layout/CandidatLayout'
 import FournisseurLayout from '@/components/layout/FournisseurLayout'
 import AdminLayout       from '@/components/layout/AdminLayout'
 
-// ── Guards ──
+// ââ Guards ââ
 import AdminGuard       from '@/components/guards/AdminGuard'
 import ClientGuard      from '@/components/guards/ClientGuard'
 import PartenaireGuard  from '@/components/guards/PartenaireGuard'
@@ -22,7 +22,7 @@ import EmployeGuard     from '@/components/guards/EmployeGuard'
 import CandidatGuard    from '@/components/guards/CandidatGuard'
 import FournisseurGuard from '@/components/guards/FournisseurGuard'
 
-// ── Public pages ──
+// ââ Public pages ââ
 const Accueil           = lazy(() => import('@/pages/public/Accueil'))
 const ServiceVIP        = lazy(() => import('@/pages/public/ServiceVIP'))
 const CommentCaMarche   = lazy(() => import('@/pages/public/CommentCaMarche'))
@@ -35,13 +35,13 @@ const CarteCadeau       = lazy(() => import('@/pages/public/CarteCadeau'))
 const Tirage            = lazy(() => import('@/pages/public/Tirage'))
 const Contact           = lazy(() => import('@/pages/public/Contact'))
 
-// ── Auth pages ──
+// ââ Auth pages ââ
 const Login             = lazy(() => import('@/pages/auth/Login'))
 const Inscription       = lazy(() => import('@/pages/auth/Inscription'))
 const OTP               = lazy(() => import('@/pages/auth/OTP'))
 const ChoixRole         = lazy(() => import('@/pages/auth/ChoixRole'))
 
-// ── Client pages ──
+// ââ Client pages ââ
 const ClientCarte       = lazy(() => import('@/pages/client/Carte'))
 const ClientRDV         = lazy(() => import('@/pages/client/RDV'))
 const ClientAbonnement  = lazy(() => import('@/pages/client/Abonnement'))
@@ -52,7 +52,7 @@ const ClientFactures    = lazy(() => import('@/pages/client/Factures'))
 const ClientParrainage  = lazy(() => import('@/pages/client/Parrainage'))
 const ClientFidelite    = lazy(() => import('@/pages/client/Fidelite'))
 
-// ── Partenaire pages ──
+// ââ Partenaire pages ââ
 const PartAccueil       = lazy(() => import('@/pages/partenaire/Accueil'))
 const PartRDV           = lazy(() => import('@/pages/partenaire/RDV'))
 const PartScanner       = lazy(() => import('@/pages/partenaire/Scanner'))
@@ -65,7 +65,7 @@ const PartCertificat     = lazy(() => import('@/pages/partenaire/Certificat'))
 const PartVacances       = lazy(() => import('@/pages/partenaire/Vacances'))
 const PartProfil         = lazy(() => import('@/pages/partenaire/Profil'))
 
-// ── Employé pages ──
+// ââ EmployÃ© pages ââ
 const EmpAccueil        = lazy(() => import('@/pages/employe/Accueil'))
 const EmpCalendrier     = lazy(() => import('@/pages/employe/Calendrier'))
 const EmpScanner        = lazy(() => import('@/pages/employe/Scanner'))
@@ -74,18 +74,18 @@ const EmpStats          = lazy(() => import('@/pages/employe/Stats'))
 const EmpConge          = lazy(() => import('@/pages/employe/Conge'))
 const EmpRecompenses    = lazy(() => import('@/pages/employe/Recompenses'))
 
-// ── Candidat pages ──
+// ââ Candidat pages ââ
 const CandStatut        = lazy(() => import('@/pages/candidat/Statut'))
 const CandFormation     = lazy(() => import('@/pages/candidat/Formation'))
 const CandCertificat    = lazy(() => import('@/pages/candidat/Certificat'))
 const CandQuiz          = lazy(() => import('@/pages/candidat/Quiz'))
 
-// ── Fournisseur pages ──
+// ââ Fournisseur pages ââ
 const FourCatalogue     = lazy(() => import('@/pages/fournisseur/Catalogue'))
 const FourCommandes     = lazy(() => import('@/pages/fournisseur/Commandes'))
 const FourPaiements     = lazy(() => import('@/pages/fournisseur/Paiements'))
 
-// ── Admin pages ──
+// ââ Admin pages ââ
 const AdminDashboard    = lazy(() => import('@/pages/admin/Dashboard'))
 const AdminCalendrier   = lazy(() => import('@/pages/admin/Calendrier'))
 const AdminClients      = lazy(() => import('@/pages/admin/Clients'))
@@ -106,9 +106,9 @@ const AdminConfig       = lazy(() => import('@/pages/admin/Config'))
 const AdminStats        = lazy(() => import('@/pages/admin/Stats'))
 const AdminMigration    = lazy(() => import('@/pages/admin/Migration'))
 const AdminParametres   = lazy(() => import('@/pages/admin/Parametres'))
-const AdminIAManager    = lazy(() => import('@/pages/admin/IAManager'))
+const AdminAssistant    = lazy(() => import('@/pages/admin/Assistant'))
 
-// ── 404 ──
+// ââ 404 ââ
 const NotFound          = lazy(() => import('@/pages/NotFound'))
 
 const Loader = () => (
@@ -124,7 +124,7 @@ export default function App() {
         <Suspense fallback={<Loader />}>
           <Routes>
 
-            {/* ── Public ── */}
+            {/* ââ Public ââ */}
             <Route element={<PublicLayout />}>
               <Route index element={<Accueil />} />
               <Route path="comment-ca-marche" element={<CommentCaMarche />} />
@@ -139,7 +139,7 @@ export default function App() {
               <Route path="service-vip"       element={<ServiceVIP />} />
             </Route>
 
-            {/* ── Auth ── */}
+            {/* ââ Auth ââ */}
             <Route element={<AuthLayout />}>
               <Route path="connexion"   element={<Login />} />
               <Route path="inscription" element={<Inscription />} />
@@ -147,7 +147,7 @@ export default function App() {
               <Route path="choix-role"  element={<ChoixRole />} />
             </Route>
 
-            {/* ── Client ── */}
+            {/* ââ Client ââ */}
             <Route element={<ClientGuard><ClientLayout /></ClientGuard>}>
               <Route path="client">
                 <Route index element={<Navigate to="carte" replace />} />
@@ -163,7 +163,7 @@ export default function App() {
               </Route>
             </Route>
 
-            {/* ── Partenaire ── */}
+            {/* ââ Partenaire ââ */}
             <Route element={<PartenaireGuard><PartenaireLayout /></PartenaireGuard>}>
               <Route path="partenaire">
                 <Route index element={<Navigate to="accueil" replace />} />
@@ -181,7 +181,7 @@ export default function App() {
               </Route>
             </Route>
 
-            {/* ── Employé ── */}
+            {/* ââ EmployÃ© ââ */}
             <Route element={<EmployeGuard><EmployeLayout /></EmployeGuard>}>
               <Route path="employe">
                 <Route index element={<Navigate to="accueil" replace />} />
@@ -195,7 +195,7 @@ export default function App() {
               </Route>
             </Route>
 
-            {/* ── Candidat ── */}
+            {/* ââ Candidat ââ */}
             <Route element={<CandidatGuard><CandidatLayout /></CandidatGuard>}>
               <Route path="candidat">
                 <Route index element={<Navigate to="statut" replace />} />
@@ -206,7 +206,7 @@ export default function App() {
               </Route>
             </Route>
 
-            {/* ── Fournisseur ── */}
+            {/* ââ Fournisseur ââ */}
             <Route element={<FournisseurGuard><FournisseurLayout /></FournisseurGuard>}>
               <Route path="fournisseur">
                 <Route index element={<Navigate to="catalogue" replace />} />
@@ -216,7 +216,7 @@ export default function App() {
               </Route>
             </Route>
 
-            {/* ── Admin ── */}
+            {/* ââ Admin ââ */}
             <Route element={<AdminGuard><AdminLayout /></AdminGuard>}>
               <Route path="admin">
                 <Route index element={<Navigate to="dashboard" replace />} />
@@ -240,11 +240,11 @@ export default function App() {
                 <Route path="stats"        element={<AdminStats />} />
                 <Route path="migration"    element={<AdminMigration />} />
                 <Route path="parametres"   element={<AdminParametres />} />
-                <Route path="ia"           element={<AdminIAManager />} />
+                <Route path="assistant"    element={<AdminAssistant />} />
               </Route>
             </Route>
 
-            {/* ── 404 ── */}
+            {/* ââ 404 ââ */}
             <Route path="*" element={<NotFound />} />
 
           </Routes>
