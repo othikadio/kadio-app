@@ -10,6 +10,7 @@ const NAV_SECTIONS = [
       { to: '/admin/ia',          icon: '🤖', label: 'IA Manager' },
       { to: '/admin/dashboard',   icon: '📊', label: 'Dashboard' },
       { to: '/admin/calendrier',  icon: '📅', label: 'Calendrier' },
+      { to: '/admin/assistant',  icon: '🎙️', label: 'Assistant IA' },
     ],
   },
   {
