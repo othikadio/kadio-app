@@ -1,7 +1,5 @@
-// ═══════════════════════════════════════════════════════
 // KADIO AI — Voice Synthesis (OpenAI TTS)
-// Voix naturelle en francais pour l'assistant
-// ═══════════════════════════════════════════════════════
+// Returns base64 audio for reliable binary transfer on Vercel
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -51,23 +49,24 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      const errText = await response.text().catch(() => '');
+      const errText = await response.text().catch(function() { return ''; });
       let errMsg = 'Erreur OpenAI TTS';
       try {
         const errJson = JSON.parse(errText);
-        errMsg = errJson.error?.message || errMsg;
+        errMsg = (errJson.error && errJson.error.message) || errMsg;
       } catch(e) {}
       return res.status(response.status).json({ error: errMsg });
     }
 
-    // Stream audio binary response
+    // Base64 encode for reliable Vercel binary transfer
     const arrayBuf = await response.arrayBuffer();
-    const uint8 = new Uint8Array(arrayBuf);
+    const base64Audio = Buffer.from(arrayBuf).toString('base64');
 
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Content-Length', uint8.length);
-    res.setHeader('Cache-Control', 'no-cache');
-    res.status(200).end(Buffer.from(uint8));
+    return res.status(200).json({
+      audio: base64Audio,
+      format: 'mp3',
+      size: arrayBuf.byteLength
+    });
   } catch (error) {
     console.error('AI Voice error:', error.message);
     return res.status(500).json({
