@@ -17,15 +17,23 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { text, voice, speed } = req.body;
+    // Parse body robustement
+    let body = req.body;
+    if (typeof body === 'string') {
+      try { body = JSON.parse(body); } catch(e) { body = {}; }
+    }
+    if (!body || typeof body !== 'object') body = {};
+
+    const text = body.text;
+    const voice = body.voice;
+    const speed = body.speed;
 
     if (!text || text.length === 0) {
       return res.status(400).json({ error: 'text requis' });
     }
 
-    // Voix disponibles OpenAI TTS:
-    // alloy (neutre), echo (grave), fable (expressif), onyx (grave pro),
-    // nova (feminin doux), shimmer (feminin clair)
+    // Limiter le texte a 4096 caracteres (limite OpenAI TTS)
+    const inputText = text.substring(0, 4096);
     const selectedVoice = voice || 'onyx';
     const selectedSpeed = speed || 1.0;
 
@@ -37,7 +45,7 @@ export default async function handler(req, res) {
       },
       body: JSON.stringify({
         model: 'tts-1-hd',
-        input: text,
+        input: inputText,
         voice: selectedVoice,
         speed: selectedSpeed,
         response_format: 'mp3',
@@ -45,17 +53,28 @@ export default async function handler(req, res) {
     });
 
     if (!response.ok) {
-      const error = await response.json().catch(() => ({}));
-      return res.status(response.status).json({ error: error.message || 'Erreur OpenAI TTS' });
+      const errText = await response.text().catch(() => '');
+      let errMsg = 'Erreur OpenAI TTS';
+      try {
+        const errJson = JSON.parse(errText);
+        errMsg = errJson.error?.message || errMsg;
+      } catch(e) {}
+      console.error('OpenAI TTS error:', response.status, errText);
+      return res.status(response.status).json({ error: errMsg, status: response.status });
     }
 
     res.setHeader('Content-Type', 'audio/mpeg');
     res.setHeader('Cache-Control', 'no-cache');
 
-    const buffer = await response.arrayBuffer();
-    res.send(Buffer.from(buffer));
+    const arrayBuf = await response.arrayBuffer();
+    const nodeBuffer = Buffer.from(arrayBuf);
+    res.status(200).send(nodeBuffer);
   } catch (error) {
-    console.error('AI Voice error:', error.message);
-    return res.status(500).json({ error: 'Erreur interne' });
+    console.error('AI Voice error:', error.message, error.stack);
+    return res.status(500).json({
+      error: 'Erreur interne',
+      detail: error.message,
+      type: error.constructor?.name
+    });
   }
 }
