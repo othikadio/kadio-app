@@ -123,7 +123,7 @@ export default function Assistant() {
       const reply = data.reply || 'Je n\'ai pas pu traiter ta demande.';
       setMessages([...newMsgs, { role: 'assistant', content: reply, agent: activeAgent }]);
 
-      // TTS via OpenAI
+      // // TTS via OpenAI (base64 decode)
       if (selectedVoice) {
         try {
           const audioRes = await fetch('/api/ai-voice', {
@@ -132,12 +132,20 @@ export default function Assistant() {
             body: JSON.stringify({ text: reply, voice: selectedVoice }),
           });
           if (audioRes.ok) {
-            const blob = await audioRes.blob();
-            const audio = new Audio(URL.createObjectURL(blob));
-            setStatus('speaking');
-            audio.onended = () => setStatus('idle');
-            audio.play();
-            return;
+            const data = await audioRes.json();
+            if (data.audio) {
+              const binaryStr = atob(data.audio);
+              const bytes = new Uint8Array(binaryStr.length);
+              for (let i = 0; i < binaryStr.length; i++) {
+                bytes[i] = binaryStr.charCodeAt(i);
+              }
+              const blob = new Blob([bytes], { type: 'audio/mpeg' });
+              const audio = new Audio(URL.createObjectURL(blob));
+              setStatus('speaking');
+              audio.onended = () => setStatus('idle');
+              audio.play();
+              return;
+            }
           }
         } catch (e) { /* fallback to idle */ }
       }
