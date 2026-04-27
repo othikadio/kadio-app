@@ -1,5 +1,5 @@
 // KADIO AI — Voice Synthesis (OpenAI TTS)
-// Returns base64 audio for reliable binary transfer on Vercel
+// Returns base64 audio JSON for Vercel compatibility
 
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -14,6 +14,17 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: 'OPENAI_API_KEY non configuree' });
   }
 
+  // Sanitize API key - remove any non-ASCII characters
+  const cleanKey = apiKey.replace(/[^\x20-\x7E]/g, '');
+
+  // Check for non-ASCII chars in key (diagnostic)
+  const badChars = [];
+  for (let i = 0; i < apiKey.length; i++) {
+    if (apiKey.charCodeAt(i) > 127) {
+      badChars.push({ pos: i, code: apiKey.charCodeAt(i) });
+    }
+  }
+
   try {
     let body = req.body;
     if (typeof body === 'string') {
@@ -24,6 +35,18 @@ export default async function handler(req, res) {
     const text = body.text;
     const voice = body.voice;
     const speed = body.speed;
+
+    // Diagnostic mode
+    if (body.diagnostic) {
+      return res.status(200).json({
+        keyLength: apiKey.length,
+        cleanKeyLength: cleanKey.length,
+        badChars: badChars,
+        keyStart: apiKey.substring(0, 10),
+        keyEnd: apiKey.substring(apiKey.length - 5),
+        hasBadChars: badChars.length > 0
+      });
+    }
 
     if (!text || text.length === 0) {
       return res.status(400).json({ error: 'text requis' });
@@ -37,7 +60,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': 'Bearer ' + apiKey,
+        'Authorization': 'Bearer ' + cleanKey,
       },
       body: JSON.stringify({
         model: 'tts-1-hd',
@@ -58,7 +81,7 @@ export default async function handler(req, res) {
       return res.status(response.status).json({ error: errMsg });
     }
 
-    // Base64 encode for reliable Vercel binary transfer
+    // Base64 encode for reliable Vercel transfer
     const arrayBuf = await response.arrayBuffer();
     const base64Audio = Buffer.from(arrayBuf).toString('base64');
 
@@ -71,7 +94,8 @@ export default async function handler(req, res) {
     console.error('AI Voice error:', error.message);
     return res.status(500).json({
       error: 'Erreur interne',
-      detail: error.message
+      detail: error.message,
+      badCharsInKey: badChars
     });
   }
 }
