@@ -17,7 +17,6 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Parse body robustement
     let body = req.body;
     if (typeof body === 'string') {
       try { body = JSON.parse(body); } catch(e) { body = {}; }
@@ -32,7 +31,6 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'text requis' });
     }
 
-    // Limiter le texte a 4096 caracteres (limite OpenAI TTS)
     const inputText = text.substring(0, 4096);
     const selectedVoice = voice || 'onyx';
     const selectedSpeed = speed || 1.0;
@@ -41,7 +39,7 @@ export default async function handler(req, res) {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${apiKey}`,
+        'Authorization': 'Bearer ' + apiKey,
       },
       body: JSON.stringify({
         model: 'tts-1-hd',
@@ -59,22 +57,22 @@ export default async function handler(req, res) {
         const errJson = JSON.parse(errText);
         errMsg = errJson.error?.message || errMsg;
       } catch(e) {}
-      console.error('OpenAI TTS error:', response.status, errText);
-      return res.status(response.status).json({ error: errMsg, status: response.status });
+      return res.status(response.status).json({ error: errMsg });
     }
 
-    res.setHeader('Content-Type', 'audio/mpeg');
-    res.setHeader('Cache-Control', 'no-cache');
-
+    // Stream audio binary response
     const arrayBuf = await response.arrayBuffer();
-    const nodeBuffer = Buffer.from(arrayBuf);
-    res.status(200).send(nodeBuffer);
+    const uint8 = new Uint8Array(arrayBuf);
+
+    res.setHeader('Content-Type', 'audio/mpeg');
+    res.setHeader('Content-Length', uint8.length);
+    res.setHeader('Cache-Control', 'no-cache');
+    res.status(200).end(Buffer.from(uint8));
   } catch (error) {
-    console.error('AI Voice error:', error.message, error.stack);
+    console.error('AI Voice error:', error.message);
     return res.status(500).json({
       error: 'Erreur interne',
-      detail: error.message,
-      type: error.constructor?.name
+      detail: error.message
     });
   }
 }
